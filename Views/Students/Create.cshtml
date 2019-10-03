@@ -1,0 +1,72 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "Create New Student";
+}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Create">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="MainBoardId" asp-items="@(new SelectList(Model.MainBoards, "Id", "Name"))" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Name">
+                            <option selected value="">Name</option>
+                        </select>
+                        <span asp-validation-for="MainBoardId" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="PeriodId" asp-items="@(new SelectList(Model.Periods, "Id", "CourseId"))" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Period">
+                            <option selected value="">Period</option>
+                        </select>
+                        <span asp-validation-for="PeriodId" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="EAD"></label>
+                            <input asp-for="EAD" class="form-control" />
+                            <span asp-validation-for="EAD" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="Week" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Select Day Week">
+                            <option selected value="">Select Day Week</option>
+                            <option value="0">Sunday - Domingo</option>
+                            <option value="1">Monday - Segunda-feira</option>
+                            <option value="2">Tuesday - Terça-feira</option>
+                            <option value="3">Wednesday - Quarta-feira</option>
+                            <option value="4">Thursday - Quinta-feira</option>
+                            <option value="5">Friday - Sexta-feira</option>
+                            <option value="6">Saturday - Sábado</option>
+                        </select>
+                        <span asp-validation-for="Week" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="NumberPeriod"></label>
+                            <input asp-for="NumberPeriod" class="form-control" />
+                            <span asp-validation-for="NumberPeriod" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="StudentRegistration" asp-items="@StudentRegistration.UnRegistered.ToSelectList()" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Student Registration">
+                            <option selected value="">Student Registration</option>
+                        </select>
+                        <span asp-validation-for="StudentRegistration" class="text-danger"></span>
+                    </div><br />
+                    <div class="form-group">
+                        <hr />
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>

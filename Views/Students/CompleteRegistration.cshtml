@@ -1,0 +1,205 @@
+﻿@model StudentFormViewModel
+<form asp-action="CompleteRegistration">
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-success card-header-text">
+                    <div class="card-text">
+                        <h4 class="card-title">Register student</h4>
+                    </div>
+                </div>
+                <div class="card-body ">
+
+                    <!--Start-->
+                    <div class="text-danger">@ViewData["Result"]</div>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="MainBoard.Name"></label>
+                            <input asp-for="MainBoard.Name" class="form-control" />
+                            <span asp-validation-for="MainBoard.Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="MainBoard.LastName"></label>
+                            <input asp-for="MainBoard.LastName" class="form-control" />
+                            <span asp-validation-for="MainBoard.LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="MainBoard.CPF"></label>
+                            <input asp-for="MainBoard.CPF" class="form-control" />
+                            <span asp-validation-for="MainBoard.CPF" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="MainBoard.RG"></label>
+                            <input asp-for="MainBoard.RG" class="form-control" />
+                            <span asp-validation-for="MainBoard.RG" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="MainBoard.Phone"></label>
+                            <input asp-for="MainBoard.Phone" class="form-control" />
+                            <span asp-validation-for="MainBoard.Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="MainBoard.Cell"></label>
+                            <input asp-for="MainBoard.Cell" class="form-control" />
+                            <span asp-validation-for="MainBoard.Cell" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="MainBoard.BirthDate"></label>
+                            <input asp-for="MainBoard.BirthDate" class="form-control" />
+                            <span asp-validation-for="MainBoard.BirthDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="MainBoard.Email"></label>
+                            <input asp-for="MainBoard.Email" class="form-control" />
+                            <span asp-validation-for="MainBoard.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--End-->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-success card-header-text">
+                    <div class="card-text">
+                        <h4 class="card-title">Register address</h4>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <!--Start-->
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Address.State"></label>
+                            <input asp-for="Address.State" class="form-control" />
+                            <span asp-validation-for="Address.State" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Address.CEP"></label>
+                            <input asp-for="Address.CEP" class="form-control" />
+                            <span asp-validation-for="Address.CEP" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Address.City"></label>
+                            <input asp-for="Address.City" class="form-control" />
+                            <span asp-validation-for="Address.City" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Address.Neighborhood"></label>
+                            <input asp-for="Address.Neighborhood" class="form-control" />
+                            <span asp-validation-for="Address.Neighborhood" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Address.Street"></label>
+                            <input asp-for="Address.Street" class="form-control" />
+                            <span asp-validation-for="Address.Street" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Address.Number"></label>
+                            <input asp-for="Address.Number" class="form-control" />
+                            <span asp-validation-for="Address.Number" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Address.Complement"></label>
+                            <input asp-for="Address.Complement" class="form-control" />
+                            <span asp-validation-for="Address.Complement" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--End-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mr-auto ml-auto">
+            <div class="card ">
+                <div class="card-header card-header-success card-header-text">
+                    <div class="card-text">
+                        <h4 class="card-title">Register EAD</h4>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Student.EAD"></label>
+                            <input asp-for="Student.EAD" class="form-control" />
+                            <span asp-validation-for="Student.EAD" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <select asp-for="Student.PeriodId" class="selectpicker col-sm-10" data-size="7" data-style="btn btn-primary btn-round" title="Select Period">
+                            <option disabled selected>Selecione Período</option>
+                            @foreach (var item in Model.Periods)
+                            {
+                                <option value="@item.Id">@item.Course.Name @item.Semester.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Student.PeriodId" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="Student.Week" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                            <option disabled selected>Select Day Week</option>
+                            <option value="0">Sunday - Domingo</option>
+                            <option value="1">Monday - Segunda-feira</option>
+                            <option value="2">Tuesday - Terça-feira</option>
+                            <option value="3">Wednesday - Quarta-feira</option>
+                            <option value="4">Thursday - Quinta-feira</option>
+                            <option value="5">Friday - Sexta-feira</option>
+                            <option value="6">Saturday - Sábado</option>
+                        </select>
+                        <span asp-validation-for="Student.Week" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Student.NumberPeriod"></label>
+                            <input asp-for="Student.NumberPeriod" class="form-control" />
+                            <span asp-validation-for="Student.NumberPeriod" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="Student.StudentRegistration" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                            <option disabled selected>Select Registration</option>
+                            <option value="0">UnRegistered</option>
+                            <option value="1">Registered</option>
+                        </select>
+                        <span asp-validation-for="Student.StudentRegistration" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,18 @@
+https://docs.microsoft.com/pt-br/aspnet/core/security/authentication/identity?view=aspnetcore-2.2&tabs=visual-studio
+https://docs.microsoft.com/pt-br/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-2.2&tabs=netcore-cli#scaffold-identity-into-a-razor-project-with-authorization
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool install --global dotnet-aspnet-codegenerator --version 3.0.0
+https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/tools/dotnet-aspnet-codegenerator?view=aspnetcore-3.0
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet restore
+
+dotnet aspnet-codegenerator identity -dc InfinitySO.Data.ApplicationDbContext --files Account.AccessDenied
+dotnet aspnet-codegenerator identity -dc InfinitySO.Data.ApplicationDbContext --files Account.Register
+dotnet aspnet-codegenerator identity -dc InfinitySO.Data.ApplicationDbContext --files Account.Login
+dotnet aspnet-codegenerator identity -dc InfinitySO.Data.ApplicationDbContext --files Account.Logout
+dotnet aspnet-codegenerator identity -dc InfinitySO.Data.ApplicationDbContext --files Account.ForgotPassword
+dotnet aspnet-codegenerator identity -dc InfinitySO.Data.ApplicationDbContext --files Account.Manage.ChangePassword
+
+
+
+dotnet publish -c Release

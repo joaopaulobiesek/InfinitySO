@@ -1,0 +1,76 @@
+﻿@model Scale
+@{
+    ViewData["Title"] = "Create New Scale";
+}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Create">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="SundayJourney" asp-items="@(new SelectList(Model.Journeys, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Sunday">
+                            <option selected value="">Sunday</option>
+                        </select>
+                        <span asp-validation-for="SundayJourney" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="MondayJourney" asp-items="@(new SelectList(Model.Journeys, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Monday">
+                            <option selected value="">Monday</option>
+                        </select>
+                        <span asp-validation-for="MondayJourney" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="TuesdayJourney" asp-items="@(new SelectList(Model.Journeys, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Tuesday">
+                            <option selected value="">Tuesday</option>
+                        </select>
+                        <span asp-validation-for="TuesdayJourney" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="WednesdayJourney" asp-items="@(new SelectList(Model.Journeys, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Wednesday">
+                            <option selected value="">Wednesday</option>
+                        </select>
+                        <span asp-validation-for="WednesdayJourney" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="ThursdayJourney" asp-items="@(new SelectList(Model.Journeys, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Thursday">
+                            <option selected value="">Thursday</option>
+                        </select>
+                        <span asp-validation-for="ThursdayJourney" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="FridayJourney" asp-items="@(new SelectList(Model.Journeys, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Friday">
+                            <option selected value="">Friday</option>
+                        </select>
+                        <span asp-validation-for="FridayJourney" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="SaturdayJourney" asp-items="@(new SelectList(Model.Journeys, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Saturday">
+                            <option selected value="">Saturday</option>
+                        </select>
+                        <span asp-validation-for="SaturdayJourney" class="text-danger"></span>
+                    </div><br />
+                    <div class="form-group">
+                        <hr />
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <partial name="_Header" />
+</head>
+<body>
+    <!--<body style="overflow-y: hidden; overflow-x: hidden;">-->
+    <div class="wrapper ">
+        <partial name="_Sidebar" />
+
+        <div class="main-panel">
+            <partial name="_Navbar" />
+
+            <div class="content">
+                <div class="content">
+                    <div class="container-fluid">
+                        @*<partial name="_CookieConsentPartial" />*@
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @*<partial name="_Footer" />*@
+    <partial name="_ThemeScripts" />
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

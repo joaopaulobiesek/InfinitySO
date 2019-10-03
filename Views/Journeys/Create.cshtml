@@ -1,0 +1,125 @@
+﻿@model Journey
+@{
+    ViewData["Title"] = "Create New Journey";
+}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Create">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Duration"></label>
+                            <input asp-for="Duration" class="form-control timepicker" />
+                            <span asp-validation-for="Duration" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Input1"></label>
+                            <input asp-for="Input1" class="form-control timepicker" />
+                            <span asp-validation-for="Input1" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Input2"></label>
+                            <input asp-for="Input2" class="form-control timepicker" />
+                            <span asp-validation-for="Input2" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Input3"></label>
+                            <input asp-for="Input3" class="form-control timepicker" />
+                            <span asp-validation-for="Input3" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Input4"></label>
+                            <input asp-for="Input4" class="form-control timepicker" />
+                            <span asp-validation-for="Input4" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Input5"></label>
+                            <input asp-for="Input5" class="form-control timepicker" />
+                            <span asp-validation-for="Input5" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Input6"></label>
+                            <input asp-for="Input6" class="form-control timepicker" />
+                            <span asp-validation-for="Input6" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Output1"></label>
+                            <input asp-for="Output1" class="form-control timepicker" />
+                            <span asp-validation-for="Output1" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Output2"></label>
+                            <input asp-for="Output2" class="form-control timepicker" />
+                            <span asp-validation-for="Output2" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Output3"></label>
+                            <input asp-for="Output3" class="form-control timepicker" />
+                            <span asp-validation-for="Output3" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Output4"></label>
+                            <input asp-for="Output4" class="form-control timepicker" />
+                            <span asp-validation-for="Output4" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Output5"></label>
+                            <input asp-for="Output5" class="form-control timepicker" />
+                            <span asp-validation-for="Output5" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Output6"></label>
+                            <input asp-for="Output6" class="form-control timepicker" />
+                            <span asp-validation-for="Output6" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <hr />
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>

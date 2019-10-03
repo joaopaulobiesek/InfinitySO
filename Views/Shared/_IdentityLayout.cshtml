@@ -1,0 +1,13 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <partial name="Auth/_Header" />
+    @RenderSection("Styles", required: false)
+    @RenderSection("HeadScripts", required: false)
+</head>
+<body class="off-canvas-sidebar">
+    @RenderBody()
+    @RenderSection("Scripts", required: false)
+    <partial name="Auth/_ThemeScripts" />
+</body>
+</html>

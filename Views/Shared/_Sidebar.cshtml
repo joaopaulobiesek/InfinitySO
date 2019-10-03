@@ -1,0 +1,435 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@if (SignInManager.IsSignedIn(User))
+{
+    var IdUser = await UserManager.GetUserAsync(User);
+    var IdUser1 = UserManager.GetUserId(User);
+    var UserClaims = await UserManager.GetClaimsAsync(IdUser);
+    string[] userName = User.Identity.Name.Split('@');
+
+    <!--<div class="sidebar" data-color="purple" data-background-color="white">-->
+    <div class="sidebar" data-color="purple" data-background-color="black">
+        <!--white-->
+        <!--
+            Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+            Tip 2: you can also add an image using data-image tag
+        -->
+        <div class="logo">
+            <a href="#" class="simple-text logo-mini">
+                SO
+            </a>
+            <a href="#" class="simple-text logo-normal">
+                Infinity Solutions
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+            <div class="user">
+                <div class="photo">
+                    <img src="~/lib/img/default-avatar.png" />
+                </div>
+                <div class="user-info">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a data-toggle="collapse" href="#collapseExample" class="username">
+                            <span>
+                                @userName[0]
+                                <b class="caret"></b>
+                            </span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">
+                            <span>
+                                Log in
+                                <b class="caret"></b>
+                            </span>
+                        </a>
+                    }
+                    <div class="collapse" id="collapseExample">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="sidebar-mini"> MP </span>
+                                    <span class="sidebar-normal"> My Profile </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="sidebar-mini"> EP </span>
+                                    <span class="sidebar-normal"> Edit Profile </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="sidebar-mini"> S </span>
+                                    <span class="sidebar-normal"> Settings </span>
+                                </a>
+                            </li>
+                            <form asp-area="Identity" asp-page="/Account/Logout">
+                                <button type="submit" class=" nav-item btn btn-link"><i class="material-icons ">power_settings_new</i></button>
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav">
+                <li class="nav-item active  ">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                @foreach (var item in UserClaims)
+                {
+                    if (item.Type == "FullAcess")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="ImportData" asp-action="Index">
+                                <i class="material-icons">dashboard</i>
+                                <p>Import Data</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#pagesCadaster">
+                                <i class="material-icons">image</i>
+                                <p>
+                                    Cadastrar
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="pagesCadaster">
+                                <ul class="nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Addresses" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Endereço </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="BilletValues" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> BilletValues </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Categories </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Companies" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Companies </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Courses" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Courses </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Departments" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Departments </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Employees" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Employees </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Journeys" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Journeys </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="MainBoards" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> MainBoards </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Patrimonies" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Patrimony </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="PatrimonyKeyDescriptions" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Patrimony Key Description </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="PatrimonyKeys" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Patrimony Key </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Periods" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Periods </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Places" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Places </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Scales" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Scales </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Sectors" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Sectors </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Semesters" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Semesters </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="StudentFinancials" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> StudentFinancials </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Students" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Students </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="SubCategories" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> SubCategory </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="TimePoints" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> TimePoints </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="UsersDataLogin" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> UserDataLogin </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                }
+                @foreach (var item in UserClaims)
+                {
+                    if (item.Type == "FullAcess" || item.Type == "UserDataLogin" || item.Type == "Department" || item.Type == "Sector" ||
+                        item.Type == "Employee")
+                    {
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#pagesAdministration">
+                                <i class="material-icons">image</i>
+                                <p>
+                                    Administrativo
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="pagesAdministration">
+                                <ul class="nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" data-toggle="collapse" href="#pagesAdministrationDepart">
+                                            <i class="material-icons">image</i>
+                                            <p>
+                                                Departamento
+                                                <b class="caret"></b>
+                                            </p>
+                                        </a>
+                                        <div class="collapse" id="pagesAdministrationDepart">
+                                            <ul class="nav">
+                                                <li class="nav-item ">
+                                                    <a class="nav-link" asp-area="" asp-controller="Departments" asp-action="Index">
+                                                        <span class="sidebar-mini"> D </span>
+                                                        <span class="sidebar-normal"> Departamento </span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item ">
+                                                    <a class="nav-link" asp-area="" asp-controller="Sectors" asp-action="Index">
+                                                        <span class="sidebar-mini"> S </span>
+                                                        <span class="sidebar-normal"> Setor </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="UsersDataLogin" asp-action="Create">
+                                            <span class="sidebar-mini"> A </span>
+                                            <span class="sidebar-normal"> Cadastrar Acesso </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Employees" asp-action="Index">
+                                            <span class="sidebar-mini"> F </span>
+                                            <span class="sidebar-normal"> Funcionário </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        break;
+                    }
+                }
+                <li class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#pagesClass">
+                        <i class="material-icons">image</i>
+                        <p>
+                            Turmas
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="pagesClass">
+                        <ul class="nav">
+                            <li class="nav-item ">
+                                <a class="nav-link" asp-area="" asp-controller="Students" asp-action="Index">
+                                    <span class="sidebar-mini"> A </span>
+                                    <span class="sidebar-normal"> Cadastrar Aluno </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#pagesCall">
+                        <i class="material-icons">image</i>
+                        <p>
+                            Chamados
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="pagesCall">
+                        <ul class="nav">
+                            <li class="nav-item ">
+                                <a class="nav-link" asp-area="" asp-controller="" asp-action="">
+                                    <span class="sidebar-mini"> E </span>
+                                    <span class="sidebar-normal"> Exemplo </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                @foreach (var item in UserClaims)
+                {
+                    if (item.Type == "FullAcess" || item.Type == "Student" || item.Type == "StudentCreate" || item.Type == "StudentEdit" ||
+                        item.Type == "StudentDelete")
+                    {
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#pagesStudent">
+                                <i class="material-icons">image</i>
+                                <p>
+                                    Aluno
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="pagesStudent">
+                                <ul class="nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Students" asp-action="CompleteRegistration">
+                                            <span class="sidebar-mini"> F </span>
+                                            <span class="sidebar-normal"> Cadastro Completo Aluno </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Students" asp-action="RegistrationEAD">
+                                            <span class="sidebar-mini"> R </span>
+                                            <span class="sidebar-normal"> Cadastrar Aluno </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        break;
+                    }
+                }
+                @foreach (var item in UserClaims)
+                {
+                    if (item.Type == "FullAcess" || item.Type == "StudentFinancial" || item.Type == "StudentFinancialCreate" || item.Type == "StudentFinancialEdit" ||
+                        item.Type == "StudentFinancialDelete")
+                    {
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#pagesFinancial">
+                                <i class="material-icons">image</i>
+                                <p>
+                                    Financeiro
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="pagesFinancial">
+                                <ul class="nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="StudentFinancials" asp-action="Index">
+                                            <span class="sidebar-mini"> F </span>
+                                            <span class="sidebar-normal"> Financeiro Estudantil </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="StudentFinancials" asp-action="Index">
+                                            <span class="sidebar-mini"> R </span>
+                                            <span class="sidebar-normal"> Relatórios </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        break;
+                    }
+                }
+                @foreach (var item in UserClaims)
+                {
+                    if (item.Type == "FullAcess" || item.Type == "TimePoint" || item.Type == "TimePointCreate" || item.Type == "TimePointEdit" ||
+                        item.Type == "TimePointDelete")
+                    {
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#pagesPoint">
+                                <i class="material-icons">image</i>
+                                <p>
+                                    Ponto
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="pagesPoint">
+                                <ul class="nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="TimePoints" asp-action="Index">
+                                            <span class="sidebar-mini"> S </span>
+                                            <span class="sidebar-normal"> Time Point </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        break;
+                    }
+                }
+                <!-- your sidebar here -->
+            </ul>
+        </div>
+    </div>
+}

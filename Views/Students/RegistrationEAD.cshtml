@@ -1,0 +1,78 @@
+﻿@model StudentFormViewModel
+<form asp-action="RegistrationEAD">
+    <div class="row">
+        <div class="col-md-6 mr-auto ml-auto">
+            <div class="card ">
+                <div class="card-header card-header-success card-header-text">
+                    <div class="card-text">
+                        <h4 class="card-title">Register EAD</h4>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <div class="col-lg-10 col-md-6 col-sm-3">
+                        <select id="StudentListId" asp-for="Student.MainBoard.Id" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                            <option disabled selected>Select Name</option>
+                            @foreach (var item in Model.MainBoards)
+                            {
+                                <option value="@item.Id">@item.Name @item.LastName - CPF: @item.CPF</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Student.MainBoard.Id" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-md-12">
+                        <select asp-for="Student.PeriodId" class="selectpicker col-sm-10" data-size="7" data-style="btn btn-primary btn-round" title="Select Period">
+                            <option disabled selected>Selecione Período</option>
+                            @foreach (var item in Model.Periods)
+                            {
+                                <option value="@item.Id">@item.Course.Name @item.Semester.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Student.PeriodId" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Student.EAD"></label>
+                            <input asp-for="Student.EAD" class="form-control" />
+                            <span asp-validation-for="Student.EAD" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="Student.Week" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                            <option disabled selected>Select Day Week</option>
+                            <option value="0">Sunday - Domingo</option>
+                            <option value="1">Monday - Segunda-feira</option>
+                            <option value="2">Tuesday - Terça-feira</option>
+                            <option value="3">Wednesday - Quarta-feira</option>
+                            <option value="4">Thursday - Quinta-feira</option>
+                            <option value="5">Friday - Sexta-feira</option>
+                            <option value="6">Saturday - Sábado</option>
+                        </select>
+                        <span asp-validation-for="Student.Week" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Student.NumberPeriod"></label>
+                            <input asp-for="Student.NumberPeriod" class="form-control" />
+                            <span asp-validation-for="Student.NumberPeriod" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="Student.StudentRegistration" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                            <option disabled selected>Select Registration</option>
+                            <option value="0">UnRegistered</option>
+                            <option value="1">Registered</option>
+                        </select>
+                        <span asp-validation-for="Student.StudentRegistration" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

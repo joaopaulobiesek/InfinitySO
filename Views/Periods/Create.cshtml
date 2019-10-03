@@ -1,0 +1,39 @@
+﻿@model Period
+@{
+    ViewData["Title"] = "Create New Period";
+}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Create">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="CourseId" asp-items="@(new SelectList(Model.Courses, "Id", "Name"))" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Course">
+                            <option selected value="">Course</option>
+                        </select>
+                        <span asp-validation-for="CourseId" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="SemesterId" asp-items="@(new SelectList(Model.Semesters, "Id", "Name"))" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Semester">
+                            <option selected value="">Semester</option>
+                        </select>
+                        <span asp-validation-for="SemesterId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <hr />
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>

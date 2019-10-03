@@ -1,0 +1,72 @@
+﻿@model StudentFinancialFormViewModel
+@{
+    ViewData["Title"] = "Create New Student Financial";
+}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Create">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="StudentFinancial.StudentId" asp-items="@(new SelectList(Model.Students, "Id", "EAD"))" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Course">
+                            <option selected value="">Student</option>
+                        </select>
+                        <span asp-validation-for="StudentFinancial.StudentId" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="StudentFinancial.OpenValue"></label>
+                            <input asp-for="StudentFinancial.OpenValue" class="form-control" />
+                            <span asp-validation-for="StudentFinancial.OpenValue" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="StudentFinancial.DateNegotiation"></label><br />
+                            <div class="input-group-prepend col-md-7">
+                                <i class="material-icons">av_timer</i>
+                                <input asp-for="StudentFinancial.DateNegotiation" class="form-control" />
+                            </div>
+                            <span asp-validation-for="StudentFinancial.DateNegotiation" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="StudentFinancial.DateDueBillet"></label><br />
+                            <div class="input-group-prepend col-md-7">
+                                <i class="material-icons">av_timer</i>
+                                <input asp-for="StudentFinancial.DateDueBillet" class="form-control" />
+                            </div>
+                            <span asp-validation-for="StudentFinancial.DateDueBillet" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="StudentFinancial.StudentFinancialNegotiation" asp-items="@StudentFinancialNegotiation.InProgress.ToSelectList()" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Negociação Financeira do Estudante">
+                            <option selected value="">Negociação Financeira do Estudante</option>
+                        </select>
+                        <span asp-validation-for="StudentFinancial.StudentFinancialNegotiation" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select asp-for="StudentFinancial.StudentFinanceInstallment" asp-items="@StudentFinanceInstallment.X1.ToSelectList()" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Parcela de financiamento estudantil">
+                            <option selected value="">Parcela de financiamento estudantil</option>
+                        </select>
+                        <span asp-validation-for="StudentFinancial.StudentFinanceInstallment" class="text-danger"></span>
+                    </div><br />
+                    <div class="form-group">
+                        <hr />
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>
