@@ -33,18 +33,62 @@ namespace InfinitySO.Services.ServicesAdministration
             var wb = new XLWorkbook(pathEnd);
             var planilha = wb.Worksheet(obj.PageNumber);
 
-            var linha = 1;
+            var linha = 2;
             while (true)
             {
                 if (string.IsNullOrEmpty(planilha.Cell("C" + linha.ToString()).Value.ToString())) break;
+                string EAD = planilha.Cell("A" + linha.ToString()).Value.ToString();
                 string cpf = planilha.Cell("B" + linha.ToString()).Value.ToString();
+                string NameComplete = planilha.Cell("C" + linha.ToString()).Value.ToString();
+                string email = planilha.Cell("D" + linha.ToString()).Value.ToString();
+                string tel = planilha.Cell("E" + linha.ToString()).Value.ToString();
+                string Situation = planilha.Cell("F" + linha.ToString()).Value.ToString();
+                string Period = planilha.Cell("G" + linha.ToString()).Value.ToString();
+                StudentRegistration SituationEnd;
+
+                if (Situation == "Nao Efetuou Matric.")
+                {
+                    SituationEnd = StudentRegistration.DidNotRegistration;
+                }
+                else if (Situation == "Vestibular")
+                {
+                    SituationEnd = StudentRegistration.EntranceExam;
+                }
+                else if (Situation == "Matricula pré- confirmada")
+                {
+                    SituationEnd = StudentRegistration.Pre_ConfirmedRegistration;
+                }
+                else if (Situation == "Matricula Ativa")
+                {
+                    SituationEnd = StudentRegistration.ActiveRegistration;
+                }
+                else if (Situation == "Formando")
+                {
+                    SituationEnd = StudentRegistration.Forming;
+                }
+                else if (Situation == "Desistente")
+                {
+                    SituationEnd = StudentRegistration.Quitter;
+                }
+                else if (Situation == "Matricula Trancada")
+                {
+                    SituationEnd = StudentRegistration.LockedRegistration;
+                }
+                else if (Situation == "Matricula Cancelada")
+                {
+                    SituationEnd = StudentRegistration.RegistrationCanceled;
+                }
+                else
+                {
+                    SituationEnd = StudentRegistration.DidNotRegistration;
+                }
+
                 cpf = cpf.Trim().Replace(".", "").Replace("-", "");
                 cpf = Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
                 var objec = await _mainBoardService.FindByCPFAsync(cpf);
-                var obje2 = await _studentService.FindByEADAsync(planilha.Cell("A" + linha.ToString()).Value.ToString());
+                var obje2 = await _studentService.FindByEADAsync(EAD);
                 if (objec == null && obje2 == null)
                 {
-                    string NameComplete = planilha.Cell("C" + linha.ToString()).Value.ToString();
                     string[] NameSplit = NameComplete.Split(' ');
                     string Name = "";
                     string LastName = "";
@@ -67,20 +111,24 @@ namespace InfinitySO.Services.ServicesAdministration
                         }
                     }
 
-                    MainBoard m1 = new MainBoard { Name = Name, LastName = LastName, CPF = cpf, RG = "00.000", Phone = "(XX)xxxx-xxxx", Cell = "(XX)x xxxx-xxxx", BirthDate = new DateTime(1990, 01, 01), Email = planilha.Cell("D" + linha.ToString()).Value.ToString(), Creation = new DateTime(2019, 08, 21) };
-                    Student s1 = new Student { PeriodId = obj.PeriodId, MainBoard = m1, EAD = planilha.Cell("A" + linha.ToString()).Value.ToString(), NumberPeriod = 1, StudentRegistration = StudentRegistration.UnRegistered, Week = DayOfWeek.Friday };
-                    Address a1 = new Address { MainBoard = m1, CEP = "Nulo", City = "Nulo", State = "Nulo", Neighborhood = "Nulo", Street = "Nulo", Number = "Nulo", Complement = "Nulo" };
-                    await _context.MainBoard.AddAsync(m1);
-                    await _context.Address.AddAsync(a1);
-                    await _context.Student.AddAsync(s1);
-
+                    if (obj.Description == Period)
+                    {
+                        MainBoard m1 = new MainBoard { Name = Name, LastName = LastName, CPF = cpf, RG = "00.000", Phone = "(XX)xxxx-xxxx", Cell = tel, BirthDate = new DateTime(1990, 01, 01), Email = email, Creation = new DateTime(2019, 08, 21) };
+                        Student s1 = new Student { PeriodId = obj.PeriodId, MainBoard = m1, EAD = EAD, NumberPeriod = 1, Week = DayOfWeek.Friday, StudentRegistration = SituationEnd };
+                        Address a1 = new Address { MainBoard = m1, CEP = "Nulo", City = "Nulo", State = "Nulo", Neighborhood = "Nulo", Street = "Nulo", Number = "Nulo", Complement = "Nulo" };
+                        await _context.MainBoard.AddAsync(m1);
+                        await _context.Address.AddAsync(a1);
+                        await _context.Student.AddAsync(s1);
+                    }
                     linha++;
                 }
                 else if (objec != null && obje2 == null)
                 {
-                    Student s1 = new Student { PeriodId = obj.PeriodId, MainBoardId = objec.Id, EAD = planilha.Cell("A" + linha.ToString()).Value.ToString(), NumberPeriod = 1, StudentRegistration = StudentRegistration.UnRegistered, Week = DayOfWeek.Friday };
-                    await _context.Student.AddAsync(s1);
-
+                    if (obj.Description == Period)
+                    {
+                        Student s1 = new Student { PeriodId = obj.PeriodId, MainBoardId = objec.Id, EAD = EAD, NumberPeriod = 1, Week = DayOfWeek.Friday, StudentRegistration = SituationEnd };
+                        await _context.Student.AddAsync(s1);
+                    }
                     linha++;
                 }
                 else

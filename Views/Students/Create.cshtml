@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select asp-for="StudentRegistration" asp-items="@StudentRegistration.UnRegistered.ToSelectList()" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Student Registration">
+                        <select asp-for="StudentRegistration" asp-items="@StudentRegistration.DidNotRegistration.ToSelectList()" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Student Registration">
                             <option selected value="">Student Registration</option>
                         </select>
                         <span asp-validation-for="StudentRegistration" class="text-danger"></span>

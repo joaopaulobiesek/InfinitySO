@@ -12,6 +12,7 @@ using InfinitySO.Models.ViewModels;
 using InfinitySO.Services.ServicesStudent;
 using InfinitySO.Services.ServicesSystem;
 using Microsoft.AspNetCore.Authorization;
+using InfinitySO.Models.Enums;
 
 namespace InfinitySO.Controllers.ControllersAdministration
 {
@@ -79,9 +80,17 @@ namespace InfinitySO.Controllers.ControllersAdministration
             try
             {
                 var obj = await _downloadFileDescriptionService.FindByIdAsync(importDataFormViewModel.DownloadFileDescription.Id);
-                await _importDataService.InsertAsync(obj);
-                ViewData["Resultado"] = "Excel lido com sucesso!";
-                return View(viewModel);
+                if (obj.CommandExecuted == CommandExecuted.Executed)
+                {
+                    ViewData["Error"] = "Arquivo lido anteriormente!";
+                    return View(viewModel);
+                }
+                else
+                {
+                    await _importDataService.InsertAsync(obj);
+                    ViewData["Resultado"] = "Excel lido com sucesso!";
+                    return View(viewModel);
+                }
             }
             catch (ApplicationException e)
             {

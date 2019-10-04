@@ -184,13 +184,11 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select asp-for="Student.StudentRegistration" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
-                            <option disabled selected>Select Registration</option>
-                            <option value="0">UnRegistered</option>
-                            <option value="1">Registered</option>
+                        <select asp-for="Student.StudentRegistration" asp-items="@StudentRegistration.DidNotRegistration.ToSelectList()" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Student Registration">
+                            <option selected value="">Student Registration</option>
                         </select>
                         <span asp-validation-for="Student.StudentRegistration" class="text-danger"></span>
-                    </div>
+                    </div><br />
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-info" />
                         <a asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>

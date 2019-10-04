@@ -13,10 +13,10 @@
             <div class="card-body ">
                 <form asp-action="Import">
                     <div class="text-success">@ViewData["Resultado"]</div>
+                    <div class="text-danger">@ViewData["Error"]</div>
                     <input type="hidden" asp-for="DownloadFile.Id" />
                     <div class="col-md-12">
-                        <select asp-for="DownloadFileDescription.Id" class="selectpicker col-sm-10" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
-                            <option disabled selected>Selecione Descrição</option>
+                        <select asp-for="DownloadFileDescription.Id" class="selectpicker col-sm-10" data-size="7" data-style="btn btn-primary btn-round" title="Select Description" required>
                             @foreach (var item in Model.DownloadFileDescriptions)
                             {
                                 @if (item.CommandExecuted == 0)
@@ -25,7 +25,7 @@
                                 }
                                 else
                                 {
-                                    <option disabled value="@item.Id">@item.Period.Course.Name @item.Period.Semester.Name - @item.NamePage - Pagina: @item.PageNumber </option>
+                                    <option style="background: #eee" value="@item.Id">@item.Period.Course.Name @item.Period.Semester.Name - @item.NamePage - Pagina: @item.PageNumber </option>
                                 }
                             }
                         </select>
