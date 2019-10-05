@@ -8,6 +8,8 @@ namespace InfinitySO.Models.ModelsStudent
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Display(Name = "Número")]
+        public int Number { get; set; }
         [Display(Name = "Semestre")]
         public string Name { get; set; }
 
@@ -15,9 +17,10 @@ namespace InfinitySO.Models.ModelsStudent
         {
         }
 
-        public Semester(int id, string name)
+        public Semester(int id, int number, string name)
         {
             Id = id;
+            Number = number;
             Name = name;
         }
     }

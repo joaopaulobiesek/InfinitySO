@@ -40,17 +40,17 @@ namespace InfinitySO.Data
             Sector sc12 = new Sector { Department = d2, Name = "Técnico de Laboratório", Initials = "Lab" };
 
 
-            Semester sem1 = new Semester { Name = "Semestre" };
-            Semester sem2 = new Semester { Name = "1º Semestre" };
-            Semester sem3 = new Semester { Name = "2º Semestre" };
-            Semester sem4 = new Semester { Name = "3º Semestre" };
-            Semester sem5 = new Semester { Name = "4º Semestre" };
-            Semester sem6 = new Semester { Name = "5º Semestre" };
-            Semester sem7 = new Semester { Name = "6º Semestre" };
-            Semester sem8 = new Semester { Name = "7º Semestre" };
-            Semester sem9 = new Semester { Name = "8º Semestre" };
-            Semester sem10 = new Semester { Name = "9º Semestre" };
-            Semester sem11 = new Semester { Name = "10º Semestre" };
+            Semester sem1 = new Semester { Number = 0, Name = "Semestre" };
+            Semester sem2 = new Semester { Number = 1, Name = "1º Semestre" };
+            Semester sem3 = new Semester { Number = 2, Name = "2º Semestre" };
+            Semester sem4 = new Semester { Number = 3, Name = "3º Semestre" };
+            Semester sem5 = new Semester { Number = 4, Name = "4º Semestre" };
+            Semester sem6 = new Semester { Number = 5, Name = "5º Semestre" };
+            Semester sem7 = new Semester { Number = 6, Name = "6º Semestre" };
+            Semester sem8 = new Semester { Number = 7, Name = "7º Semestre" };
+            Semester sem9 = new Semester { Number = 8, Name = "8º Semestre" };
+            Semester sem10 = new Semester { Number = 9, Name = "9º Semestre" };
+            Semester sem11 = new Semester { Number = 10, Name = "10º Semestre" };
 
             Course cur1 = new Course { Name = "0-CURSO" };
             Course cur2 = new Course { Name = "2º Licenciatura" };

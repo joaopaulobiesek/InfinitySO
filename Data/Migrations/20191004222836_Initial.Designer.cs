@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfinitySO.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191003025739_Initial")]
+    [Migration("20191004222836_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -677,6 +677,9 @@ namespace InfinitySO.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
