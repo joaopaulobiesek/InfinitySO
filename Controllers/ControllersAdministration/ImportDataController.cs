@@ -13,6 +13,7 @@ using InfinitySO.Services.ServicesStudent;
 using InfinitySO.Services.ServicesSystem;
 using Microsoft.AspNetCore.Authorization;
 using InfinitySO.Models.Enums;
+using InfinitySO.Models.ModelsSystem;
 
 namespace InfinitySO.Controllers.ControllersAdministration
 {
@@ -50,45 +51,42 @@ namespace InfinitySO.Controllers.ControllersAdministration
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
-            var obj = await _downloadFileDescriptionService.FindByIdListAsync(id.Value);
-            var obj2 = await _downloadFileService.FindByIdAsync(id.Value);
+            var obj = await _downloadFileService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
-            var viewModel = new ImportDataFormViewModel { DownloadFileDescriptions = obj, DownloadFile = obj2 };
+            var viewModel = new DownloadFile { Id = obj.Id, NameFile = obj.NameFile, Path = obj.Path, TypeFile = obj.TypeFile };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Import(int id, ImportDataFormViewModel importDataFormViewModel)
+        public async Task<IActionResult> Import(int id, DownloadFile downloadFile)
         {
-            var obj2 = await _downloadFileDescriptionService.FindByIdListAsync(id);
-            var obj3 = await _downloadFileService.FindByIdAsync(id);
-            var viewModel = new ImportDataFormViewModel { DownloadFileDescriptions = obj2, DownloadFile = obj3 };
+            var obj = await _downloadFileService.FindByIdAsync(id);
+            var viewModel = new DownloadFile { Id = obj.Id, NameFile = obj.NameFile, Path = obj.Path, TypeFile = obj.TypeFile };
 
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }
-            if (id != importDataFormViewModel.DownloadFile.Id)
+            if (id != downloadFile.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
             }
             try
             {
-                var obj = await _downloadFileDescriptionService.FindByIdAsync(importDataFormViewModel.DownloadFileDescription.Id);
-                if (obj.CommandExecuted == CommandExecuted.Executed)
+                if (obj.CommandExecuted == CommandExecuted.NotExecuted)
                 {
-                    ViewData["Error"] = "Arquivo lido anteriormente!";
+                    await _importDataService.InsertAsync(obj);
+                    ViewData["Resultado"] = "Excel lido com sucesso!";
                     return View(viewModel);
                 }
                 else
                 {
-                    await _importDataService.InsertAsync(obj);
-                    ViewData["Resultado"] = "Excel lido com sucesso!";
+                    ViewData["Error"] = "Excel ja executado anteriormente!";
                     return View(viewModel);
                 }
             }

@@ -16,6 +16,10 @@ namespace InfinitySO.Services.ServicesStudent
         {
             _context = context;
         }
+        public async Task<Period> FindByCodPeriodAsync(string codPeriod)
+        {
+            return await _context.Period.FirstOrDefaultAsync(obj => obj.CodPeriod == codPeriod);
+        }
 
         public async Task<List<Period>> FindAllAsync()
         {

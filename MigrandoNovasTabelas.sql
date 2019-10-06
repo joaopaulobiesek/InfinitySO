@@ -9,3 +9,11 @@ FROM InfinitySO.dbo.Department;
 
 SET IDENTITY_INSERT Department OFF
 GO
+
+
+/*verifica duplicidade*/
+
+select EAD, count(*)
+from Student
+group by EAD
+having count(*) > 1

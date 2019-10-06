@@ -32,7 +32,7 @@ namespace InfinitySO.Models.ModelsStudent
         public DayOfWeek Week { get; set; }
         [Required(ErrorMessage = "{0} Required")]
         [Display(Name = "Numero do periodo")]
-        public int NumberPeriod { get; set; }
+        public string NumberPeriod { get; set; }
         [Display(Name = "Status da matricula")]
         public StudentRegistration StudentRegistration { get; set; }
 
@@ -45,7 +45,7 @@ namespace InfinitySO.Models.ModelsStudent
         {
         }
 
-        public Student(int id, MainBoard mainBoard, Period period, string eAD, DayOfWeek week, int numberPeriod, StudentRegistration studentRegistration)
+        public Student(int id, MainBoard mainBoard, Period period, string eAD, DayOfWeek week, string numberPeriod, StudentRegistration studentRegistration)
         {
             Id = id;
             MainBoard = mainBoard;

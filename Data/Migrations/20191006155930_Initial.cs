@@ -74,6 +74,7 @@ namespace InfinitySO.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TypeFile = table.Column<int>(nullable: false),
+                    CommandExecuted = table.Column<int>(nullable: false),
                     NameFile = table.Column<string>(nullable: true),
                     PageNumbers = table.Column<int>(nullable: false),
                     Size = table.Column<long>(nullable: false),
@@ -394,7 +395,8 @@ namespace InfinitySO.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SemesterId = table.Column<int>(nullable: false),
-                    CourseId = table.Column<int>(nullable: false)
+                    CourseId = table.Column<int>(nullable: false),
+                    CodPeriod = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -618,7 +620,7 @@ namespace InfinitySO.Data.Migrations
                     PeriodId = table.Column<int>(nullable: false),
                     EAD = table.Column<string>(nullable: false),
                     Week = table.Column<int>(nullable: false),
-                    NumberPeriod = table.Column<int>(nullable: false),
+                    NumberPeriod = table.Column<string>(nullable: false),
                     StudentRegistration = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

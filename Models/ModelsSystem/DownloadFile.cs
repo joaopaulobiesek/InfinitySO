@@ -9,6 +9,7 @@ namespace InfinitySO.Models.ModelsSystem
     {
         public int Id { get; set; }
         public TypeFile TypeFile { get; set; }
+        public CommandExecuted CommandExecuted { get; set; }
         public string NameFile { get; set; }
         public int PageNumbers { get; set; }
         public long Size { get; set; }
@@ -19,10 +20,11 @@ namespace InfinitySO.Models.ModelsSystem
         {
         }
 
-        public DownloadFile(int id, TypeFile typeFile, string nameFile, int pageNumbers, long size, DateTime dateUpload, string path)
+        public DownloadFile(int id, TypeFile typeFile, CommandExecuted commandExecuted, string nameFile, int pageNumbers, long size, DateTime dateUpload, string path)
         {
             Id = id;
             TypeFile = typeFile;
+            CommandExecuted = commandExecuted;
             NameFile = nameFile;
             PageNumbers = pageNumbers;
             Size = size;

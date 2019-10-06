@@ -29,67 +29,23 @@
                                     <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                 </div>
                             </div>
+                        </div><div class="col-sm-7">
+                            <div class="form-group">
+                                <label asp-for="DownloadFile.TypeFile"></label>
+                                <input asp-for="DownloadFile.TypeFile" value="@TypeFile.System_xlsx" class="form-control" readonly />
+                                <span asp-validation-for="DownloadFile.TypeFile" class="text-danger"></span>
+                            </div>
                         </div>
-                        <div class="col-lg-5 col-md-6 col-sm-3">
-                            <select id="DownloadFileTypeFile" asp-for="DownloadFile.TypeFile" asp-items="@TypeFile.System_xlsx.ToSelectList()" class="selectpicker" data-size="8" data-style="btn btn-primary btn-round" title="Parcela de financiamento estudantil">
-                                <option selected value="">Tipo de arquivos</option>
-                            </select>
-                            <span asp-validation-for="DownloadFile.TypeFile" class="text-danger"></span>
-                        </div><br />
                         <div class="col-sm-7">
                             <div class="form-group">
                                 <label asp-for="DownloadFile.PageNumbers"></label>
-                                <input id="DownloadFilePageNumbers" asp-for="DownloadFile.PageNumbers" class="form-control" />
+                                <input asp-for="DownloadFile.PageNumbers" value="1" class="form-control" readonly />
                                 <span asp-validation-for="DownloadFile.PageNumbers" class="text-danger"></span>
                             </div>
                         </div>
-                        <hr />
-                        <div class="material-datatables">
-                            <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <label asp-for="DownloadFileDescription.PageNumber" class="form-check-label"></label>
-                                            <input id="PageNumberId" asp-for="DownloadFileDescription.PageNumber" class="form-control" />
-                                        </th>
-                                        <th>
-                                            <label asp-for="DownloadFileDescription.NamePage"></label>
-                                            <input id="NamePageId" asp-for="DownloadFileDescription.NamePage" class="form-control" />
-                                        </th>
-                                        <th>
-                                            <label asp-for="DownloadFileDescription.Description"></label>
-                                            <input id="DescriptionId" asp-for="DownloadFileDescription.Description" class="form-control" />
-                                        </th>
-                                        <th>
-                                            <select id="PeriodListId" asp-for="DownloadFileDescription.PeriodId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
-                                                <option disabled selected>Select Período</option>
-                                                @foreach (var item in Model.Periods)
-                                                {
-                                                    <option value="@item.Id">@item.Course.Name - @item.Semester.Name</option>
-                                                }
-                                            </select>
-                                        </th>
-                                        <th>
-                                            <button style="float:right;" class="btn btn-link btn-info btn-just-icon" type="button" id="ButtonAddFile" onclick="AddFile()" disabled="disabled"><i class="material-icons">add_box</i></button>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>@Html.DisplayNameFor(model => model.DownloadFileDescription.PageNumber)</th>
-                                        <th>@Html.DisplayNameFor(model => model.DownloadFileDescription.NamePage)</th>
-                                        <th>@Html.DisplayNameFor(model => model.DownloadFileDescription.Description)</th>
-                                        <th>@Html.DisplayNameFor(model => model.DownloadFileDescription.PeriodId)</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                                <tbody id="DownloadFileDescriptionsId"></tbody>
-                            </table>
-                        </div>
-                        <textarea style="display:none;" asp-for="stringDownloadFileDescriptions" id="DownloadFileDescriptions"></textarea>
                         <div class="form-group">
                             <hr />
-                            <input id="MySubmitSendFile" type="submit" value="Send File" class="btn btn-info" disabled="disabled" />
+                            <input id="MySubmitSendFile" type="submit" value="Send File" class="btn btn-info" />
                             <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
                         </div>
                     </form>
@@ -115,67 +71,4 @@
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-    <script>
-
-        var inputs = $('input').on('keyup', verificarInputs);
-        function verificarInputs() {
-            const preenchidos = inputs.get().every(({ value }) => value)
-            $('#ButtonAddFile').prop('disabled', !preenchidos);
-        }
-
-        var Imports = new Object();
-        Imports.ImportsData = new Array();
-
-        var IdDownloadFileTypeFile = document.getElementById("DownloadFileTypeFile");
-        var IdPageNumber = document.getElementById("PageNumberId");
-        var IdNamePage = document.getElementById("NamePageId");
-        var IdDescription = document.getElementById("DescriptionId");
-        var IdPeriodList = document.getElementById("PeriodListId");
-        var IdDownloadFilePageNumbers = document.getElementById("DownloadFilePageNumbers");
-        var MySubmitSendFile = document.getElementById("MySubmitSendFile");
-        var IdDownloadFileDescriptions = document.getElementById("DownloadFileDescriptions");
-        var IdDownloadFileDescriptionsDiv = document.getElementById("DownloadFileDescriptionsId");//Div responsavel por adicionar tbody
-        var count = 0;
-
-        function AddFile() {
-            if (IdDownloadFileTypeFile.options[IdDownloadFileTypeFile.selectedIndex].value == "Tipo de arquivos") {
-                alert("Unselected File");
-            } else if (IdPeriodList.options[IdPeriodList.selectedIndex].value == "Select Período") {
-                alert("Unselected Select Period");
-            } else {
-                if (count < IdDownloadFilePageNumbers.value) {
-                    count++;
-                    if (count == IdDownloadFilePageNumbers.value) {
-                        MySubmitSendFile.disabled = false;
-                    }
-                    Imports.ImportsData.push({
-                        "IdPageNumber": IdPageNumber.value,
-                        "IdNamePage": IdNamePage.value,
-                        "IdDescription": IdDescription.value,
-                        "IdPeriodList": IdPeriodList.value
-                    });
-
-                    IdDownloadFileDescriptions.innerHTML = JSON.stringify(Imports.ImportsData);
-
-                    var FileDown = "<tr>" +
-                        "<td>" + IdPageNumber.value + "</td>" +
-                        "<td>" + IdNamePage.value + "</td>" +
-                        "<td>" + IdDescription.value + "</td>" +
-                        "<td>" + IdPeriodList.options[IdPeriodList.selectedIndex].text + "</td>" +
-                        "</tr>";
-                    IdDownloadFileDescriptionsDiv.innerHTML += FileDown;
-
-                    IdPageNumber.value = "";
-                    IdNamePage.value = "";
-                    IdDescription.value = "";
-
-                } else {
-                    if (count < IdDownloadFilePageNumbers.value) {
-                        count++;
-                    }
-                    alert("Only " + IdDownloadFilePageNumbers.value + " Pages are allowed");
-                }
-            }
-        }
-    </script>
 }

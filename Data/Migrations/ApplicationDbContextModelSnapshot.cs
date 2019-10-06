@@ -651,6 +651,9 @@ namespace InfinitySO.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CodPeriod")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
@@ -698,8 +701,9 @@ namespace InfinitySO.Data.Migrations
                     b.Property<int>("MainBoardId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberPeriod")
-                        .HasColumnType("int");
+                    b.Property<string>("NumberPeriod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PeriodId")
                         .HasColumnType("int");
@@ -757,6 +761,9 @@ namespace InfinitySO.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommandExecuted")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateUpload")
                         .HasColumnType("datetime2");

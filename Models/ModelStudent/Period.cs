@@ -15,6 +15,7 @@ namespace InfinitySO.Models.ModelsStudent
         public int SemesterId { get; set; }
         [ForeignKey("Course")]
         public int CourseId { get; set; }
+        public string CodPeriod { get; set; }
         [NotMapped]
         public ICollection<Semester> Semesters { get; set; }
         [NotMapped]
@@ -24,11 +25,12 @@ namespace InfinitySO.Models.ModelsStudent
         {
         }
 
-        public Period(int id, Semester semester, Course course)
+        public Period(int id, Semester semester, Course course, string codPeriod)
         {
             Id = id;
             Semester = semester;
             Course = course;
+            CodPeriod = codPeriod;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model ImportDataFormViewModel
+﻿@model DownloadFile
 @{
     ViewData["Title"] = "Import Data";
 }
@@ -14,41 +14,21 @@
                 <form asp-action="Import">
                     <div class="text-success">@ViewData["Resultado"]</div>
                     <div class="text-danger">@ViewData["Error"]</div>
-                    <input type="hidden" asp-for="DownloadFile.Id" />
-                    <div class="col-md-12">
-                        <select asp-for="DownloadFileDescription.Id" class="selectpicker col-sm-10" data-size="7" data-style="btn btn-primary btn-round" title="Select Description" required>
-                            @foreach (var item in Model.DownloadFileDescriptions)
-                            {
-                                @if (item.CommandExecuted == 0)
-                                {
-                                    <option value="@item.Id">@item.Period.Course.Name @item.Period.Semester.Name - @item.NamePage - Pagina: @item.PageNumber </option>
-                                }
-                                else
-                                {
-                                    <option style="background: #eee" value="@item.Id">@item.Period.Course.Name @item.Period.Semester.Name - @item.NamePage - Pagina: @item.PageNumber </option>
-                                }
-                            }
-                        </select>
-                        <span asp-validation-for="DownloadFileDescription.Id" class="text-danger"></span>
-                    </div><br />
-                    @foreach (var item in Model.DownloadFileDescriptions)
-                    {
-                        <div class="col-sm-7">
-                            <div class="form-group">
-                                <label asp-for="DownloadFile.Path"></label>
-                                <input asp-for="DownloadFile.Path" value="@item.DownloadFile.Path" readonly="readonly" class="form-control" />
-                                <span asp-validation-for="DownloadFile.Path" class="text-danger"></span>
-                            </div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Path"></label>
+                            <input asp-for="Path"  readonly="readonly" class="form-control" />
+                            <span asp-validation-for="Path" class="text-danger"></span>
                         </div>
-                        <div class="col-sm-7">
-                            <div class="form-group">
-                                <label asp-for="DownloadFile.NameFile"></label>
-                                <input asp-for="DownloadFile.NameFile" value="@item.DownloadFile.NameFile" readonly="readonly" class="form-control" />
-                                <span asp-validation-for="DownloadFile.NameFile" class="text-danger"></span>
-                            </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="NameFile"></label>
+                            <input asp-for="NameFile" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="NameFile" class="text-danger"></span>
                         </div>
-                        break;
-                    }
+                    </div>
                     <div class="form-group">
                         <hr />
                         <input type="submit" value="Executed File" class="btn btn-info" />

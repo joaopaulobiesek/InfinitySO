@@ -28,18 +28,20 @@ namespace InfinitySO.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
+        private readonly SeedingService _seedingService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender, ApplicationDbContext context)
+            IEmailSender emailSender, ApplicationDbContext context, SeedingService seedingService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _context = context;
+            _seedingService = seedingService;
         }
 
         [BindProperty]
@@ -76,6 +78,7 @@ namespace InfinitySO.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            await _seedingService.Seed();
             if (_context.MainBoard.Any())
             {
                 return Page();  // DB has been seeded
