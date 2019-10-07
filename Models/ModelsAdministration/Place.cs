@@ -20,6 +20,8 @@ namespace InfinitySO.Models.ModelsAdministration
 
         [NotMapped]
         public ICollection<Company> Companies { get; set; }
+        [NotMapped]
+        public ICollection<Place> Places { get; set; }
 
         public Place()
         {

@@ -242,7 +242,7 @@
                 @foreach (var item in UserClaims)
                 {
                     if (item.Type == "FullAcess" || item.Type == "UserDataLogin" || item.Type == "Department" || item.Type == "Sector" ||
-                        item.Type == "Employee")
+                        item.Type == "Employee" || item.Type == "Company")
                     {
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" href="#pagesAdministration">
@@ -286,9 +286,27 @@
                                         </a>
                                     </li>
                                     <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Companies" asp-action="Index">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Cadastrar Empresa </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Espaço do Local </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
                                         <a class="nav-link" asp-area="" asp-controller="Employees" asp-action="Index">
                                             <span class="sidebar-mini"> F </span>
                                             <span class="sidebar-normal"> Funcionário </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Places" asp-action="Index">
+                                            <span class="sidebar-mini"> L </span>
+                                            <span class="sidebar-normal"> Local </span>
                                         </a>
                                     </li>
                                 </ul>
@@ -401,6 +419,46 @@
                         break;
                     }
                 }
+                @foreach (var item in UserClaims)
+                {
+                    if (item.Type == "FullAcess" || item.Type == "SubCategory" || item.Type == "PatrimonyKey" || item.Type == "PatrimonyKeyDescription" ||
+                        item.Type == "Patrimony")
+                    {
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#pagesPatrimony">
+                                <i class="material-icons">image</i>
+                                <p>
+                                    Patrimônio
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="pagesPatrimony">
+                                <ul class="nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="SubCategories" asp-action="Index">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Descrição do Patrimônio </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Patrimonies" asp-action="Index">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Cadastrar Patrimônio </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="PatrimonyKeys" asp-action="Create">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Patrimony Key </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        break;
+                    }
+                }
+
                 @foreach (var item in UserClaims)
                 {
                     if (item.Type == "FullAcess" || item.Type == "TimePoint" || item.Type == "TimePointCreate" || item.Type == "TimePointEdit" ||

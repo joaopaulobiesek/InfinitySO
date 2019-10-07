@@ -24,6 +24,8 @@ namespace InfinitySO.Models.ModelsAdministration
 
         [NotMapped]
         public ICollection<Place> Places { get; set; }
+        [NotMapped]
+        public ICollection<Category> Categories { get; set; }
 
         public Category()
         {

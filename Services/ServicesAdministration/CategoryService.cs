@@ -18,7 +18,7 @@ namespace InfinitySO.Services.ServicesAdministration
 
         public async Task<List<Category>> FindAllAsync()
         {
-            return await _context.Category.OrderBy(x => x.Name).ToListAsync();
+            return await _context.Category.Include(x => x.Place).Include(x => x.Place.Company).OrderBy(x => x.Name).ToListAsync();
         }
 
         public async Task InsertAsync(Category obj)

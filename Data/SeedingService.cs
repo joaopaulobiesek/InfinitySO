@@ -40,7 +40,6 @@ namespace InfinitySO.Data
             Sector sc11 = new Sector { Department = d2, Name = "Tutor", Initials = "Tut" };
             Sector sc12 = new Sector { Department = d2, Name = "Técnico de Laboratório", Initials = "Lab" };
 
-
             Semester sem1 = new Semester { Number = 0, Name = "Semestre" };
             Semester sem2 = new Semester { Number = 1, Name = "1º Semestre" };
             Semester sem3 = new Semester { Number = 2, Name = "2º Semestre" };
@@ -71,14 +70,14 @@ namespace InfinitySO.Data
             Course cur16 = new Course { Name = "CST Processos Gerencias" };
             Course cur17 = new Course { Name = "CST Segurança do Trabalho" };
             Course cur18 = new Course { Name = "CST Serviços Jurídicos, Cartório e Notas" };
-            Course cur19 = new Course { Name = "Gestão Ambiental" };
-            Course cur20 = new Course { Name = "Gestão Comercial" };
-            Course cur21 = new Course { Name = "Gestão da Segurança Pública" };
-            Course cur22 = new Course { Name = "Gestão de Produção Industrial" };
-            Course cur23 = new Course { Name = "Gestão de Recursos Humanos" };
-            Course cur24 = new Course { Name = "Gestão Financeira" };
-            Course cur25 = new Course { Name = "Gestão Hospitalar" };
-            Course cur26 = new Course { Name = "Gestão Pública" };
+            Course cur19 = new Course { Name = "CST Gestão Ambiental" };
+            Course cur20 = new Course { Name = "CST Gestão Comercial" };
+            Course cur21 = new Course { Name = "CST Gestão da Segurança Pública" };
+            Course cur22 = new Course { Name = "CST Gestão de Produção Industrial" };
+            Course cur23 = new Course { Name = "CST Gestão de Recursos Humanos" };
+            Course cur24 = new Course { Name = "CST Gestão Financeira" };
+            Course cur25 = new Course { Name = "CST Gestão Hospitalar" };
+            Course cur26 = new Course { Name = "CST Gestão Pública" };
             Course cur27 = new Course { Name = "Educação Fisica - Bacharelado" };
             Course cur28 = new Course { Name = "Educação Fisica - Lic." };
             Course cur29 = new Course { Name = "Enfermagem" };
@@ -90,6 +89,19 @@ namespace InfinitySO.Data
             Course cur35 = new Course { Name = "Pedagógia - Lic." };
             Course cur36 = new Course { Name = "Serviço Social" };
             Course cur37 = new Course { Name = "Sociologia - Lic." };
+            Course cur38 = new Course { Name = "CST em Comércio Exterior" };
+            Course cur39 = new Course { Name = "CST em Gestão de Turismo" };
+            Course cur40 = new Course { Name = "Engenharia Civil" };
+            Course cur41 = new Course { Name = "Engenharia Computação" };
+            Course cur42 = new Course { Name = "Engenharia de Produção" };
+            Course cur43 = new Course { Name = "Engenharia Elétrica" };
+            Course cur44 = new Course { Name = "Engenharia Mecânica" };
+            Course cur45 = new Course { Name = "Farmácia" };
+            Course cur46 = new Course { Name = "Filosofia - Lic." };
+            Course cur47 = new Course { Name = "Letras - Português" };
+            Course cur48 = new Course { Name = "Letras - Português e Espanhol" };
+            Course cur49 = new Course { Name = "Letras - Português e Inglês" };
+            Course cur50 = new Course { Name = "Teologia" };
 
             Period per1 = new Period { Semester = sem1, Course = cur1, CodPeriod = "CUR00" };
             Period per2 = new Period { Semester = sem2, Course = cur2, CodPeriod = "2Licen1" };
@@ -156,7 +168,7 @@ namespace InfinitySO.Data
             Period per63 = new Period { Semester = sem4, Course = cur10, CodPeriod = "CSTADS3" };
             Period per64 = new Period { Semester = sem5, Course = cur10, CodPeriod = "CSTADS4" };
             Period per65 = new Period { Semester = sem6, Course = cur10, CodPeriod = "CSTADS5" };
-            Period per66 = new Period { Semester = sem7, Course = cur10, CodPeriod = "CSTADS6" };
+            Period per66 = new Period { Semester = sem7, Course = cur10, CodPeriod = "CSTADS6" }; 
             Period per67 = new Period { Semester = sem2, Course = cur11, CodPeriod = "CSTEIP1" };
             Period per68 = new Period { Semester = sem3, Course = cur11, CodPeriod = "CSTEIP2" };
             Period per69 = new Period { Semester = sem4, Course = cur11, CodPeriod = "CSTEIP3" };
@@ -314,6 +326,114 @@ namespace InfinitySO.Data
             Period per221 = new Period { Semester = sem7, Course = cur37, CodPeriod = "SOC6" };
             Period per222 = new Period { Semester = sem8, Course = cur37, CodPeriod = "SOC7" };
             Period per223 = new Period { Semester = sem9, Course = cur37, CodPeriod = "SOC8" };
+            Period per224 = new Period { Semester = sem2, Course = cur38, CodPeriod = "COMEXT1" };
+            Period per225 = new Period { Semester = sem3, Course = cur38, CodPeriod = "COMEXT2" };
+            Period per226 = new Period { Semester = sem4, Course = cur38, CodPeriod = "COMEXT3" };
+            Period per227 = new Period { Semester = sem5, Course = cur38, CodPeriod = "COMEXT4" };
+            Period per228 = new Period { Semester = sem2, Course = cur39, CodPeriod = "GTUR1" };
+            Period per229 = new Period { Semester = sem3, Course = cur39, CodPeriod = "GTUR2" };
+            Period per230 = new Period { Semester = sem4, Course = cur39, CodPeriod = "GTUR3" };
+            Period per231 = new Period { Semester = sem5, Course = cur39, CodPeriod = "GTUR4" };
+            Period per232 = new Period { Semester = sem2, Course = cur40, CodPeriod = "ENGCIV1" };
+            Period per233 = new Period { Semester = sem3, Course = cur40, CodPeriod = "ENGCIV2" };
+            Period per234 = new Period { Semester = sem4, Course = cur40, CodPeriod = "ENGCIV3" };
+            Period per235 = new Period { Semester = sem5, Course = cur40, CodPeriod = "ENGCIV4" };
+            Period per236 = new Period { Semester = sem6, Course = cur40, CodPeriod = "ENGCIV5" };
+            Period per237 = new Period { Semester = sem7, Course = cur40, CodPeriod = "ENGCIV6" };
+            Period per238 = new Period { Semester = sem8, Course = cur40, CodPeriod = "ENGCIV7" };
+            Period per239 = new Period { Semester = sem9, Course = cur40, CodPeriod = "ENGCIV8" };
+            Period per240 = new Period { Semester = sem10, Course = cur40, CodPeriod = "ENGCIV9" };
+            Period per241 = new Period { Semester = sem11, Course = cur40, CodPeriod = "ENGCIV10" };
+            Period per242 = new Period { Semester = sem2, Course = cur41, CodPeriod = "ENGCOMP1" };
+            Period per243 = new Period { Semester = sem3, Course = cur41, CodPeriod = "ENGCOMP2" };
+            Period per244 = new Period { Semester = sem4, Course = cur41, CodPeriod = "ENGCOMP3" };
+            Period per246 = new Period { Semester = sem5, Course = cur41, CodPeriod = "ENGCOMP4" };
+            Period per247 = new Period { Semester = sem6, Course = cur41, CodPeriod = "ENGCOMP5" };
+            Period per248 = new Period { Semester = sem7, Course = cur41, CodPeriod = "ENGCOMP6" };
+            Period per249 = new Period { Semester = sem8, Course = cur41, CodPeriod = "ENGCOMP7" };
+            Period per250 = new Period { Semester = sem9, Course = cur41, CodPeriod = "ENGCOMP8" };
+            Period per251 = new Period { Semester = sem10, Course = cur41, CodPeriod = "ENGCOMP9" };
+            Period per252 = new Period { Semester = sem11, Course = cur41, CodPeriod = "ENGCOMP10" };
+            Period per253 = new Period { Semester = sem2, Course = cur42, CodPeriod = "ENGPRO1" };
+            Period per254 = new Period { Semester = sem3, Course = cur42, CodPeriod = "ENGPRO2" };
+            Period per255 = new Period { Semester = sem4, Course = cur42, CodPeriod = "ENGPRO3" };
+            Period per256 = new Period { Semester = sem5, Course = cur42, CodPeriod = "ENGPRO4" };
+            Period per257 = new Period { Semester = sem6, Course = cur42, CodPeriod = "ENGPRO5" };
+            Period per258 = new Period { Semester = sem7, Course = cur42, CodPeriod = "ENGPRO6" };
+            Period per259 = new Period { Semester = sem8, Course = cur42, CodPeriod = "ENGPRO7" };
+            Period per260 = new Period { Semester = sem9, Course = cur42, CodPeriod = "ENGPRO8" };
+            Period per261 = new Period { Semester = sem10, Course = cur42, CodPeriod = "ENGPRO9" };
+            Period per262 = new Period { Semester = sem11, Course = cur42, CodPeriod = "ENGPRO10" };
+            Period per263 = new Period { Semester = sem2, Course = cur43, CodPeriod = "ENGELE1" };
+            Period per264 = new Period { Semester = sem3, Course = cur43, CodPeriod = "ENGELE2" };
+            Period per265 = new Period { Semester = sem4, Course = cur43, CodPeriod = "ENGELE3" };
+            Period per266 = new Period { Semester = sem5, Course = cur43, CodPeriod = "ENGELE4" };
+            Period per267 = new Period { Semester = sem6, Course = cur43, CodPeriod = "ENGELE5" };
+            Period per268 = new Period { Semester = sem7, Course = cur43, CodPeriod = "ENGELE6" };
+            Period per269 = new Period { Semester = sem8, Course = cur43, CodPeriod = "ENGELE7" };
+            Period per270 = new Period { Semester = sem9, Course = cur43, CodPeriod = "ENGELE8" };
+            Period per271 = new Period { Semester = sem10, Course = cur43, CodPeriod = "ENGELE9" };
+            Period per272 = new Period { Semester = sem11, Course = cur43, CodPeriod = "ENGELE10" };
+            Period per273 = new Period { Semester = sem2, Course = cur44, CodPeriod = "ENGMEC1" };
+            Period per274 = new Period { Semester = sem3, Course = cur44, CodPeriod = "ENGMEC2" };
+            Period per275 = new Period { Semester = sem4, Course = cur44, CodPeriod = "ENGMEC3" };
+            Period per276 = new Period { Semester = sem5, Course = cur44, CodPeriod = "ENGMEC4" };
+            Period per277 = new Period { Semester = sem6, Course = cur44, CodPeriod = "ENGMEC5" };
+            Period per278 = new Period { Semester = sem7, Course = cur44, CodPeriod = "ENGMEC6" };
+            Period per279 = new Period { Semester = sem8, Course = cur44, CodPeriod = "ENGMEC7" };
+            Period per280 = new Period { Semester = sem9, Course = cur44, CodPeriod = "ENGMEC8" };
+            Period per281 = new Period { Semester = sem10, Course = cur44, CodPeriod = "ENGMEC9" };
+            Period per282 = new Period { Semester = sem11, Course = cur44, CodPeriod = "ENGMEC10" };
+            Period per283 = new Period { Semester = sem2, Course = cur45, CodPeriod = "FARM1" };
+            Period per284 = new Period { Semester = sem3, Course = cur45, CodPeriod = "FARM2" };
+            Period per285 = new Period { Semester = sem4, Course = cur45, CodPeriod = "FARM3" };
+            Period per286 = new Period { Semester = sem5, Course = cur45, CodPeriod = "FARM4" };
+            Period per287 = new Period { Semester = sem6, Course = cur45, CodPeriod = "FARM5" };
+            Period per288 = new Period { Semester = sem7, Course = cur45, CodPeriod = "FARM6" };
+            Period per289 = new Period { Semester = sem8, Course = cur45, CodPeriod = "FARM7" };
+            Period per290 = new Period { Semester = sem9, Course = cur45, CodPeriod = "FARM8" };
+            Period per291 = new Period { Semester = sem10, Course = cur45, CodPeriod = "FARM9" };
+            Period per292 = new Period { Semester = sem11, Course = cur45, CodPeriod = "FARM10" };
+            Period per293 = new Period { Semester = sem2, Course = cur46, CodPeriod = "FILO1" };
+            Period per294 = new Period { Semester = sem3, Course = cur46, CodPeriod = "FILO2" };
+            Period per295 = new Period { Semester = sem4, Course = cur46, CodPeriod = "FILO3" };
+            Period per296 = new Period { Semester = sem5, Course = cur46, CodPeriod = "FILO4" };
+            Period per297 = new Period { Semester = sem6, Course = cur46, CodPeriod = "FILO5" };
+            Period per298 = new Period { Semester = sem7, Course = cur46, CodPeriod = "FILO6" };
+            Period per299 = new Period { Semester = sem8, Course = cur46, CodPeriod = "FILO7" };
+            Period per300 = new Period { Semester = sem9, Course = cur46, CodPeriod = "FILO8" };
+            Period per301 = new Period { Semester = sem2, Course = cur47, CodPeriod = "LETRASPOR1" };
+            Period per302 = new Period { Semester = sem3, Course = cur47, CodPeriod = "LETRASPOR2" };
+            Period per303 = new Period { Semester = sem4, Course = cur47, CodPeriod = "LETRASPOR3" };
+            Period per304 = new Period { Semester = sem5, Course = cur47, CodPeriod = "LETRASPOR4" };
+            Period per305 = new Period { Semester = sem6, Course = cur47, CodPeriod = "LETRASPOR5" };
+            Period per306 = new Period { Semester = sem7, Course = cur47, CodPeriod = "LETRASPOR6" };
+            Period per307 = new Period { Semester = sem8, Course = cur47, CodPeriod = "LETRASPOR7" };
+            Period per308 = new Period { Semester = sem9, Course = cur47, CodPeriod = "LETRASPOR8" };
+            Period per309 = new Period { Semester = sem2, Course = cur48, CodPeriod = "LETRASPORESP1" };
+            Period per310 = new Period { Semester = sem3, Course = cur48, CodPeriod = "LETRASPORESP2" };
+            Period per311 = new Period { Semester = sem4, Course = cur48, CodPeriod = "LETRASPORESP3" };
+            Period per312 = new Period { Semester = sem5, Course = cur48, CodPeriod = "LETRASPORESP4" };
+            Period per313 = new Period { Semester = sem6, Course = cur48, CodPeriod = "LETRASPORESP5" };
+            Period per314 = new Period { Semester = sem7, Course = cur48, CodPeriod = "LETRASPORESP6" };
+            Period per315 = new Period { Semester = sem8, Course = cur48, CodPeriod = "LETRASPORESP7" };
+            Period per316 = new Period { Semester = sem9, Course = cur48, CodPeriod = "LETRASPORESP8" };
+            Period per317 = new Period { Semester = sem2, Course = cur49, CodPeriod = "LETRASPORING1" };
+            Period per318 = new Period { Semester = sem3, Course = cur49, CodPeriod = "LETRASPORING2" };
+            Period per319 = new Period { Semester = sem4, Course = cur49, CodPeriod = "LETRASPORING3" };
+            Period per320 = new Period { Semester = sem5, Course = cur49, CodPeriod = "LETRASPORING4" };
+            Period per321 = new Period { Semester = sem6, Course = cur49, CodPeriod = "LETRASPORING5" };
+            Period per322 = new Period { Semester = sem7, Course = cur49, CodPeriod = "LETRASPORING6" };
+            Period per323 = new Period { Semester = sem8, Course = cur49, CodPeriod = "LETRASPORING7" };
+            Period per324 = new Period { Semester = sem9, Course = cur49, CodPeriod = "LETRASPORING8" };
+            Period per325 = new Period { Semester = sem2, Course = cur50, CodPeriod = "TEO1" };
+            Period per326 = new Period { Semester = sem3, Course = cur50, CodPeriod = "TEO2" };
+            Period per327 = new Period { Semester = sem4, Course = cur50, CodPeriod = "TEO3" };
+            Period per328 = new Period { Semester = sem5, Course = cur50, CodPeriod = "TEO4" };
+            Period per329 = new Period { Semester = sem6, Course = cur50, CodPeriod = "TEO5" };
+            Period per330 = new Period { Semester = sem7, Course = cur50, CodPeriod = "TEO6" };
+            Period per331 = new Period { Semester = sem8, Course = cur50, CodPeriod = "TEO7" };
+            Period per332 = new Period { Semester = sem9, Course = cur50, CodPeriod = "TEO8" };
 
             Journey j1 = new Journey { Name = "Folga", Duration = "00:00" };
             Journey j2 = new Journey { Name = "Horario Comercial", Duration = "08:00", Input1 = "08:00", Input2 = "14:00", Output1 = "12:00", Output2 = "18:00" };
@@ -428,7 +548,8 @@ namespace InfinitySO.Data
             await _context.Semester.AddRangeAsync(sem1, sem2, sem3, sem4, sem5, sem6, sem7, sem8, sem9, sem10, sem11);
 
             await _context.Course.AddRangeAsync(cur1, cur2, cur3, cur4, cur5, cur6, cur7, cur8, cur9, cur10, cur11, cur12, cur13, cur14, cur15, cur16, cur17, cur18, cur19,
-                                     cur20, cur21, cur22, cur23, cur24, cur25, cur26, cur27, cur28, cur29, cur30, cur31, cur32, cur33, cur34, cur35, cur36, cur37);
+                                     cur20, cur21, cur22, cur23, cur24, cur25, cur26, cur27, cur28, cur29, cur30, cur31, cur32, cur33, cur34, cur35, cur36, cur37, cur38,
+                                     cur39, cur40, cur41, cur42, cur43, cur44, cur45, cur46, cur47, cur48, cur49, cur50);
 
             await _context.Period.AddRangeAsync(per1, per2, per3, per4, per5, per6, per7, per8, per9, per10, per11, per12, per13, per14, per15, per16, per17, per18, per19,
                                      per20, per21, per22, per23, per24, per25, per26, per27, per28, per29, per30, per31, per32, per33, per34, per35, per36, per37,
@@ -443,7 +564,13 @@ namespace InfinitySO.Data
                                      per173, per174, per175, per176, per177, per178, per179, per180, per181, per182, per183, per184, per185, per186, per187, per188,
                                      per189, per190, per191, per192, per193, per194, per195, per196, per197, per198, per199, per200, per201, per202, per203, per204,
                                      per205, per206, per207, per208, per209, per210, per211, per212, per213, per214, per215, per216, per217, per218, per219, per220,
-                                     per221, per222, per223);
+                                     per221, per222, per223, per224, per225, per226, per227, per228, per229, per230, per231, per232, per233, per234, per235, per236,
+                                     per237, per238, per239, per240, per241, per242, per243, per244, per246, per247, per248, per249, per250, per251, per252, per253,
+                                     per254, per255, per256, per257, per258, per259, per260, per261, per262, per263, per264, per265, per266, per267, per268, per269,
+                                     per270, per271, per272, per273, per274, per275, per276, per277, per278, per279, per280, per281, per282, per283, per284, per285,
+                                     per286, per287, per288, per289, per290, per291, per292, per293, per294, per295, per296, per297, per298, per299, per300, per301,
+                                     per302, per303, per304, per305, per306, per307, per308, per309, per310, per311, per312, per313, per314, per315, per316, per317,
+                                     per318, per319, per320, per321, per322, per323, per324, per325, per326, per327, per328, per329, per330, per331, per332);
 
             await _context.SaveChangesAsync();
         }

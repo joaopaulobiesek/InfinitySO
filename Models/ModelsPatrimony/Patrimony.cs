@@ -33,6 +33,8 @@ namespace InfinitySO.Models.ModelsPatrimony
         public ICollection<Category> Categories { get; set; }
         [NotMapped]
         public ICollection<SubCategory> SubCategories { get; set; }
+        [NotMapped]
+        public ICollection<Patrimony> Patrimonies { get; set; }
 
         public Patrimony()
         {

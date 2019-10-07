@@ -19,9 +19,11 @@ namespace InfinitySO.Controllers.ControllersPatrimony
             _subCategoryService = subCategoryService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var subCategories = await _subCategoryService.FindAllAsync();
+            var viewModel = new SubCategory { SubCategories = subCategories };
+            return View(viewModel);
         }
 
         public IActionResult Create()
@@ -38,7 +40,7 @@ namespace InfinitySO.Controllers.ControllersPatrimony
                 return View();
             }
             await _subCategoryService.InsertAsync(subCategory);
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

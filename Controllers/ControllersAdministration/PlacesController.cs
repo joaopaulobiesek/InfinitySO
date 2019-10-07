@@ -18,9 +18,12 @@ namespace InfinitySO.Controllers.ControllersAdministration
             _companyService = companyService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var places = await _placeService.FindAllAsync();
+            var companies = await _companyService.FindAllAsync();
+            var viewModel = new Place { Places = places, Companies = companies };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create()

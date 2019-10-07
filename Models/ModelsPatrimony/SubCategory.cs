@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InfinitySO.Models.ModelsPatrimony
@@ -16,6 +17,8 @@ namespace InfinitySO.Models.ModelsPatrimony
         [Required(ErrorMessage = "{0} Required")]
         [Display(Name = "Descrição do patrimônio")]
         public string Description { get; set; }
+        [NotMapped]
+        public ICollection<SubCategory> SubCategories { get; set; }
 
         public SubCategory()
         {

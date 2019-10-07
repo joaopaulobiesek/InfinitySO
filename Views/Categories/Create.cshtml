@@ -14,11 +14,15 @@
                 <!--Start-->
                 <form asp-action="Create">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select asp-for="PlaceId" asp-items="@(new SelectList(Model.Places, "Id", "Name"))" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Place">
-                            <option selected value="">Place</option>
+                    <div class="text-danger">@ViewData["Error"]</div>
+                    <div class="col-lg-10 col-md-6 col-sm-3">
+                        <select asp-for="PlaceId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                            <option disabled selected>Select Name</option>
+                            @foreach (var item in Model.Places)
+                            {
+                                <option value="@item.Id">@item.Company.CorporateName @item.Company.FantasyName - Local: @item.Name</option>
+                            }
                         </select>
-                        <span asp-validation-for="PlaceId" class="text-danger"></span>
                     </div><br />
                     <div class="col-sm-7">
                         <div class="form-group">

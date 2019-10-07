@@ -14,9 +14,9 @@
                 <!--Start-->
                 <form asp-action="Create">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select asp-for="CompanyId" asp-items="@(new SelectList(Model.Companies, "Id", "CorporateName"))" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Company">
-                            <option selected value="">Company</option>
+                    <div class="col-md-12">
+                        <select asp-for="CompanyId" asp-items="@(new SelectList(Model.Companies, "Id", "CorporateName"))" class="selectpicker col-sm-10" data-size="7" data-style="btn btn-primary btn-round" title="Select Company">
+                            <option disabled selected>Selecione Empresa</option>                          
                         </select>
                         <span asp-validation-for="CompanyId" class="text-danger"></span>
                     </div><br />

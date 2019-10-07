@@ -24,16 +24,19 @@ namespace InfinitySO.Controllers.ControllersPatrimony
             _subCategoryService = subCategoryService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var patrimonies = await _patrimonyService.FindAllAsync();
+            var viewModel = new Patrimony { Patrimonies = patrimonies };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create()
         {
             var category = await _categoryService.FindAllAsync();
+            //var patrimonies = await _patrimonyService.FindAllAsync();
             var subCategory = await _subCategoryService.FindAllAsync();
-            var viewModel = new Patrimony { Categories = category, SubCategories = subCategory };
+            var viewModel = new Patrimony { Categories = category, SubCategories = subCategory/*, Patrimonies = patrimonies */};
             return View(viewModel);
         }
 
@@ -41,15 +44,24 @@ namespace InfinitySO.Controllers.ControllersPatrimony
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Patrimony patrimony)
         {
+            var category = await _categoryService.FindAllAsync();
+            var subCategory = await _subCategoryService.FindAllAsync();
+            var viewModel = new Patrimony { Categories = category, SubCategories = subCategory };
             if (!ModelState.IsValid)
-            {
-                var category = await _categoryService.FindAllAsync();
-                var subCategory = await _subCategoryService.FindAllAsync();
-                var viewModel = new Patrimony { Categories = category, SubCategories = subCategory };
+            {               
                 return View(viewModel);
             }
-            await _patrimonyService.InsertAsync(patrimony);
-            return RedirectToAction(nameof(Create));
+            var obj = await _patrimonyService.FindByCatSubAsync(patrimony.CategoryId, patrimony.SubCategoryId);
+            if (obj == null)
+            {
+                await _patrimonyService.InsertAsync(patrimony);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewData["Error"] = "Patrimônio já cadastrado neste local. Favor Editar o já existente!";
+                return View(viewModel);
+            }
         }
     }
 }

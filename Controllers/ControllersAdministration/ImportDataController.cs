@@ -86,7 +86,7 @@ namespace InfinitySO.Controllers.ControllersAdministration
                 }
                 else
                 {
-                    ViewData["Error"] = "Excel ja executado anteriormente!";
+                    ViewData["Error"] = "Excel já executado anteriormente!";
                     return View(viewModel);
                 }
             }

@@ -18,7 +18,7 @@ namespace InfinitySO.Services.ServicesAdministration
 
         public async Task<List<Place>> FindAllAsync()
         {
-            return await _context.Place.OrderBy(x => x.Name).ToListAsync();
+            return await _context.Place.Include(x => x.Company).OrderBy(x => x.Name).ToListAsync();
         }
 
         public async Task InsertAsync(Place obj)
