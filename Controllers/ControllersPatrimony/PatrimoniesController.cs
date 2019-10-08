@@ -34,9 +34,8 @@ namespace InfinitySO.Controllers.ControllersPatrimony
         public async Task<IActionResult> Create()
         {
             var category = await _categoryService.FindAllAsync();
-            //var patrimonies = await _patrimonyService.FindAllAsync();
             var subCategory = await _subCategoryService.FindAllAsync();
-            var viewModel = new Patrimony { Categories = category, SubCategories = subCategory/*, Patrimonies = patrimonies */};
+            var viewModel = new Patrimony { Categories = category, SubCategories = subCategory};
             return View(viewModel);
         }
 

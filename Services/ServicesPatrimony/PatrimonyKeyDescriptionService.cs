@@ -17,7 +17,7 @@ namespace InfinitySO.Services.ServicesPatrimony
 
         public async Task<List<PatrimonyKeyDescription>> FindAllAsync()
         {
-            return await _context.PatrimonyKeyDescription.Include(obj => obj.PatrimonyKey).ToListAsync();
+            return await _context.PatrimonyKeyDescription.Include(obj => obj.PatrimonyKey).Include(obj => obj.PatrimonyKey.Sector).ToListAsync();
         }
 
         public async Task InsertAsync(PatrimonyKeyDescription obj)

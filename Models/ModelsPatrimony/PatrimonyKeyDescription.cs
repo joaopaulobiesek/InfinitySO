@@ -31,6 +31,8 @@ namespace InfinitySO.Models.ModelsPatrimony
 
         [NotMapped]
         public ICollection<PatrimonyKey> PatrimonyKeys { get; set; }
+        [NotMapped]
+        public ICollection<PatrimonyKeyDescription> PatrimonyKeyDescriptions { get; set; }
 
         public PatrimonyKeyDescription()
         {

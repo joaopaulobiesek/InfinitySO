@@ -26,7 +26,7 @@ namespace InfinitySO.Services.ServicesStudent
 
         public async Task<List<Student>> FindAllAsync()
         {
-            return await _context.Student.Include(obj => obj.MainBoard).OrderBy(x => x.MainBoard.Name).ThenBy(x => x.MainBoard.LastName).ToListAsync();
+            return await _context.Student.Include(obj => obj.MainBoard).Include(obj => obj.Period).Include(obj => obj.Period.Course).Include(obj => obj.Period.Semester).OrderBy(x => x.MainBoard.Name).ThenBy(x => x.MainBoard.LastName).ToListAsync();
         }
 
         public async Task InsertAsync(Student obj)

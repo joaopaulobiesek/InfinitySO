@@ -68,25 +68,6 @@ namespace InfinitySO.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DownloadFile",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeFile = table.Column<int>(nullable: false),
-                    CommandExecuted = table.Column<int>(nullable: false),
-                    NameFile = table.Column<string>(nullable: true),
-                    PageNumbers = table.Column<int>(nullable: false),
-                    Size = table.Column<long>(nullable: false),
-                    DateUpload = table.Column<DateTime>(nullable: false),
-                    Path = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DownloadFile", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Journey",
                 columns: table => new
                 {
@@ -581,33 +562,30 @@ namespace InfinitySO.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DownloadFileDescription",
+                name: "DownloadFile",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    TypeFile = table.Column<int>(nullable: false),
                     CommandExecuted = table.Column<int>(nullable: false),
-                    DownloadFileId = table.Column<int>(nullable: false),
-                    PeriodId = table.Column<int>(nullable: false),
-                    PageNumber = table.Column<int>(nullable: false),
-                    NamePage = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    PeriodId = table.Column<int>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    NameFile = table.Column<string>(nullable: true),
+                    PageNumbers = table.Column<int>(nullable: false),
+                    Size = table.Column<long>(nullable: false),
+                    DateUpload = table.Column<DateTime>(type: "date", nullable: false),
+                    Path = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DownloadFileDescription", x => x.Id);
+                    table.PrimaryKey("PK_DownloadFile", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DownloadFileDescription_DownloadFile_DownloadFileId",
-                        column: x => x.DownloadFileId,
-                        principalTable: "DownloadFile",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DownloadFileDescription_Period_PeriodId",
+                        name: "FK_DownloadFile_Period_PeriodId",
                         column: x => x.PeriodId,
                         principalTable: "Period",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -869,13 +847,8 @@ namespace InfinitySO.Data.Migrations
                 column: "PlaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DownloadFileDescription_DownloadFileId",
-                table: "DownloadFileDescription",
-                column: "DownloadFileId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DownloadFileDescription_PeriodId",
-                table: "DownloadFileDescription",
+                name: "IX_DownloadFile_PeriodId",
+                table: "DownloadFile",
                 column: "PeriodId");
 
             migrationBuilder.CreateIndex(
@@ -1028,7 +1001,7 @@ namespace InfinitySO.Data.Migrations
                 name: "BilletValue");
 
             migrationBuilder.DropTable(
-                name: "DownloadFileDescription");
+                name: "DownloadFile");
 
             migrationBuilder.DropTable(
                 name: "PatrimonyKeyDescription");
@@ -1050,9 +1023,6 @@ namespace InfinitySO.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "StudentFinancial");
-
-            migrationBuilder.DropTable(
-                name: "DownloadFile");
 
             migrationBuilder.DropTable(
                 name: "PatrimonyKey");

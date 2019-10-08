@@ -14,6 +14,7 @@
                 <!--Start-->
                 <form asp-action="Create">
                     <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="text-danger">@ViewData["Error"]</div>
                     <div class="col-lg-10 col-md-6 col-sm-3">
                         <select asp-for="PatrimonyId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
                             <option disabled selected>Select Name</option>

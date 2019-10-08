@@ -47,7 +47,6 @@ namespace InfinitySO.Data
 
         //Start System
         public DbSet<DownloadFile> DownloadFile { get; set; }
-        public DbSet<DownloadFileDescription> DownloadFileDescription { get; set; }
         public DbSet<SystemController> SystemController { get; set; }
         public DbSet<SystemSubController> SystemSubController { get; set; }
         //End System

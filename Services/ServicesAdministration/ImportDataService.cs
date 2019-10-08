@@ -183,7 +183,7 @@ namespace InfinitySO.Services.ServicesAdministration
         public async Task InsertDataAsync(ImportDataFormViewModel obj, string pathFile, string nameFile, long sizeFile)
         {
             string[] pathFileEnd = pathFile.Split(nameFile);
-            DownloadFile df1 = new DownloadFile { NameFile = nameFile, Path = pathFileEnd[0], PageNumbers = obj.DownloadFile.PageNumbers, TypeFile = obj.DownloadFile.TypeFile, Size = sizeFile, DateUpload = DateTime.Now, CommandExecuted = CommandExecuted.NotExecuted };
+            DownloadFile df1 = new DownloadFile { Name = obj.DownloadFile.Name, NameFile = nameFile, Path = pathFileEnd[0], PageNumbers = obj.DownloadFile.PageNumbers, TypeFile = obj.DownloadFile.TypeFile, Size = sizeFile, DateUpload = DateTime.Now, CommandExecuted = CommandExecuted.NotExecuted };
             await _context.DownloadFile.AddAsync(df1);
             await _context.SaveChangesAsync();
         }

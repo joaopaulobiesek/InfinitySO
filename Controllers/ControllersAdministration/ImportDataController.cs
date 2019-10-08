@@ -25,16 +25,14 @@ namespace InfinitySO.Controllers.ControllersAdministration
         private readonly IHostingEnvironment _appEnvironment;
         private readonly PeriodService _periodService;
         private readonly DownloadFileService _downloadFileService;
-        private readonly DownloadFileDescriptionService _downloadFileDescriptionService;
 
         [Obsolete]
-        public ImportDataController(ImportDataService importDataService, IHostingEnvironment appEnvironment, PeriodService periodService, DownloadFileService downloadFileService, DownloadFileDescriptionService downloadFileDescriptionService)
+        public ImportDataController(ImportDataService importDataService, IHostingEnvironment appEnvironment, PeriodService periodService, DownloadFileService downloadFileService)
         {
             _importDataService = importDataService;
             _appEnvironment = appEnvironment;
             _periodService = periodService;
             _downloadFileService = downloadFileService;
-            _downloadFileDescriptionService = downloadFileDescriptionService;
         }
 
         public async Task<IActionResult> Index()

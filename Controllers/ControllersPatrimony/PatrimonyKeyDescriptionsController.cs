@@ -21,15 +21,17 @@ namespace InfinitySO.Controllers.ControllersPatrimony
             _patrimonyKeyService = patrimonyKeyService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var patrimonyKeyDescriptions = await _patrimonyKeyDescriptionService.FindAllAsync();
+            var viewModel = new PatrimonyKeyDescription { PatrimonyKeyDescriptions = patrimonyKeyDescriptions, DateDescription = DateTime.Now };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create()
         {
             var patrimonyKey = await _patrimonyKeyService.FindAllAsync();
-            var viewModel = new PatrimonyKeyDescription { PatrimonyKeys = patrimonyKey };
+            var viewModel = new PatrimonyKeyDescription { PatrimonyKeys = patrimonyKey, DateDescription = DateTime.Now };
             return View(viewModel);
         }
 
@@ -40,7 +42,8 @@ namespace InfinitySO.Controllers.ControllersPatrimony
             if (!ModelState.IsValid)
             {
                 var patrimonyKey = await _patrimonyKeyService.FindAllAsync();
-                var viewModel = new PatrimonyKeyDescription { PatrimonyKeys = patrimonyKey };
+                var patrimonyKeyDescriptions = await _patrimonyKeyDescriptionService.FindAllAsync();
+                var viewModel = new PatrimonyKeyDescription { PatrimonyKeys = patrimonyKey, PatrimonyKeyDescriptions = patrimonyKeyDescriptions, DateDescription = DateTime.Now };
                 return View(viewModel);
             }
             await _patrimonyKeyDescriptionService.InsertAsync(patrimonyKeyDescription);

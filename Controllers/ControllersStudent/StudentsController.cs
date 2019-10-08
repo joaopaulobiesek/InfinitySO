@@ -25,9 +25,12 @@ namespace InfinitySO.Controllers.ControllersStudent
             _periodService = periodService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var period = await _periodService.FindAllAsync();
+            var student = await _studentService.FindAllAsync();
+            var viewModel = new StudentFormViewModel { Periods = period, Students = student };
+            return View(viewModel);
         }
         public async Task<IActionResult> Create()
         {

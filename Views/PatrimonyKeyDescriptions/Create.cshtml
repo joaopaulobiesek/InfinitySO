@@ -14,15 +14,19 @@
                 <!--Start-->
                 <form asp-action="Create">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select asp-for="PatrimonyKeyId" asp-items="@(new SelectList(Model.PatrimonyKeys, "Id", "KeyPatrimony"))" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Patrimony Key">
-                            <option selected value="">Patrimony Key</option>
+                    <div class="text-danger">@ViewData["Error"]</div>
+                    <div class="col-lg-10 col-md-6 col-sm-3">
+                        <select asp-for="PatrimonyKeyId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                            <option disabled selected>Select Name</option>
+                            @foreach (var item in Model.PatrimonyKeys)
+                            {
+                                <option value="@item.Id">@item.KeyPatrimony - @item.Sector.Department.Name - @item.Sector.Name  @item.Patrimony.Category.Place.Company.FantasyName @item.Patrimony.Category.Place.Name - Local: @item.Patrimony.Category.Name </option>
+                            }
                         </select>
-                        <span asp-validation-for="PatrimonyKeyId" class="text-danger"></span>
                     </div><br />
                     <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select asp-for="LowPatrimony" asp-items="@LowPatrimony.Maintenance.ToSelectList()" class="custom-select" data-size="7" data-style="btn btn-primary btn-round" title="Low Patrimony">
-                            <option selected value="">Low Patrimony</option>
+                        <select asp-for="LowPatrimony" asp-items="@LowPatrimony.Maintenance.ToSelectList()" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Low Patrimony">
+                            <option selected disabled value="">Baixa de Patrimônio</option>
                         </select>
                         <span asp-validation-for="LowPatrimony" class="text-danger"></span>
                     </div><br />

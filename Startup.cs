@@ -273,7 +273,6 @@ namespace InfinitySO
             //End Patrimony
 
             //Start System
-            services.AddScoped<DownloadFileDescriptionService>();
             services.AddScoped<DownloadFileService>();
             services.AddScoped<SystemControllerService>();
             services.AddScoped<SystemSubControllerService>();

@@ -27,7 +27,7 @@ namespace InfinitySO.Controllers.ControllersPatrimony
         public async Task<IActionResult> Index()
         {
             var patrimonyKeys = await _patrimonyKeyService.FindAllAsync();
-            var viewModel = new PatrimonyKey { PatrimonyKeys = patrimonyKeys };
+            var viewModel = new PatrimonyKey { PatrimonyKeys = patrimonyKeys, DateBuy = DateTime.Now, NextMaintenanceDate = DateTime.Now };
             return View(viewModel);
         }
 
@@ -35,7 +35,7 @@ namespace InfinitySO.Controllers.ControllersPatrimony
         {
             var patrimony = await _patrimonyService.FindAllAsync();
             var sector = await _sectorService.FindAllAsync();
-            var viewModel = new PatrimonyKey { Patrimonies = patrimony, Sectors = sector };
+            var viewModel = new PatrimonyKey { Patrimonies = patrimony, Sectors = sector, DateBuy = DateTime.Now, NextMaintenanceDate = DateTime.Now };
             return View(viewModel);
         }
 
@@ -43,15 +43,25 @@ namespace InfinitySO.Controllers.ControllersPatrimony
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PatrimonyKey patrimonyKey)
         {
+            var patrimony = await _patrimonyService.FindAllAsync();
+            var sector = await _sectorService.FindAllAsync();
+            var viewModel = new PatrimonyKey { Patrimonies = patrimony, Sectors = sector, DateBuy = DateTime.Now, NextMaintenanceDate = DateTime.Now };
+
             if (!ModelState.IsValid)
             {
-                var patrimony = await _patrimonyService.FindAllAsync();
-                var sector = await _sectorService.FindAllAsync();
-                var viewModel = new PatrimonyKey { Patrimonies = patrimony, Sectors = sector };
                 return View(viewModel);
             }
-            await _patrimonyKeyService.InsertAsync(patrimonyKey);
-            return RedirectToAction(nameof(Create));
+            var obj = await _patrimonyKeyService.FindByKeyAsync(patrimonyKey.KeyPatrimony);
+            if (obj == null)
+            {
+                await _patrimonyKeyService.InsertAsync(patrimonyKey);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewData["Error"] = "Chave do patrimônio já cadastrada!";
+                return View(viewModel);
+            }
         }
     }
 }

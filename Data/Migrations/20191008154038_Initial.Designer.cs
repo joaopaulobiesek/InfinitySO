@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfinitySO.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191006155930_Initial")]
+    [Migration("20191008154038_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -768,7 +768,10 @@ namespace InfinitySO.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateUpload")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameFile")
                         .HasColumnType("nvarchar(max)");
@@ -779,6 +782,9 @@ namespace InfinitySO.Data.Migrations
                     b.Property<string>("Path")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PeriodId")
+                        .HasColumnType("int");
+
                     b.Property<long>("Size")
                         .HasColumnType("bigint");
 
@@ -787,41 +793,9 @@ namespace InfinitySO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DownloadFile");
-                });
-
-            modelBuilder.Entity("InfinitySO.Models.ModelsSystem.DownloadFileDescription", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CommandExecuted")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DownloadFileId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NamePage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PageNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PeriodId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DownloadFileId");
-
                     b.HasIndex("PeriodId");
 
-                    b.ToTable("DownloadFileDescription");
+                    b.ToTable("DownloadFile");
                 });
 
             modelBuilder.Entity("InfinitySO.Models.ModelsSystem.SystemController", b =>
@@ -1299,19 +1273,11 @@ namespace InfinitySO.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("InfinitySO.Models.ModelsSystem.DownloadFileDescription", b =>
+            modelBuilder.Entity("InfinitySO.Models.ModelsSystem.DownloadFile", b =>
                 {
-                    b.HasOne("InfinitySO.Models.ModelsSystem.DownloadFile", "DownloadFile")
-                        .WithMany()
-                        .HasForeignKey("DownloadFileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("InfinitySO.Models.ModelsStudent.Period", "Period")
                         .WithMany()
-                        .HasForeignKey("PeriodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PeriodId");
                 });
 
             modelBuilder.Entity("InfinitySO.Models.ModelsSystem.SystemSubController", b =>
