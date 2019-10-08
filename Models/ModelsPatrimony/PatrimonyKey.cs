@@ -24,7 +24,7 @@ namespace InfinitySO.Models.ModelsPatrimony
         [Display(Name = "Quantidade do patrimônio")]
         public int Quantity { get; set; }
 
-        [Display(Name = "Chave do identificadora do patrimônio")]
+        [Display(Name = "Chave do patrimônio")]
         public string KeyPatrimony { get; set; }
 
         [Display(Name = "Endereço de IP")]
@@ -59,6 +59,8 @@ namespace InfinitySO.Models.ModelsPatrimony
 
         [NotMapped]
         public ICollection<Patrimony> Patrimonies { get; set; }
+        [NotMapped]
+        public ICollection<PatrimonyKey> PatrimonyKeys { get; set; }
         [NotMapped]
         public ICollection<Sector> Sectors { get; set; }
 

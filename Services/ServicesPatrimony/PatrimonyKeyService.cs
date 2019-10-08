@@ -17,7 +17,10 @@ namespace InfinitySO.Services.ServicesPatrimony
 
         public async Task<List<PatrimonyKey>> FindAllAsync()
         {
-            return await _context.PatrimonyKey.Include(obj => obj.Patrimony).Include(obj => obj.Sector).ToListAsync();
+            return await _context.PatrimonyKey.Include(obj => obj.Patrimony).Include(obj => obj.Patrimony.SubCategory)
+                                              .Include(obj => obj.Patrimony.Category).Include(obj => obj.Patrimony.Category.Place)
+                                              .Include(obj => obj.Patrimony.Category.Place.Company)
+                                              .Include(obj => obj.Sector).ToListAsync();
         }
 
         public async Task InsertAsync(PatrimonyKey obj)

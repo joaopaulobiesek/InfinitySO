@@ -24,9 +24,11 @@ namespace InfinitySO.Controllers.ControllersPatrimony
             _sectorService = sectorService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var patrimonyKeys = await _patrimonyKeyService.FindAllAsync();
+            var viewModel = new PatrimonyKey { PatrimonyKeys = patrimonyKeys };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create()
