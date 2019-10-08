@@ -45,6 +45,8 @@ namespace InfinitySO.Models.ModelsEmployee
         [NotMapped]
         public ICollection<MainBoard> MainBoards { get; set; }
         [NotMapped]
+        public ICollection<Employee> Employees { get; set; }
+        [NotMapped]
         public ICollection<Sector> Sectors { get; set; }
         [NotMapped]
         public ICollection<Scale> Scales { get; set; }

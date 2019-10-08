@@ -14,18 +14,26 @@
                 <!--Start-->
                 <form asp-action="Create">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select asp-for="MainBoardId" asp-items="@(new SelectList(Model.MainBoards, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Employee Name">
-                            <option selected value="">Employee Name</option>
+                    <div class="col-lg-10 col-md-6 col-sm-3">
+                        <select asp-for="MainBoardId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Employee Name">
+                            <option disabled selected>Nomes</option>
+                            @foreach (var item in Model.MainBoards)
+                            {
+                                <option value="@item.Id">@item.Name @item.LastName - CPF: @item.CPF</option>
+                            }
                         </select>
                         <span asp-validation-for="MainBoardId" class="text-danger"></span>
                     </div><br />
-                    <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select asp-for="SectorId" asp-items="@(new SelectList(Model.Sectors, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Sector Name">
-                            <option selected value="">Sector Name</option>
-                        </select>
-                        <span asp-validation-for="SectorId" class="text-danger"></span>
-                    </div><br />
+                          <div class="col-lg-10 col-md-6 col-sm-3">
+                              <select asp-for="SectorId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                                  <option disabled selected>Select Name</option>
+                                  @foreach (var item in Model.Sectors)
+                                  {
+                                      <option value="@item.Id">@item.Department.Name - @item.Name </option>
+                                  }
+                              </select>
+                              <span asp-validation-for="SectorId" class="text-danger"></span>
+                          </div><br />
                     <div class="col-lg-5 col-md-6 col-sm-3">
                         <select asp-for="ScaleId" asp-items="@(new SelectList(Model.Scales, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Scale Name">
                             <option selected value="">Scale Name</option>

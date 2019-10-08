@@ -26,9 +26,11 @@ namespace InfinitySO.Controllers.ControllersEmployee
             _scaleService = scaleService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var employees = await _employeeService.FindAllAsync();
+            var viewModel = new Employee { Employees = employees, Admission = DateTime.Now, Resignation = DateTime.Now };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create()
@@ -53,7 +55,7 @@ namespace InfinitySO.Controllers.ControllersEmployee
                 return View(viewModel);
             }
             await _employeeService.InsertAsync(employee);
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(Index));
         }
     }
 }
