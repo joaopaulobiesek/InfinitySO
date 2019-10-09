@@ -34,9 +34,9 @@ namespace InfinitySO.Services.ServicesStudent
             await _context.SaveChangesAsync();
         }
 
-        public async Task InsertAsync(StudentFinancialFormViewModel obj)
+        public async Task InsertAsync(StudentFinancialFormViewModel obj, Student student)
         {
-            StudentFinancial sf1 = new StudentFinancial { StudentId = obj.StudentFinancial.StudentId, OpenValue = obj.StudentFinancial.OpenValue, DateNegotiation = obj.StudentFinancial.DateNegotiation, DateDueBillet = obj.StudentFinancial.DateDueBillet, StudentFinancialNegotiation = obj.StudentFinancial.StudentFinancialNegotiation, StudentFinanceInstallment = obj.StudentFinancial.StudentFinanceInstallment };
+            StudentFinancial sf1 = new StudentFinancial { StudentId = student.Id, OpenValue = obj.StudentFinancial.OpenValue, DateNegotiation = obj.StudentFinancial.DateNegotiation, DateDueBillet = obj.StudentFinancial.DateDueBillet, StudentFinancialNegotiation = obj.StudentFinancial.StudentFinancialNegotiation, StudentFinanceInstallment = obj.StudentFinancial.StudentFinanceInstallment };
             _context.StudentFinancial.Add(sf1);
             List<JsonBilletsValue> jsonBillets = JsonConvert.DeserializeObject<List<JsonBilletsValue>>(obj.stringBilletValues);
             for (int i = 0; i < jsonBillets.Count; i++)

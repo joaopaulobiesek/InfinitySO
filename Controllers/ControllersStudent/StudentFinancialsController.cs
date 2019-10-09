@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using InfinitySO.Models.JsonModels;
 using InfinitySO.Models.ModelsStudent;
 using InfinitySO.Models.ViewModels;
 using InfinitySO.Services.ServicesAdministration;
@@ -33,6 +34,27 @@ namespace InfinitySO.Controllers.ControllersStudent
             var list = await _studentFinancialService.FindAllAsync();
             var viewModel = new StudentFinancialFormViewModel { StudentFinancials = list };
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetName(string term)
+        {
+            if (term.Length > 5)
+            {
+                List<JsonAutoCompeteStudent> list = new List<JsonAutoCompeteStudent>();
+                var ListNames = await _studentService.FindAllAsync();
+                foreach (var item in ListNames)
+                {
+                    var name = item.MainBoard.Name + " " + item.MainBoard.LastName + " - CPF: " + item.MainBoard.CPF + " - EAD: " + item.EAD;
+                    list.Add(new JsonAutoCompeteStudent() { Name = name });
+                }
+                var result = (from N in list where N.Name.Contains(term.ToUpper()) select new { Value = N.Name });
+                return Json(result);
+            }
+            else
+            {
+                return Json("");
+            }
         }
 
         [Authorize(Policy = "StudentStudentFinancialCreate")]
@@ -70,17 +92,29 @@ namespace InfinitySO.Controllers.ControllersStudent
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "StudentStudentFinancialCreate")]
-        public async Task<IActionResult> Register(StudentFinancialFormViewModel studentFinancialFormViewModel)
+        public async Task<IActionResult> Register(StudentFinancialFormViewModel studentFinancialFormViewModel, string searchEAD)
         {
+            var student = await _studentService.FindAllAsync();
+            var mainBoards = await _mainBoardService.FindAllAsync();
+            var viewModel = new StudentFinancialFormViewModel { MainBoards = mainBoards, Students = student };
+
             if (!ModelState.IsValid)
             {
-                var student = await _studentService.FindAllAsync();
-                var mainBoards = await _mainBoardService.FindAllAsync();
-                var viewModel = new StudentFinancialFormViewModel { MainBoards = mainBoards, Students = student };
                 return View(viewModel);
             }
-            await _studentFinancialService.InsertAsync(studentFinancialFormViewModel);
-            return RedirectToAction(nameof(Register));
+            string[] eads = searchEAD.Split("- EAD: ");
+            var ead = await _studentService.FindByEADAsync(eads[1]);
+            if (ead != null)
+            {
+                await _studentFinancialService.InsertAsync(studentFinancialFormViewModel, ead);
+               return RedirectToAction(nameof(Register));
+
+            }
+            else
+            {
+                ViewData["Error"] = "Erro ao tentar carregar informações, tente novamente mais tarde!";
+                return View(viewModel);
+            }
         }
 
         [Authorize(Policy = "StudentStudentFinancialEdit")]

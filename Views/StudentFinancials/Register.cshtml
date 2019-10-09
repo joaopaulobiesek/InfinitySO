@@ -15,15 +15,13 @@
                 <!--Start-->
                 <form asp-action="Register">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="col-lg-10 col-md-6 col-sm-3">
-                        <select id="StudentListId" asp-for="StudentFinancial.StudentId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
-                            <option disabled selected>Select Name</option>
-                            @foreach (var item in Model.Students)
-                            {
-                                <option value="@item.Id">@item.MainBoard.Name @item.MainBoard.LastName - CPF: @item.MainBoard.CPF - EAD: @item.EAD</option>
-                            }
-                        </select>
-                    </div><br />
+                    <div class="text-danger">@ViewData["Error"]</div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label>Aluno:</label>
+                            <input id="searchEAD" name="searchEAD" type="text" class="form-control">
+                        </div>
+                    </div>
                     <div class="col-sm-7">
                         <div class="form-group">
                             <label asp-for="StudentFinancial.OpenValue"></label>
@@ -107,6 +105,11 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script>
+    $("#searchEAD").autocomplete({
+        source: '@Url.Action("GetName","StudentFinancials")'
+    });
+    </script>
+    <script>
 
         var inputs = $('input').on('keyup', verificarInputs);
         function verificarInputs() {
@@ -139,8 +142,6 @@
                 alert("Unselected Negotiation");
             } else if (IdBilletPay.options[IdBilletPay.selectedIndex].value == "Billet Pay") {
                 alert("Unselected Billet Pay");
-            } else if (IdStudentList.options[IdStudentList.selectedIndex].value == "Select Name") {
-                alert("Unselected Name");
             } else {
 
                 if (count < IdStudentFinanceInstallment.value) {
