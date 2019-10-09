@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InfinitySO.Controllers.ControllersPatrimony
 {
-    public class PatrimoniesController : Controller
+    public class HistoricalPatrimonyController : Controller
     {
         public IActionResult Index()
         {

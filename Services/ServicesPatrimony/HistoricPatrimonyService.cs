@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace InfinitySO.Services.ServicesPatrimony
 {
-    public class PatrimonyService
+    public class HistoricPatrimonyService
     {
     }
 }

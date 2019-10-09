@@ -6,16 +6,16 @@ using InfinitySO.Models.Enums;
 
 namespace InfinitySO.Models.ModelsPatrimony
 {
-    public class PatrimonyKeyDescription
+    public class HistoricPatrimony
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public PatrimonyKey PatrimonyKey { get; set; }
+        public Patrimony Patrimony { get; set; }
         public LowPatrimony LowPatrimony { get; set; }
-        [ForeignKey("PatrimonyKey")]
+        [ForeignKey("Patrimony")]
         [Display(Name = "Quantidade de baixas do patrimônio")]
-        public int PatrimonyKeyId { get; set; }
+        public int PatrimonyId { get; set; }
 
         [Required(ErrorMessage = "{0} Required")]
         [Display(Name = "Quantidade de baixas do patrimônio")]
@@ -29,19 +29,14 @@ namespace InfinitySO.Models.ModelsPatrimony
         [Column(TypeName = "date")]
         public DateTime DateDescription { get; set; }
 
-        [NotMapped]
-        public ICollection<PatrimonyKey> PatrimonyKeys { get; set; }
-        [NotMapped]
-        public ICollection<PatrimonyKeyDescription> PatrimonyKeyDescriptions { get; set; }
-
-        public PatrimonyKeyDescription()
+        public HistoricPatrimony()
         {
         }
 
-        public PatrimonyKeyDescription(int id, PatrimonyKey patrimonyKey, LowPatrimony lowPatrimony, string description, DateTime dateDescription)
+        public HistoricPatrimony(int id, Patrimony patrimony, LowPatrimony lowPatrimony, string description, DateTime dateDescription)
         {
             Id = id;
-            PatrimonyKey = patrimonyKey;
+            Patrimony = patrimony;
             LowPatrimony = lowPatrimony;
             Description = description;
             DateDescription = dateDescription;

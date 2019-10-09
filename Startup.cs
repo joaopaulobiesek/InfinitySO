@@ -17,12 +17,12 @@ using Microsoft.AspNetCore.Mvc;
 using InfinitySO.Services.ServicesStudent;
 using InfinitySO.Services.ServicesUserDataLogin;
 using InfinitySO.Services.ServicesSystem;
-using InfinitySO.Services.ServicesPatrimony;
 using InfinitySO.Services.ServicesEmployee;
 using InfinitySO.Services.ServicesAdministration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using InfinitySO.Services.ServicesPatrimony;
 
 namespace InfinitySO
 {
@@ -266,10 +266,9 @@ namespace InfinitySO
             //End Employee
 
             //Start Patrimony
+            services.AddScoped<HistoricPatrimonyService>();
             services.AddScoped<PatrimonyService>();
-            services.AddScoped<PatrimonyKeyService>();
-            services.AddScoped<PatrimonyKeyDescriptionService>();
-            services.AddScoped<SubCategoryService>();
+            services.AddScoped<ProductService>();
             //End Patrimony
 
             //Start System

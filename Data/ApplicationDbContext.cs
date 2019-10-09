@@ -29,6 +29,7 @@ namespace InfinitySO.Data
         public DbSet<MainBoard> MainBoard { get; set; }
         public DbSet<Place> Place { get; set; }
         public DbSet<Sector> Sector { get; set; }
+        public DbSet<Supply> Supply { get; set; }
         //End Administration
 
         //Start Employee
@@ -39,10 +40,9 @@ namespace InfinitySO.Data
         //End Employee
 
         //Start Patrimony
+        public DbSet<HistoricPatrimony> HistoricPatrimony { get; set; }
         public DbSet<Patrimony> Patrimony { get; set; }
-        public DbSet<PatrimonyKey> PatrimonyKey { get; set; }
-        public DbSet<PatrimonyKeyDescription> PatrimonyKeyDescription { get; set; }
-        public DbSet<SubCategory> SubCategory { get; set; }
+        public DbSet<Product> Product { get; set; }
         //End Patrimony
 
         //Start System

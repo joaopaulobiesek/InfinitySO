@@ -1,4 +1,5 @@
 ﻿using InfinitySO.Models.ModelsAdministration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,29 +11,48 @@ namespace InfinitySO.Models.ModelsPatrimony
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public Category Category { get; set; }
-        public SubCategory SubCategory { get; set; }
+        public Place Place { get; set; }
+        public Product Product { get; set; }
 
-        [ForeignKey("Category")]
-        [Display(Name = "Referência do lugar")]
-        public int CategoryId { get; set; }
+        [ForeignKey("Place")]
+        [Display(Name = "Referência do Local")]
+        public int PlaceId { get; set; }
 
-        [ForeignKey("SubCategory")]
+        [ForeignKey("Product")]
         [Display(Name = "Nome do patrimônio")]
-        public int SubCategoryId { get; set; }
+        public int ProductId { get; set; }
+
+        [Display(Name = "Chave do patrimônio")]
+        public string KeyPatrimony { get; set; }
+
+        [Display(Name = "Numero da Nota Fiscal")]
+        public string NoteNumber { get; set; }
+
+        [Display(Name = "Descrição do produto")]
+        public string DescriptionProduct { get; set; }
 
         [Required(ErrorMessage = "{0} Required")]
-        [Display(Name = "Quantidade do patrimônio")]
-        public int Quantity { get; set; }
+        [Display(Name = "Data da compra")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [Column(TypeName = "date")]
+        public DateTime DateBuy { get; set; }
 
         [Required(ErrorMessage = "{0} Required")]
-        [Display(Name = "Quantidade de baixas do patrimônio")]
-        public int LowQuantity { get; set; }
+        [Display(Name = "Data da proxima manutenção")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [Column(TypeName = "date")]
+        public DateTime NextMaintenanceDate { get; set; }
+
+        [Required(ErrorMessage = "{0} Required")]
+        [Display(Name = "Custo do patrimônio")]
+        public double Amount { get; set; }
 
         [NotMapped]
-        public ICollection<Category> Categories { get; set; }
+        public ICollection<Place> Places { get; set; }
         [NotMapped]
-        public ICollection<SubCategory> SubCategories { get; set; }
+        public ICollection<Product> Products { get; set; }
         [NotMapped]
         public ICollection<Patrimony> Patrimonies { get; set; }
 
@@ -40,13 +60,17 @@ namespace InfinitySO.Models.ModelsPatrimony
         {
         }
 
-        public Patrimony(int id, Category category, SubCategory subCategory, int quantity, int lowQuantity)
+        public Patrimony(int id, Place place, Product product, string keyPatrimony, string noteNumber, string descriptionProduct, DateTime dateBuy, DateTime nextMaintenanceDate, double amount)
         {
             Id = id;
-            Category = category;
-            SubCategory = subCategory;
-            Quantity = quantity;
-            LowQuantity = lowQuantity;
+            Place = place;
+            Product = product;
+            KeyPatrimony = keyPatrimony;
+            NoteNumber = noteNumber;
+            DescriptionProduct = descriptionProduct;
+            DateBuy = dateBuy;
+            NextMaintenanceDate = nextMaintenanceDate;
+            Amount = amount;
         }
     }
 }
