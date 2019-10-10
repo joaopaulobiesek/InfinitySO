@@ -18,7 +18,7 @@ namespace InfinitySO.Models.ModelsPatrimony
         public int PatrimonyId { get; set; }
 
         [Required(ErrorMessage = "{0} Required")]
-        [Display(Name = "Quantidade de baixas do patrimônio")]
+        [Display(Name = "Descrição do Ocorrido")]
         [StringLength(int.MaxValue)]
         public string Description { get; set; }
 
@@ -28,6 +28,11 @@ namespace InfinitySO.Models.ModelsPatrimony
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Column(TypeName = "date")]
         public DateTime DateDescription { get; set; }
+
+        [NotMapped]
+        public ICollection<HistoricPatrimony> HistoricalPatrimony { get; set; }
+        [NotMapped]
+        public ICollection<Patrimony> Patrimonies { get; set; }
 
         public HistoricPatrimony()
         {

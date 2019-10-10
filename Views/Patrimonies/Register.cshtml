@@ -1,0 +1,90 @@
+﻿@model Patrimony
+@{
+    ViewData["Title"] = "Create New Sectors";
+}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Register">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="text-danger">@ViewData["Result"]</div>
+                    <div class="col-lg-10 col-md-6 col-sm-3">
+                        <select id="StudentListId" asp-for="PlaceId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                            <option disabled selected>Select Name</option>
+                            @foreach (var item in Model.Places)
+                            {
+                                <option value="@item.Id">@item.Company.FantasyName @item.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="PlaceId" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-lg-10 col-md-6 col-sm-3">
+                        <select id="StudentListId" asp-for="ProductId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Sector">
+                            <option disabled selected>Select Name</option>
+                            @foreach (var item in Model.Products)
+                            {
+                                <option value="@item.Id">@item.Name - @item.ProductCategory </option>
+                            }
+                        </select>
+                        <span asp-validation-for="ProductId" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="KeyPatrimony"></label>
+                            <input asp-for="KeyPatrimony" class="form-control" />
+                            <span asp-validation-for="KeyPatrimony" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="NoteNumber"></label>
+                            <input asp-for="NoteNumber" class="form-control" />
+                            <span asp-validation-for="NoteNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="DescriptionProduct"></label>
+                            <input asp-for="DescriptionProduct" class="form-control" />
+                            <span asp-validation-for="DescriptionProduct" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="DateBuy"></label>
+                            <input asp-for="DateBuy" class="form-control" />
+                            <span asp-validation-for="DateBuy" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="NextMaintenanceDate"></label>
+                            <input asp-for="NextMaintenanceDate" class="form-control" />
+                            <span asp-validation-for="NextMaintenanceDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Amount"></label>
+                            <input asp-for="Amount" class="form-control" />
+                            <span asp-validation-for="Amount" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <hr />
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>

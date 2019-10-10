@@ -1,4 +1,6 @@
 ﻿using InfinitySO.Models.Enums;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InfinitySO.Models.ModelsPatrimony
 {
@@ -7,6 +9,9 @@ namespace InfinitySO.Models.ModelsPatrimony
         public int Id { get; set; }
         public string Name { get; set; }
         public ProductCategory ProductCategory { get; set; }
+
+        [NotMapped]
+        public ICollection<Product> Products { get; set; }
 
         public Product()
         {
