@@ -174,7 +174,8 @@ namespace InfinitySO.Services.ServicesAdministration
                     linha++;
                 }
             }
-            _context.Entry(obj).Property("CommandExecuted").CurrentValue = CommandExecuted.Executed;
+             _context.Entry(obj).Property("CommandExecuted").CurrentValue = CommandExecuted.Executed;
+            //obj.CommandExecuted = CommandExecuted.Executed; FUNCIONA aula udemy https://www.udemy.com/course/programacao-orientada-a-objetos-csharp/learn/lecture/11595926#questions
             //https://docs.microsoft.com/pt-br/ef/ef6/saving/change-tracking/property-values
             await _context.SaveChangesAsync();
             wb.Dispose();

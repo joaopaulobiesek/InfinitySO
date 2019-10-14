@@ -271,11 +271,17 @@ namespace InfinitySO.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ActiveSupply")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MeasureType")
                         .HasColumnType("int");
+
+                    b.Property<double>("MinimumOrderQuantity")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -289,6 +295,71 @@ namespace InfinitySO.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Supply");
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsAdministration.SupplyAdd", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AddDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InvoiceNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("QuantityAdded")
+                        .HasColumnType("float");
+
+                    b.Property<int>("SupplyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("SupplyId");
+
+                    b.ToTable("SupplyAdd");
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsAdministration.WithdrawalSupply", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("AmountWithdrawn")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("WithDrawalDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("SupplyId");
+
+                    b.ToTable("WithdrawalSupply");
                 });
 
             modelBuilder.Entity("InfinitySO.Models.ModelsEmployee.Employee", b =>
@@ -549,14 +620,14 @@ namespace InfinitySO.Data.Migrations
                     b.Property<string>("DescriptionProduct")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("InvoiceNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("KeyPatrimony")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NextMaintenanceDate")
                         .HasColumnType("date");
-
-                    b.Property<string>("NoteNumber")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PlaceId")
                         .HasColumnType("int");
@@ -1107,6 +1178,36 @@ namespace InfinitySO.Data.Migrations
                     b.HasOne("InfinitySO.Models.ModelsAdministration.Department", "Department")
                         .WithMany("Sectors")
                         .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsAdministration.SupplyAdd", b =>
+                {
+                    b.HasOne("InfinitySO.Models.ModelsEmployee.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InfinitySO.Models.ModelsAdministration.Supply", "Supply")
+                        .WithMany("AddSupplies")
+                        .HasForeignKey("SupplyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsAdministration.WithdrawalSupply", b =>
+                {
+                    b.HasOne("InfinitySO.Models.ModelsEmployee.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InfinitySO.Models.ModelsAdministration.Supply", "Supply")
+                        .WithMany("WithdrawalSupplies")
+                        .HasForeignKey("SupplyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

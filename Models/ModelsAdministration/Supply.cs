@@ -1,4 +1,6 @@
 ﻿using InfinitySO.Models.Enums;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InfinitySO.Models.ModelsAdministration
 {
@@ -10,6 +12,10 @@ namespace InfinitySO.Models.ModelsAdministration
         public string Name { get; set; }
         public string Description { get; set; }
         public double ValueMeasure { get; set; }
+        public double MinimumOrderQuantity { get; set; }
+        public int ActiveSupply { get; set; }
+        public ICollection<SupplyAdd> AddSupplies { get; set; } = new List<SupplyAdd>();
+        public ICollection<WithdrawalSupply> WithdrawalSupplies { get; set; } = new List<WithdrawalSupply>();
 
         public Supply()
         {
@@ -23,6 +29,33 @@ namespace InfinitySO.Models.ModelsAdministration
             Name = name;
             Description = description;
             ValueMeasure = valueMeasure;
+        }
+
+        public void AddSuppliesList(SupplyAdd sa)
+        {
+            AddSupplies.Add(sa);
+        }
+
+        public void RemoveSuppliesList(SupplyAdd sa)
+        {
+            AddSupplies.Remove(sa);
+        }
+
+        public void AddWithdrawalSuppliesList(WithdrawalSupply ws)
+        {
+            WithdrawalSupplies.Add(ws);
+        }
+
+        public void RemoveWithdrawalSuppliesList(WithdrawalSupply ws)
+        {
+            WithdrawalSupplies.Remove(ws);
+        }
+
+        public double TotalSuppliesAvailable(Supply supply)
+        {
+            var ItensAdd = AddSupplies.Where(sup => sup.SupplyId == supply.Id).Sum(sup => sup.QuantityAdded);
+            var ItensRemove = WithdrawalSupplies.Where(sup => sup.SupplyId == supply.Id).Sum(sup => sup.AmountWithdrawn);
+            return ItensAdd - ItensRemove;
         }
     }
 }

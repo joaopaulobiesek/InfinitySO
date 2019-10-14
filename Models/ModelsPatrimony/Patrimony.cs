@@ -26,7 +26,7 @@ namespace InfinitySO.Models.ModelsPatrimony
         public string KeyPatrimony { get; set; }
 
         [Display(Name = "Numero da Nota Fiscal")]
-        public string NoteNumber { get; set; }
+        public string InvoiceNumber { get; set; }
 
         [Display(Name = "Descrição do produto")]
         public string DescriptionProduct { get; set; }
@@ -60,13 +60,13 @@ namespace InfinitySO.Models.ModelsPatrimony
         {
         }
 
-        public Patrimony(int id, Place place, Product product, string keyPatrimony, string noteNumber, string descriptionProduct, DateTime dateBuy, DateTime nextMaintenanceDate, double amount)
+        public Patrimony(int id, Place place, Product product, string keyPatrimony, string invoiceNumber, string descriptionProduct, DateTime dateBuy, DateTime nextMaintenanceDate, double amount)
         {
             Id = id;
             Place = place;
             Product = product;
             KeyPatrimony = keyPatrimony;
-            NoteNumber = noteNumber;
+            InvoiceNumber = invoiceNumber;
             DescriptionProduct = descriptionProduct;
             DateBuy = dateBuy;
             NextMaintenanceDate = nextMaintenanceDate;

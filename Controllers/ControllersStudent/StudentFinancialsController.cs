@@ -45,7 +45,7 @@ namespace InfinitySO.Controllers.ControllersStudent
                 var ListNames = await _studentService.FindAllAsync();
                 foreach (var item in ListNames)
                 {
-                    var name = item.MainBoard.Name + " " + item.MainBoard.LastName + " - CPF: " + item.MainBoard.CPF + " - EAD: " + item.EAD;
+                    var name = item.MainBoard.Name + " " + item.MainBoard.LastName + " - CPF: " + item.MainBoard.CPF.Trim().Replace(".", "").Replace("-", "") + " - EAD: " + item.EAD;
                     list.Add(new JsonAutoCompeteStudent() { Name = name });
                 }
                 var result = (from N in list where N.Name.Contains(term.ToUpper()) select new { Value = N.Name });
