@@ -31,7 +31,7 @@ namespace InfinitySO.Data
         public DbSet<Sector> Sector { get; set; }
         public DbSet<Supply> Supply { get; set; }
         public DbSet<SupplyAdd> SupplyAdd { get; set; }
-        public DbSet<WithdrawalSupply> WithdrawalSupply { get; set; }
+        public DbSet<SupplyWithdrawal> SupplyWithdrawal { get; set; }
         //End Administration
 
         //Start Employee

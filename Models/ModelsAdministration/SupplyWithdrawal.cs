@@ -1,12 +1,9 @@
 ﻿using InfinitySO.Models.ModelsEmployee;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InfinitySO.Models.ModelsAdministration
 {
-    public class WithdrawalSupply
+    public class SupplyWithdrawal
     {
         public int Id { get; set; }
         public Supply Supply { get; set; }
@@ -17,11 +14,11 @@ namespace InfinitySO.Models.ModelsAdministration
         public double AmountWithdrawn { get; set; }
         public DateTime WithDrawalDate { get; set; }
 
-        WithdrawalSupply()
+        SupplyWithdrawal()
         {
         }
 
-        public WithdrawalSupply(int id, Supply supply, Employee employee, string description, double amountWithdrawn, DateTime withDrawalDate)
+        public SupplyWithdrawal(int id, Supply supply, Employee employee, string description, double amountWithdrawn, DateTime withDrawalDate)
         {
             Id = id;
             Supply = supply;

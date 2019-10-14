@@ -331,7 +331,7 @@ namespace InfinitySO.Data.Migrations
                     b.ToTable("SupplyAdd");
                 });
 
-            modelBuilder.Entity("InfinitySO.Models.ModelsAdministration.WithdrawalSupply", b =>
+            modelBuilder.Entity("InfinitySO.Models.ModelsAdministration.SupplyWithdrawal", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -359,7 +359,7 @@ namespace InfinitySO.Data.Migrations
 
                     b.HasIndex("SupplyId");
 
-                    b.ToTable("WithdrawalSupply");
+                    b.ToTable("SupplyWithdrawal");
                 });
 
             modelBuilder.Entity("InfinitySO.Models.ModelsEmployee.Employee", b =>
@@ -1197,7 +1197,7 @@ namespace InfinitySO.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("InfinitySO.Models.ModelsAdministration.WithdrawalSupply", b =>
+            modelBuilder.Entity("InfinitySO.Models.ModelsAdministration.SupplyWithdrawal", b =>
                 {
                     b.HasOne("InfinitySO.Models.ModelsEmployee.Employee", "Employee")
                         .WithMany()
@@ -1206,7 +1206,7 @@ namespace InfinitySO.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("InfinitySO.Models.ModelsAdministration.Supply", "Supply")
-                        .WithMany("WithdrawalSupplies")
+                        .WithMany("SupplyWithdrawals")
                         .HasForeignKey("SupplyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

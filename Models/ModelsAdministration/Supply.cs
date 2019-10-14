@@ -15,7 +15,7 @@ namespace InfinitySO.Models.ModelsAdministration
         public double MinimumOrderQuantity { get; set; }
         public int ActiveSupply { get; set; }
         public ICollection<SupplyAdd> AddSupplies { get; set; } = new List<SupplyAdd>();
-        public ICollection<WithdrawalSupply> WithdrawalSupplies { get; set; } = new List<WithdrawalSupply>();
+        public ICollection<SupplyWithdrawal> SupplyWithdrawals { get; set; } = new List<SupplyWithdrawal>();
 
         public Supply()
         {
@@ -41,20 +41,20 @@ namespace InfinitySO.Models.ModelsAdministration
             AddSupplies.Remove(sa);
         }
 
-        public void AddWithdrawalSuppliesList(WithdrawalSupply ws)
+        public void AddWithdrawalSuppliesList(SupplyWithdrawal ws)
         {
-            WithdrawalSupplies.Add(ws);
+            SupplyWithdrawals.Add(ws);
         }
 
-        public void RemoveWithdrawalSuppliesList(WithdrawalSupply ws)
+        public void RemoveWithdrawalSuppliesList(SupplyWithdrawal ws)
         {
-            WithdrawalSupplies.Remove(ws);
+            SupplyWithdrawals.Remove(ws);
         }
 
         public double TotalSuppliesAvailable(Supply supply)
         {
             var ItensAdd = AddSupplies.Where(sup => sup.SupplyId == supply.Id).Sum(sup => sup.QuantityAdded);
-            var ItensRemove = WithdrawalSupplies.Where(sup => sup.SupplyId == supply.Id).Sum(sup => sup.AmountWithdrawn);
+            var ItensRemove = SupplyWithdrawals.Where(sup => sup.SupplyId == supply.Id).Sum(sup => sup.AmountWithdrawn);
             return ItensAdd - ItensRemove;
         }
     }

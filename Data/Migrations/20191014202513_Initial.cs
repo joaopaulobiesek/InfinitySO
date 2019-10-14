@@ -722,6 +722,35 @@ namespace InfinitySO.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SupplyWithdrawal",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SupplyId = table.Column<int>(nullable: false),
+                    EmployeeId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    AmountWithdrawn = table.Column<double>(nullable: false),
+                    WithDrawalDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SupplyWithdrawal", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SupplyWithdrawal_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SupplyWithdrawal_Supply_SupplyId",
+                        column: x => x.SupplyId,
+                        principalTable: "Supply",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TimePoint",
                 columns: table => new
                 {
@@ -750,35 +779,6 @@ namespace InfinitySO.Data.Migrations
                         name: "FK_TimePoint_Employee_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WithdrawalSupply",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SupplyId = table.Column<int>(nullable: false),
-                    EmployeeId = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    AmountWithdrawn = table.Column<double>(nullable: false),
-                    WithDrawalDate = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WithdrawalSupply", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_WithdrawalSupply_Employee_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employee",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_WithdrawalSupply_Supply_SupplyId",
-                        column: x => x.SupplyId,
-                        principalTable: "Supply",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1009,6 +1009,16 @@ namespace InfinitySO.Data.Migrations
                 column: "SupplyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SupplyWithdrawal_EmployeeId",
+                table: "SupplyWithdrawal",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SupplyWithdrawal_SupplyId",
+                table: "SupplyWithdrawal",
+                column: "SupplyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SystemSubController_SystemControllerId",
                 table: "SystemSubController",
                 column: "SystemControllerId");
@@ -1022,16 +1032,6 @@ namespace InfinitySO.Data.Migrations
                 name: "IX_UserDataLogin_MainBoardId",
                 table: "UserDataLogin",
                 column: "MainBoardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WithdrawalSupply_EmployeeId",
-                table: "WithdrawalSupply",
-                column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WithdrawalSupply_SupplyId",
-                table: "WithdrawalSupply",
-                column: "SupplyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -1070,6 +1070,9 @@ namespace InfinitySO.Data.Migrations
                 name: "SupplyAdd");
 
             migrationBuilder.DropTable(
+                name: "SupplyWithdrawal");
+
+            migrationBuilder.DropTable(
                 name: "SystemSubController");
 
             migrationBuilder.DropTable(
@@ -1077,9 +1080,6 @@ namespace InfinitySO.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserDataLogin");
-
-            migrationBuilder.DropTable(
-                name: "WithdrawalSupply");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -1094,13 +1094,13 @@ namespace InfinitySO.Data.Migrations
                 name: "Patrimony");
 
             migrationBuilder.DropTable(
+                name: "Supply");
+
+            migrationBuilder.DropTable(
                 name: "SystemController");
 
             migrationBuilder.DropTable(
                 name: "Employee");
-
-            migrationBuilder.DropTable(
-                name: "Supply");
 
             migrationBuilder.DropTable(
                 name: "Student");
