@@ -256,6 +256,9 @@ namespace InfinitySO
             services.AddScoped<MainBoardService>();
             services.AddScoped<PlaceService>();
             services.AddScoped<SectorService>();
+            services.AddScoped<SupplyAddService>();
+            services.AddScoped<SupplyService>();
+            services.AddScoped<SupplyWithdrawalService>();
             //End Administration           
 
             //Start Employee
