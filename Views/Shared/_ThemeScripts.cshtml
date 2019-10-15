@@ -24,6 +24,24 @@
 <script src="~/lib/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
 <!--  Auto Complete, full documentation here: https://jqueryui.com/autocomplete/  -->
 <script src="~/js/jquery-ui.js"></script>
+<!--  jquery blockUI, full documentation here: http://malsup.com/jquery/block/  -->
+<script src="~/js/jquery.blockUI.js"></script>
 <!--  Scripts  -->
 <script src="~/js/DataTables.js" type="text/javascript"></script>
 <script src="~/js/DateAndTimePicker.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function DivLoading() { //jquery.blockUI.js
+        $.blockUI({
+            css: {
+                border: 'none',
+                padding: '15px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .5,
+                color: '#fff'
+            }
+        });
+    }
+</script>

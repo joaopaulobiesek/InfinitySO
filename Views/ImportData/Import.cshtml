@@ -18,7 +18,7 @@
                     <div class="col-sm-7">
                         <div class="form-group">
                             <label asp-for="Path"></label>
-                            <input asp-for="Path"  readonly="readonly" class="form-control" />
+                            <input asp-for="Path" readonly="readonly" class="form-control" />
                             <span asp-validation-for="Path" class="text-danger"></span>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <hr />
-                        <input type="submit" value="Executed File" class="btn btn-info" />
+                        <input type="submit" onclick="DivLoading()" value="Executed File" class="btn btn-info" />
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
                     </div>
                 </form>
