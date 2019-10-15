@@ -154,7 +154,7 @@ namespace InfinitySO.Data.Migrations
                     Description = table.Column<string>(nullable: true),
                     ValueMeasure = table.Column<double>(nullable: false),
                     MinimumOrderQuantity = table.Column<double>(nullable: false),
-                    ActiveSupply = table.Column<int>(nullable: false)
+                    ActiveSupply = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

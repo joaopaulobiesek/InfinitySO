@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfinitySO.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191014202513_Initial")]
+    [Migration("20191014235524_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -273,8 +273,8 @@ namespace InfinitySO.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActiveSupply")
-                        .HasColumnType("int");
+                    b.Property<bool>("ActiveSupply")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using InfinitySO.Models.JsonModels;
 using InfinitySO.Models.ModelsStudent;
@@ -39,16 +41,16 @@ namespace InfinitySO.Controllers.ControllersStudent
         [HttpGet]
         public async Task<IActionResult> GetName(string term)
         {
-            if (term.Length > 5)
+            if (term.Length > 3)
             {
                 List<JsonAutoCompeteStudent> list = new List<JsonAutoCompeteStudent>();
                 var ListNames = await _studentService.FindAllAsync();
                 foreach (var item in ListNames)
                 {
-                    var name = item.MainBoard.Name + " " + item.MainBoard.LastName + " - CPF: " + item.MainBoard.CPF.Trim().Replace(".", "").Replace("-", "") + " - EAD: " + item.EAD;
+                    var name = RemoveAccents(item.MainBoard.Name) + " " + RemoveAccents(item.MainBoard.LastName) + " - CPF: " + item.MainBoard.CPF.Trim().Replace(".", "").Replace("-", "") + " - EAD: " + item.EAD;
                     list.Add(new JsonAutoCompeteStudent() { Name = name });
                 }
-                var result = (from N in list where N.Name.Contains(term.ToUpper()) select new { Value = N.Name });
+                var result = (from N in list where N.Name.Contains(RemoveAccents(term.ToUpper())) select new { Value = N.Name });
                 return Json(result);
             }
             else
@@ -107,7 +109,7 @@ namespace InfinitySO.Controllers.ControllersStudent
             if (ead != null)
             {
                 await _studentFinancialService.InsertAsync(studentFinancialFormViewModel, ead);
-               return RedirectToAction(nameof(Register));
+                return RedirectToAction(nameof(Register));
 
             }
             else
@@ -209,6 +211,21 @@ namespace InfinitySO.Controllers.ControllersStudent
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             };
             return View(viewModel);
+        }
+
+        private string RemoveAccents(string texto)
+        {
+            string s = texto.Normalize(NormalizationForm.FormD);
+            StringBuilder sb = new StringBuilder();
+            for (int k = 0; k < s.Length; k++)
+            {
+                UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(s[k]);
+                if (uc != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(s[k]);
+                }
+            }
+            return sb.ToString();
         }
     }
 }

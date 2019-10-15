@@ -13,7 +13,7 @@ namespace InfinitySO.Models.ModelsAdministration
         public string Description { get; set; }
         public double ValueMeasure { get; set; }
         public double MinimumOrderQuantity { get; set; }
-        public int ActiveSupply { get; set; }
+        public bool ActiveSupply { get; set; }
         public ICollection<SupplyAdd> AddSupplies { get; set; } = new List<SupplyAdd>();
         public ICollection<SupplyWithdrawal> SupplyWithdrawals { get; set; } = new List<SupplyWithdrawal>();
 

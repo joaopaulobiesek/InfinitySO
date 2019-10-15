@@ -64,6 +64,7 @@
                         <h2>Result</h2>
                         <h4><code>@ViewData["Erro"]</code></h4>
                     </center>
+                    <a asp-action="SendFile" class="btn btn-outline-primary btn-lg">Send File</a>
                 }
                 else if (ViewData["Resultado"] != null)
                 {
@@ -72,6 +73,7 @@
                         <h4><code>@ViewData["Resultado"]</code></h4>
                         <h4><code>@ViewData["Resultados"]</code></h4>
                     </center>
+                    <a asp-action="SendFile" class="btn btn-outline-primary btn-lg">Send File</a>
                 }
             </div>
         </div>
