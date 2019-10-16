@@ -1,4 +1,5 @@
 ﻿using InfinitySO.Models.ModelsAdministration;
+using InfinitySO.Models.ModelsCertificate;
 using InfinitySO.Models.ModelsEmployee;
 using InfinitySO.Models.ModelsPatrimony;
 using InfinitySO.Models.ModelsStudent;
@@ -33,6 +34,12 @@ namespace InfinitySO.Data
         public DbSet<SupplyAdd> SupplyAdd { get; set; }
         public DbSet<SupplyWithdrawal> SupplyWithdrawal { get; set; }
         //End Administration
+        
+        //Start Certificate
+        public DbSet<Certificate> Certificate { get; set; }
+        public DbSet<CertificateCourse> CertificateCourse { get; set; }
+        public DbSet<CertificateProgrammatic> CertificateProgrammatic { get; set; }
+        //End Certificate
 
         //Start Employee
         public DbSet<Employee> Employee { get; set; }

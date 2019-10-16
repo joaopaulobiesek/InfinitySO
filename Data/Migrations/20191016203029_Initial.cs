@@ -34,6 +34,8 @@ namespace InfinitySO.Data.Migrations
                     Phone = table.Column<string>(maxLength: 15, nullable: true),
                     Cell = table.Column<string>(maxLength: 15, nullable: false),
                     Email = table.Column<string>(maxLength: 250, nullable: false),
+                    Path = table.Column<string>(nullable: true),
+                    Soon = table.Column<string>(nullable: true),
                     Creation = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
@@ -195,6 +197,33 @@ namespace InfinitySO.Data.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CertificateCourse",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyId = table.Column<int>(nullable: false),
+                    NameCourse = table.Column<string>(nullable: true),
+                    NameSignature = table.Column<string>(nullable: true),
+                    NameCPF = table.Column<string>(maxLength: 20, nullable: false),
+                    Hour = table.Column<string>(maxLength: 4, nullable: true),
+                    Value = table.Column<double>(nullable: false),
+                    Amount = table.Column<int>(nullable: false),
+                    InitialDate = table.Column<DateTime>(type: "date", nullable: false),
+                    FinalDate = table.Column<DateTime>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CertificateCourse", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CertificateCourse_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -435,6 +464,54 @@ namespace InfinitySO.Data.Migrations
                         name: "FK_SystemSubController_SystemController_SystemControllerId",
                         column: x => x.SystemControllerId,
                         principalTable: "SystemController",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Certificate",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MainBoardId = table.Column<int>(nullable: false),
+                    CertificateCourseId = table.Column<int>(nullable: false),
+                    Pay = table.Column<bool>(nullable: false),
+                    Approved = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Certificate", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Certificate_CertificateCourse_CertificateCourseId",
+                        column: x => x.CertificateCourseId,
+                        principalTable: "CertificateCourse",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Certificate_MainBoard_MainBoardId",
+                        column: x => x.MainBoardId,
+                        principalTable: "MainBoard",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CertificateProgrammatic",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CourseCertificateId = table.Column<int>(nullable: false),
+                    ProgrammaticContent = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CertificateProgrammatic", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CertificateProgrammatic_CertificateCourse_CourseCertificateId",
+                        column: x => x.CourseCertificateId,
+                        principalTable: "CertificateCourse",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -894,6 +971,26 @@ namespace InfinitySO.Data.Migrations
                 column: "PlaceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Certificate_CertificateCourseId",
+                table: "Certificate",
+                column: "CertificateCourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Certificate_MainBoardId",
+                table: "Certificate",
+                column: "MainBoardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CertificateCourse_CompanyId",
+                table: "CertificateCourse",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CertificateProgrammatic_CourseCertificateId",
+                table: "CertificateProgrammatic",
+                column: "CourseCertificateId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DownloadFile_PeriodId",
                 table: "DownloadFile",
                 column: "PeriodId");
@@ -1061,6 +1158,12 @@ namespace InfinitySO.Data.Migrations
                 name: "Category");
 
             migrationBuilder.DropTable(
+                name: "Certificate");
+
+            migrationBuilder.DropTable(
+                name: "CertificateProgrammatic");
+
+            migrationBuilder.DropTable(
                 name: "DownloadFile");
 
             migrationBuilder.DropTable(
@@ -1089,6 +1192,9 @@ namespace InfinitySO.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "StudentFinancial");
+
+            migrationBuilder.DropTable(
+                name: "CertificateCourse");
 
             migrationBuilder.DropTable(
                 name: "Patrimony");

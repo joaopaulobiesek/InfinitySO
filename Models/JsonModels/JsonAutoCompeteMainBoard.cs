@@ -1,15 +1,15 @@
 ﻿
 namespace InfinitySO.Models.JsonModels
 {
-    public class JsonAutoCompeteStudent
+    public class JsonAutoCompeteMainBoard
     {
         public string Name { get; set; }
 
-        public JsonAutoCompeteStudent()
+        public JsonAutoCompeteMainBoard()
         {
         }
 
-        public JsonAutoCompeteStudent(string name)
+        public JsonAutoCompeteMainBoard(string name)
         {
             Name = name;
         }

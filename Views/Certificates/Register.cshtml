@@ -1,0 +1,61 @@
+﻿@model Certificate
+@{
+    ViewData["Title"] = "Create Certificate";
+}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Register">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="text-danger">@ViewData["Error"]</div>
+                    <input asp-for="CertificateCourseId" value="@ViewData["CodCertificateCourse"]" type="hidden" />
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label>Aluno:</label>
+                            <input id="searchCPF" name="searchCPF" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input asp-for="Pay" class="form-check-input">
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                            Pago
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input asp-for="Approved" class="form-check-input">
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                            Aprovado
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <hr />
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+    $("#searchCPF").autocomplete({
+        source: '@Url.Action("GetName","Certificates")'
+    });
+    </script>
+}

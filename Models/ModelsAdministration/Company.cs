@@ -40,6 +40,12 @@ namespace InfinitySO.Models.ModelsAdministration
         [Display(Name = "E-mail")]
         public string Email { get; set; }
 
+        [Display(Name = "Caminho")]
+        public string Path { get; set; }
+
+        [Display(Name = "Logo")]
+        public string Soon { get; set; }
+
         [Required(ErrorMessage = "{0} Required")]
         [Display(Name = "Data de Abertura")]
         [DataType(DataType.Date)]

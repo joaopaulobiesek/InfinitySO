@@ -133,9 +133,15 @@ namespace InfinitySO.Data.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
+
+                    b.Property<string>("Soon")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StateRegistration")
                         .IsRequired()
@@ -360,6 +366,98 @@ namespace InfinitySO.Data.Migrations
                     b.HasIndex("SupplyId");
 
                     b.ToTable("SupplyWithdrawal");
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsCertificate.Certificate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Approved")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("CertificateCourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MainBoardId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Pay")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CertificateCourseId");
+
+                    b.HasIndex("MainBoardId");
+
+                    b.ToTable("Certificate");
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsCertificate.CertificateCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FinalDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Hour")
+                        .HasColumnType("nvarchar(4)")
+                        .HasMaxLength(4);
+
+                    b.Property<DateTime>("InitialDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("NameCPF")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("NameCourse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameSignature")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("CertificateCourse");
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsCertificate.CertificateProgrammatic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseCertificateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProgrammaticContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseCertificateId");
+
+                    b.ToTable("CertificateProgrammatic");
                 });
 
             modelBuilder.Entity("InfinitySO.Models.ModelsEmployee.Employee", b =>
@@ -1208,6 +1306,39 @@ namespace InfinitySO.Data.Migrations
                     b.HasOne("InfinitySO.Models.ModelsAdministration.Supply", "Supply")
                         .WithMany("SupplyWithdrawals")
                         .HasForeignKey("SupplyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsCertificate.Certificate", b =>
+                {
+                    b.HasOne("InfinitySO.Models.ModelsCertificate.CertificateCourse", "CertificateCourse")
+                        .WithMany()
+                        .HasForeignKey("CertificateCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InfinitySO.Models.ModelsAdministration.MainBoard", "MainBoard")
+                        .WithMany()
+                        .HasForeignKey("MainBoardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsCertificate.CertificateCourse", b =>
+                {
+                    b.HasOne("InfinitySO.Models.ModelsAdministration.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsCertificate.CertificateProgrammatic", b =>
+                {
+                    b.HasOne("InfinitySO.Models.ModelsCertificate.CertificateCourse", "CertificateCourse")
+                        .WithMany()
+                        .HasForeignKey("CourseCertificateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

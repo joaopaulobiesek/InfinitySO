@@ -1,0 +1,93 @@
+﻿@model CertificateCourse
+@{
+    ViewData["Title"] = "Create Certificate";
+}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Register">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="col-lg-5 col-md-6 col-sm-3">
+                        <select id="StudentListId" asp-for="CompanyId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Company">
+                            <option disabled selected>Selecione Empresa</option>
+                            @foreach (var item in Model.Companies)
+                            {
+                                <option value="@item.Id">@item.CorporateName - @item.FantasyName -CNPJ: @item.CNPJ</option>
+                            }
+                        </select>
+                        <span asp-validation-for="CompanyId" class="text-danger"></span>
+                    </div><br />
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="NameCourse"></label>
+                            <input asp-for="NameCourse" class="form-control" />
+                            <span asp-validation-for="NameCourse" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="NameSignature"></label>
+                            <input asp-for="NameSignature" class="form-control" />
+                            <span asp-validation-for="NameSignature" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="NameCPF"></label>
+                            <input asp-for="NameCPF" class="form-control" />
+                            <span asp-validation-for="NameCPF" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Hour"></label>
+                            <input asp-for="Hour" class="form-control" />
+                            <span asp-validation-for="Hour" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Value"></label>
+                            <input asp-for="Value" class="form-control" />
+                            <span asp-validation-for="Value" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="Amount"></label>
+                            <input asp-for="Amount" class="form-control" />
+                            <span asp-validation-for="Amount" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="InitialDate"></label>
+                            <input asp-for="InitialDate" class="form-control" />
+                            <span asp-validation-for="InitialDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label asp-for="FinalDate"></label>
+                            <input asp-for="FinalDate" class="form-control" />
+                            <span asp-validation-for="FinalDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <hr />
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>

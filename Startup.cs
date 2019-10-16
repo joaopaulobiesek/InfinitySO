@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using InfinitySO.Services.ServicesPatrimony;
+using InfinitySO.Services.ServicesCertificate;
 
 namespace InfinitySO
 {
@@ -259,7 +260,12 @@ namespace InfinitySO
             services.AddScoped<SupplyAddService>();
             services.AddScoped<SupplyService>();
             services.AddScoped<SupplyWithdrawalService>();
-            //End Administration           
+            //End Administration 
+
+            //Start Certificate 
+            services.AddScoped<CertificateCourseService>();
+            services.AddScoped<CertificateService>();
+            //End Certificate           
 
             //Start Employee
             services.AddScoped<EmployeeService>();
