@@ -17,14 +17,14 @@ namespace InfinitySO.Services.ServicesCertificate
             _context = context;
         }
 
-        public async Task<List<CertificateCourse>> FindAllAsync()
-        {
-            return await _context.CertificateCourse.Include(x => x.Company).OrderBy(x => x.NameCourse).ToListAsync();
-        }
-
         public async Task<CertificateCourse> FindByIdAsync(int id)
         {
             return await _context.CertificateCourse.Include(obj => obj.Company).FirstOrDefaultAsync(obj => obj.Id == id);
+        }
+
+        public async Task<List<CertificateCourse>> FindAllAsync()
+        {
+            return await _context.CertificateCourse.Include(x => x.Company).OrderBy(x => x.NameCourse).ToListAsync();
         }
 
         public async Task InsertAsync(CertificateCourse obj)

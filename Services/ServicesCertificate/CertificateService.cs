@@ -18,6 +18,11 @@ namespace InfinitySO.Services.ServicesCertificate
             _context = context;
         }
 
+        public async Task<Certificate> FindByIdAsync(int id)
+        {
+            return await _context.Certificate.Include(x => x.CertificateCourse).Include(x => x.CertificateCourse.Company).Include(x => x.MainBoard).FirstOrDefaultAsync(obj => obj.Id == id);
+        }
+
         public async Task<List<Certificate>> FindAllIdAsync(int id)
         {
             return await _context.Certificate.Include(x => x.CertificateCourse).Include(x => x.CertificateCourse.Company).Include(x => x.MainBoard).OrderBy(x => x.MainBoard.Name).ThenBy(x => x.MainBoard.LastName).Where(x => x.CertificateCourseId == id).ToListAsync();

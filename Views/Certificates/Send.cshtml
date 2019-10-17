@@ -1,10 +1,10 @@
-﻿@model Certificate
+﻿@model CertificateFormViewModel
 @{
     ViewData["Title"] = "Certificados";
 }
 
 <div class="row">
-    <div class="col-md-12 mr-auto ml-auto">
+    <div class="col-md-10 mr-auto ml-auto">
         <div class="card ">
             <div class="card-header card-header-rose card-header-text">
                 <div class="card-text">
@@ -14,7 +14,31 @@
             <div class="card-body ">
 
                 <!--Start-->
-                oi
+                <a  onclick="printDiv('div1')" class="btn btn-link btn-warning btn-just-icon details"><i class="material-icons">print</i></a>
+                <div id="div1">
+                    <div class="wrapperCert">
+                        <div class="certificate">
+                            <h1>Certificado</h1>
+                            <p>
+                                Certificamos a participação de @Html.DisplayFor(model => model.Certificate.MainBoard.Name) @Html.DisplayFor(model => model.Certificate.MainBoard.LastName)
+                                no Curso de @Html.DisplayFor(model => model.CertificateCourse.NameCourse), realizado pelo @Html.DisplayFor(model => model.CertificateCourse.Company.CorporateName)
+                                (@Html.DisplayFor(model => model.CertificateCourse.Company.FantasyName)), no período de @Html.DisplayFor(model => model.CertificateCourse.InitialDate)
+                                há @Html.DisplayFor(model => model.CertificateCourse.FinalDate), com carga horária de @Html.DisplayFor(model => model.CertificateCourse.Hour)h.
+                            </p>
+                            <h2>
+                                Luís Eduardo Magalhães, @DateTime.Now.ToString("dd 'de' MMMM 'de' yyyy", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")).
+                            </h2>
+                            <h3>
+                                _____________________________________________________<br />
+                                @Html.DisplayFor(model => model.CertificateCourse.NameSignature)<br />
+                                CPF: @Html.DisplayFor(model => model.CertificateCourse.NameCPF)<br />
+                            </h3>
+                            <img class="logo-gacea" src="~/lib/img/logo.jpg" />
+                            <div style="font-size:8pt; float:left; margin-left:-150px; margin-top:30px;"> CNPJ @Html.DisplayFor(model => model.CertificateCourse.Company.CNPJ)</div>
+                            <!--<img class="logo-unopar" src="preset/logo-2.png" />  -->
+                        </div>
+                    </div>
+                </div>
                 <!--End-->
             </div>
         </div>

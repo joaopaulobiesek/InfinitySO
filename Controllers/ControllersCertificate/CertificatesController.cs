@@ -115,10 +115,15 @@ namespace InfinitySO.Controllers.ControllersCertificate
             }
         }
 
-        public async Task<IActionResult> Send()
+        public async Task<IActionResult> Send(int? id)
         {
-            var certificateCourses = await _certificateCourseService.FindAllAsync();
-            var viewModel = new Certificate { CertificateCourses = certificateCourses };
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+            var certificates = await _certificateService.FindByIdAsync(id.Value);
+            var certificateCourses = await _certificateCourseService.FindByIdAsync(certificates.CertificateCourseId);
+            var viewModel = new CertificateFormViewModel { CertificateCourse = certificateCourses, Certificate = certificates };
             return View(viewModel);
         }
 

@@ -45,3 +45,13 @@
         });
     }
 </script>
+<script language="javascript" type="text/javascript">
+     function printDiv(divID) {
+            var divToPrint = document.getElementById(divID);
+            var popupWin = window.open('', '_blank', 'width=300,height=400,location=no,left=200px');
+            popupWin.document.open();
+            popupWin.document.write('<html><head> <style> .wrapperCert {  height: 100%;  min-height: 100%;    display: -ms-flex;  display: -webkit-flex;  display: flex;   -ms-align-items: center;  -webkit-align-items: center;  align-items: center;    -ms-justify-content: center;  -webkit-justify-content: center;  justify-content: center;}   .wrapperCert .certificate {  width:1000px;  height:600px;  border: 1px solid rgba(0, 0, 0, .3);  background-image:url(../../lib/img/border.png);  background-size:1000px 600px;  font-family:  serif;  font-weight:400;  color:#333;  font-size:12pt;}.wrapperCert h1{	font-family:  Abril Fatface /*cursive*/;	font-weight:400;	color:#012C6B;	font-size:44pt;	text-align:center;	margin-top:60px;}.wrapperCert p{	text-align:justify;	width:800px;	margin:auto;}.wrapperCert h2{	font-size:12pt;font-weight:400;	margin-top:80px;	text-align:center;}.wrapperCert h3{	font-size:10pt;	font-weight:400;	margin-top:100px;	text-align:center;}.wrapperCert h4{	font-family:  cursive;	font-weight:400;	color:#012C6B;	font-size:28pt;	text-align:center;	margin-top:60px;}.wrapperCert img{	width:180px;	height:180px;}.wrapperCert .logo-gacea{	float:left;	margin-left:40px;	margin-top:-140px;}.wrapperCert .logo-unopar{	float:right;	margin-right:40px;	margin-top:-130px;}</style></head>');
+            popupWin.document.write('<body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+            popupWin.document.close();
+        }
+</script>
