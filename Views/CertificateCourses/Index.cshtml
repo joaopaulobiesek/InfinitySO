@@ -48,32 +48,31 @@
                             @foreach (var item in Model.CertificateCourses)
                             {
 
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Company.FantasyName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NameCourse)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NameSignature)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Hour)h.
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.InitialDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FinalDate)
-                                </td>
-                                <td class="text-right">
-                                    <a asp-controller="Certificates" asp-action="Index" asp-route-id="@item.Id" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">add_box</i></a>
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-link btn-warning btn-just-icon details"><i class="material-icons">dvr</i></a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-link btn-danger btn-just-icon remove" style="pointer-events: none;"><i class="material-icons">close</i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Company.FantasyName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NameCourse)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NameSignature)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Hour)h.
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InitialDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FinalDate)
+                                    </td>
+                                    <td class="text-right">
+                                        <a asp-controller="Certificates" asp-action="Index" asp-route-id="@item.Id" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">add_box</i></a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-link btn-danger btn-just-icon remove" style="pointer-events: none;"><i class="material-icons">close</i></a>
+                                    </td>
+                                </tr>
                             }
 
                         </tbody>

@@ -60,54 +60,66 @@ namespace InfinitySO.Controllers.ControllersCertificate
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
-            ViewData["CodCertificateCourse"] = id.Value;
             var certificates = await _certificateService.FindAllIdAsync(id.Value);
             var viewModel = new Certificate { Certificates = certificates, CertificateCourse = obj };
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Register(int? id)
+        public async Task<IActionResult> Register()
         {
-            if (id == null)
-            {
-                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
-            }
-
-            var obj = await _certificateCourseService.FindByIdAsync(id.Value);
-            if (obj == null)
-            {
-                return RedirectToAction(nameof(Error), new { message = "Id not found" });
-            }
-            ViewData["CodCertificateCourse"] = id.Value;
-            return View();
+            var certificateCourses = await _certificateCourseService.FindAllAsync();
+            var viewModel = new Certificate { CertificateCourses = certificateCourses };
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(Certificate certificate, string searchCPF)
         {
+            var certificateCourses = await _certificateCourseService.FindAllAsync();
+            var certificateCoursesId = await _certificateCourseService.FindByIdAsync(certificate.CertificateCourseId);
+            var certificates = await _certificateService.FindAllIdAsync(certificate.CertificateCourseId);
+            var viewModel = new Certificate { CertificateCourses = certificateCourses };
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(viewModel);
+            }           
+            try
+            {
+                string[] cpfs = searchCPF.Split("- CPF: ");
+                string cpf = cpfs[1].Trim().Replace(".", "").Replace("-", "");
+                cpf = Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
+                var mainBoards = await _mainBoardService.FindByCPFAsync(cpf);
+                if (mainBoards != null)
+                {
+                    if (certificates.Count < certificateCoursesId.Amount)
+                    {
+                        await _certificateService.InsertAsync(certificate, mainBoards);
+                        return RedirectToAction("Index", new { id = certificate.CertificateCourseId });
+                    }
+                    else
+                    {
+                        ViewData["Error"] = "Limite da inscritos atingido!";
+                        return View(viewModel);
+                    }
+                }
+                else
+                {
+                    ViewData["Error"] = "Erro ao tentar carregar informações, tente novamente mais tarde!";
+                    return View(viewModel);
+                }
             }
-            string[] cpfs = searchCPF.Split("- CPF: ");
-            string cpf = cpfs[1].Trim().Replace(".", "").Replace("-", "");
-            cpf = Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
-            var mainBoards = await _mainBoardService.FindByCPFAsync(cpf);
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
+        }
 
-            ViewData["Error"] = "Erro ao tentar carregar informações, tente novamente mais tarde!" + certificate.Id + " - " + certificate.MainBoardId + " - " + certificate.CertificateCourseId + " - " + certificate.Pay + " - " + certificate.Approved;
-            return View();
-            /*
-            if (mainBoards != null)
-            {
-                await _certificateService.InsertAsync(certificate, mainBoards);
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                ViewData["Error"] = "Erro ao tentar carregar informações, tente novamente mais tarde!";
-                return View();
-            }*/
+        public async Task<IActionResult> Send()
+        {
+            var certificateCourses = await _certificateCourseService.FindAllAsync();
+            var viewModel = new Certificate { CertificateCourses = certificateCourses };
+            return View(viewModel);
         }
 
         public IActionResult Error(string message)

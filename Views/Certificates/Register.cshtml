@@ -3,7 +3,7 @@
     ViewData["Title"] = "Create Certificate";
 }
 <div class="row">
-    <div class="col-md-6 mr-auto ml-auto">
+    <div class="col-md-10 mr-auto ml-auto">
         <div class="card ">
             <div class="card-header card-header-rose card-header-text">
                 <div class="card-text">
@@ -15,7 +15,17 @@
                 <form asp-action="Register">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="text-danger">@ViewData["Error"]</div>
-                    <input asp-for="CertificateCourseId" value="@ViewData["CodCertificateCourse"]" type="hidden" />
+                    <div class="col-sm-7">
+                        <select asp-for="CertificateCourseId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Course">
+                            <option disabled selected>Selecione Curso</option>
+                            @foreach (var item in Model.CertificateCourses)
+                            {
+                                <option value="@item.Id">@item.Company.FantasyName - @item.NameSignature - CPF: @item.NameCPF - @item.NameCourse - De: @item.InitialDate.ToString("dd/MM/yyyy") a @item.FinalDate.ToString("dd/MM/yyyy") - @item.Hour h.</option>
+                            }
+                        </select>
+                        <span asp-validation-for="CertificateCourseId" class="text-danger"></span>
+                    </div><br />
+
                     <div class="col-sm-7">
                         <div class="form-group">
                             <label>Aluno:</label>

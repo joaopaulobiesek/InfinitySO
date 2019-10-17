@@ -1,5 +1,4 @@
-﻿using InfinitySO.Models.Enums;
-using InfinitySO.Models.ModelsAdministration;
+﻿using InfinitySO.Models.ModelsAdministration;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,6 +23,8 @@ namespace InfinitySO.Models.ModelsCertificate
 
         [NotMapped]
         public ICollection<Certificate> Certificates { get; set; }
+        [NotMapped]
+        public ICollection<CertificateCourse> CertificateCourses { get; set; }
 
         public Certificate()
         {
