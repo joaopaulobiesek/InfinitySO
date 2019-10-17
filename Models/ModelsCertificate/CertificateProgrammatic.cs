@@ -11,7 +11,7 @@ namespace InfinitySO.Models.ModelsCertificate
         public CertificateCourse CertificateCourse { get; set; }
 
         [ForeignKey("CertificateCourse")]
-        public int CourseCertificateId { get; set; }
+        public int CertificateCourseId { get; set; }
         public string ProgrammaticContent { get; set; }
 
         public CertificateProgrammatic()

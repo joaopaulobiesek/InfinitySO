@@ -1,4 +1,4 @@
-﻿@model Certificate
+﻿@model CertificateFormViewModel
 @{
     ViewData["Title"] = "Create Certificate";
 }
@@ -16,14 +16,14 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="text-danger">@ViewData["Error"]</div>
                     <div class="col-sm-7">
-                        <select asp-for="CertificateCourseId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Course">
+                        <select asp-for="Certificate.CertificateCourseId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Course">
                             <option disabled selected>Selecione Curso</option>
                             @foreach (var item in Model.CertificateCourses)
                             {
                                 <option value="@item.Id">@item.Company.FantasyName - @item.NameSignature - CPF: @item.NameCPF - @item.NameCourse - De: @item.InitialDate.ToString("dd/MM/yyyy") a @item.FinalDate.ToString("dd/MM/yyyy") - @item.Hour h.</option>
                             }
                         </select>
-                        <span asp-validation-for="CertificateCourseId" class="text-danger"></span>
+                        <span asp-validation-for="Certificate.CertificateCourseId" class="text-danger"></span>
                     </div><br />
 
                     <div class="col-sm-7">
@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input asp-for="Pay" class="form-check-input">
+                            <input asp-for="Certificate.Pay" class="form-check-input">
                             <span class="form-check-sign">
                                 <span class="check"></span>
                             </span>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input asp-for="Approved" class="form-check-input">
+                            <input asp-for="Certificate.Approved" class="form-check-input">
                             <span class="form-check-sign">
                                 <span class="check"></span>
                             </span>

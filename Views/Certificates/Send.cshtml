@@ -14,7 +14,8 @@
             <div class="card-body ">
 
                 <!--Start-->
-                <a  onclick="printDiv('div1')" class="btn btn-link btn-warning btn-just-icon details"><i class="material-icons">print</i></a>
+                Frente: <a onclick="printDiv('div1')" class="btn btn-link btn-warning btn-just-icon details"><i class="material-icons">print</i></a>
+                Verso: <a onclick="printDiv('div2')" class="btn btn-link btn-warning btn-just-icon details"><i class="material-icons">print</i></a>
                 <div id="div1">
                     <div class="wrapperCert">
                         <div class="certificate">
@@ -36,6 +37,29 @@
                             <img class="logo-gacea" src="~/lib/img/logo.jpg" />
                             <div style="font-size:8pt; float:left; margin-left:-150px; margin-top:30px;"> CNPJ @Html.DisplayFor(model => model.CertificateCourse.Company.CNPJ)</div>
                             <!--<img class="logo-unopar" src="preset/logo-2.png" />  -->
+                        </div>
+                    </div>
+                </div>
+                <div id="div2">
+                    <div class="wrapperCert">
+                        <div class="certificate">
+                            <h4>Conteúdo programático do curso de @Html.DisplayFor(model => model.CertificateCourse.NameCourse)</h4>
+                            @{int i = 1;}
+                            <div>
+                                @foreach (var item in Model.CertificateProgrammatics)
+                                {
+                                    @if (i < 13)
+                                    {
+                                        <p>@i @item.ProgrammaticContent</p>
+                                    }
+                                    else
+                                    {
+                                        <p style="text-align:right">@i @item.ProgrammaticContent</p>
+                                    }
+                                    i++;
+                                }
+                            </div>
+                            <h3><b>Total de @Html.DisplayFor(model => model.CertificateCourse.Hour)Horas.</b></h3>
                         </div>
                     </div>
                 </div>

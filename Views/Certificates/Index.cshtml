@@ -1,4 +1,4 @@
-﻿@model Certificate
+﻿@model CertificateFormViewModel
 @{
     ViewData["Title"] = "Certificados";
 }
@@ -37,19 +37,19 @@
                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                         <thead>
                             <tr>
-                                <th>@Html.DisplayNameFor(model => model.MainBoard.Name)</th>
-                                <th>@Html.DisplayNameFor(model => model.MainBoard.CPF)</th>
-                                <th>@Html.DisplayNameFor(model => model.Approved)</th>
-                                <th>@Html.DisplayNameFor(model => model.Pay)</th>
+                                <th>@Html.DisplayNameFor(model => model.Certificate.MainBoard.Name)</th>
+                                <th>@Html.DisplayNameFor(model => model.Certificate.MainBoard.CPF)</th>
+                                <th>@Html.DisplayNameFor(model => model.Certificate.Approved)</th>
+                                <th>@Html.DisplayNameFor(model => model.Certificate.Pay)</th>
                                 <th class="disabled-sorting text-right">Actions</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>@Html.DisplayNameFor(model => model.MainBoard.Name)</th>
-                                <th>@Html.DisplayNameFor(model => model.MainBoard.CPF)</th>
-                                <th>@Html.DisplayNameFor(model => model.Approved)</th>
-                                <th>@Html.DisplayNameFor(model => model.Pay)</th>
+                                <th>@Html.DisplayNameFor(model => model.Certificate.MainBoard.Name)</th>
+                                <th>@Html.DisplayNameFor(model => model.Certificate.MainBoard.CPF)</th>
+                                <th>@Html.DisplayNameFor(model => model.Certificate.Approved)</th>
+                                <th>@Html.DisplayNameFor(model => model.Certificate.Pay)</th>
                                 <th class="disabled-sorting text-right">Actions</th>
                             </tr>
                         </tfoot>

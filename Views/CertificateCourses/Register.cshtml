@@ -1,4 +1,4 @@
-﻿@model CertificateCourse
+﻿@model CertificateFormViewModel
 @{
     ViewData["Title"] = "Create Certificate";
 }
@@ -15,71 +15,96 @@
                 <form asp-action="Register">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select id="StudentListId" asp-for="CompanyId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Company">
+                        <select id="StudentListId" asp-for="CertificateCourse.CompanyId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Company">
                             <option disabled selected>Selecione Empresa</option>
                             @foreach (var item in Model.Companies)
                             {
                                 <option value="@item.Id">@item.CorporateName - @item.FantasyName -CNPJ: @item.CNPJ</option>
                             }
                         </select>
-                        <span asp-validation-for="CompanyId" class="text-danger"></span>
+                        <span asp-validation-for="CertificateCourse.CompanyId" class="text-danger"></span>
                     </div><br />
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label asp-for="NameCourse"></label>
-                            <input asp-for="NameCourse" class="form-control" />
-                            <span asp-validation-for="NameCourse" class="text-danger"></span>
+                            <label asp-for="CertificateCourse.NameCourse"></label>
+                            <input asp-for="CertificateCourse.NameCourse" class="form-control" />
+                            <span asp-validation-for="CertificateCourse.NameCourse" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label asp-for="NameSignature"></label>
-                            <input asp-for="NameSignature" class="form-control" />
-                            <span asp-validation-for="NameSignature" class="text-danger"></span>
+                            <label asp-for="CertificateCourse.NameSignature"></label>
+                            <input asp-for="CertificateCourse.NameSignature" class="form-control" />
+                            <span asp-validation-for="CertificateCourse.NameSignature" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label asp-for="NameCPF"></label>
-                            <input asp-for="NameCPF" class="form-control" />
-                            <span asp-validation-for="NameCPF" class="text-danger"></span>
+                            <label asp-for="CertificateCourse.NameCPF"></label>
+                            <input asp-for="CertificateCourse.NameCPF" class="form-control" />
+                            <span asp-validation-for="CertificateCourse.NameCPF" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label asp-for="Hour"></label>
-                            <input asp-for="Hour" class="form-control" />
-                            <span asp-validation-for="Hour" class="text-danger"></span>
+                            <label asp-for="CertificateCourse.Hour"></label>
+                            <input asp-for="CertificateCourse.Hour" class="form-control" />
+                            <span asp-validation-for="CertificateCourse.Hour" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label asp-for="Value"></label>
-                            <input asp-for="Value" class="form-control" />
-                            <span asp-validation-for="Value" class="text-danger"></span>
+                            <label asp-for="CertificateCourse.Value"></label>
+                            <input asp-for="CertificateCourse.Value" class="form-control" />
+                            <span asp-validation-for="CertificateCourse.Value" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label asp-for="Amount"></label>
-                            <input asp-for="Amount" class="form-control" />
-                            <span asp-validation-for="Amount" class="text-danger"></span>
+                            <label asp-for="CertificateCourse.Amount"></label>
+                            <input asp-for="CertificateCourse.Amount" class="form-control" />
+                            <span asp-validation-for="CertificateCourse.Amount" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label asp-for="InitialDate"></label>
-                            <input asp-for="InitialDate" class="form-control" />
-                            <span asp-validation-for="InitialDate" class="text-danger"></span>
+                            <label asp-for="CertificateCourse.InitialDate"></label>
+                            <input asp-for="CertificateCourse.InitialDate" class="form-control" />
+                            <span asp-validation-for="CertificateCourse.InitialDate" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label asp-for="FinalDate"></label>
-                            <input asp-for="FinalDate" class="form-control" />
-                            <span asp-validation-for="FinalDate" class="text-danger"></span>
+                            <label asp-for="CertificateCourse.FinalDate"></label>
+                            <input asp-for="CertificateCourse.FinalDate" class="form-control" />
+                            <span asp-validation-for="CertificateCourse.FinalDate" class="text-danger"></span>
                         </div>
                     </div>
+                    <hr />
+                    <div class="material-datatables">
+                        <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <label asp-for="CertificateProgrammatic.ProgrammaticContent" class="form-check-label"></label>
+                                        <input id="DateDueId" asp-for="CertificateProgrammatic.ProgrammaticContent" class="form-control" />
+                                    </th>
+                                    <th>                                       
+                                        <button style="float:right;" class="btn btn-link btn-info btn-just-icon" type="button" id="ButtonAddBillet" onclick="AddBillet()" disabled="disabled"><i class="material-icons">add_box</i></button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.CertificateProgrammatic.ProgrammaticContent)</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                            <tbody id="BilletValuesId"></tbody>
+                            <tbody id="BilletValuesTotalId"></tbody>
+                        </table>
+                    </div>
+                    <textarea style="display:none;" id="BilletValues"></textarea>
                     <div class="form-group">
                         <hr />
                         <input type="submit" value="Create" class="btn btn-info" />

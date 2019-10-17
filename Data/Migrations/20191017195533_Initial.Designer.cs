@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfinitySO.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191016203029_Initial")]
+    [Migration("20191017195533_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -449,7 +449,7 @@ namespace InfinitySO.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CourseCertificateId")
+                    b.Property<int>("CertificateCourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProgrammaticContent")
@@ -457,7 +457,7 @@ namespace InfinitySO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseCertificateId");
+                    b.HasIndex("CertificateCourseId");
 
                     b.ToTable("CertificateProgrammatic");
                 });
@@ -1340,7 +1340,7 @@ namespace InfinitySO.Data.Migrations
                 {
                     b.HasOne("InfinitySO.Models.ModelsCertificate.CertificateCourse", "CertificateCourse")
                         .WithMany()
-                        .HasForeignKey("CourseCertificateId")
+                        .HasForeignKey("CertificateCourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

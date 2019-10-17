@@ -502,15 +502,15 @@ namespace InfinitySO.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CourseCertificateId = table.Column<int>(nullable: false),
+                    CertificateCourseId = table.Column<int>(nullable: false),
                     ProgrammaticContent = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CertificateProgrammatic", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CertificateProgrammatic_CertificateCourse_CourseCertificateId",
-                        column: x => x.CourseCertificateId,
+                        name: "FK_CertificateProgrammatic_CertificateCourse_CertificateCourseId",
+                        column: x => x.CertificateCourseId,
                         principalTable: "CertificateCourse",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -986,9 +986,9 @@ namespace InfinitySO.Data.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CertificateProgrammatic_CourseCertificateId",
+                name: "IX_CertificateProgrammatic_CertificateCourseId",
                 table: "CertificateProgrammatic",
-                column: "CourseCertificateId");
+                column: "CertificateCourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DownloadFile_PeriodId",

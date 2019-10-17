@@ -53,11 +53,6 @@ namespace InfinitySO.Models.ModelsCertificate
         [Column(TypeName = "date")]
         public DateTime FinalDate { get; set; }
 
-        [NotMapped]
-        public ICollection<CertificateCourse> CertificateCourses { get; set; }
-        [NotMapped]
-        public ICollection<Company> Companies { get; set; }
-
         public CertificateCourse()
         {
         }

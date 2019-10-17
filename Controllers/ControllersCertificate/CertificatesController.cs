@@ -18,12 +18,14 @@ namespace InfinitySO.Controllers.ControllersCertificate
     {
         private readonly CertificateCourseService _certificateCourseService;
         private readonly CertificateService _certificateService;
+        private readonly CertificateProgrammaticService _certificateProgrammaticService;
         private readonly MainBoardService _mainBoardService;
 
-        public CertificatesController(CertificateCourseService certificateCourseService, CertificateService certificateService, MainBoardService mainBoardService)
+        public CertificatesController(CertificateCourseService certificateCourseService, CertificateService certificateService, CertificateProgrammaticService certificateProgrammaticService, MainBoardService mainBoardService)
         {
             _certificateCourseService = certificateCourseService;
             _certificateService = certificateService;
+            _certificateProgrammaticService = certificateProgrammaticService;
             _mainBoardService = mainBoardService;
         }
 
@@ -61,14 +63,14 @@ namespace InfinitySO.Controllers.ControllersCertificate
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
             var certificates = await _certificateService.FindAllIdAsync(id.Value);
-            var viewModel = new Certificate { Certificates = certificates, CertificateCourse = obj };
+            var viewModel = new CertificateFormViewModel { Certificates = certificates, CertificateCourse = obj };
             return View(viewModel);
         }
 
         public async Task<IActionResult> Register()
         {
             var certificateCourses = await _certificateCourseService.FindAllAsync();
-            var viewModel = new Certificate { CertificateCourses = certificateCourses };
+            var viewModel = new CertificateFormViewModel { CertificateCourses = certificateCourses };
             return View(viewModel);
         }
 
@@ -79,7 +81,7 @@ namespace InfinitySO.Controllers.ControllersCertificate
             var certificateCourses = await _certificateCourseService.FindAllAsync();
             var certificateCoursesId = await _certificateCourseService.FindByIdAsync(certificate.CertificateCourseId);
             var certificates = await _certificateService.FindAllIdAsync(certificate.CertificateCourseId);
-            var viewModel = new Certificate { CertificateCourses = certificateCourses };
+            var viewModel = new CertificateFormViewModel { CertificateCourses = certificateCourses };
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
@@ -123,7 +125,8 @@ namespace InfinitySO.Controllers.ControllersCertificate
             }
             var certificates = await _certificateService.FindByIdAsync(id.Value);
             var certificateCourses = await _certificateCourseService.FindByIdAsync(certificates.CertificateCourseId);
-            var viewModel = new CertificateFormViewModel { CertificateCourse = certificateCourses, Certificate = certificates };
+            var certificateProgrammatics = await _certificateProgrammaticService.FindAllIdAsync(certificates.CertificateCourseId);
+            var viewModel = new CertificateFormViewModel { CertificateCourse = certificateCourses, Certificate = certificates, CertificateProgrammatics = certificateProgrammatics };
             return View(viewModel);
         }
 

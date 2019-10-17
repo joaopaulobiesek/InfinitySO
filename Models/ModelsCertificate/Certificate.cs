@@ -20,12 +20,7 @@ namespace InfinitySO.Models.ModelsCertificate
         public int CertificateCourseId { get; set; }
         public bool Pay { get; set; }
         public bool Approved { get; set; }
-
-        [NotMapped]
-        public ICollection<Certificate> Certificates { get; set; }
-        [NotMapped]
-        public ICollection<CertificateCourse> CertificateCourses { get; set; }
-
+        
         public Certificate()
         {
         }

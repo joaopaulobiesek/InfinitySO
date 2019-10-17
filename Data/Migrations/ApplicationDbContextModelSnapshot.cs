@@ -447,7 +447,7 @@ namespace InfinitySO.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CourseCertificateId")
+                    b.Property<int>("CertificateCourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProgrammaticContent")
@@ -455,7 +455,7 @@ namespace InfinitySO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseCertificateId");
+                    b.HasIndex("CertificateCourseId");
 
                     b.ToTable("CertificateProgrammatic");
                 });
@@ -1338,7 +1338,7 @@ namespace InfinitySO.Data.Migrations
                 {
                     b.HasOne("InfinitySO.Models.ModelsCertificate.CertificateCourse", "CertificateCourse")
                         .WithMany()
-                        .HasForeignKey("CourseCertificateId")
+                        .HasForeignKey("CertificateCourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

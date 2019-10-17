@@ -264,6 +264,7 @@ namespace InfinitySO
 
             //Start Certificate 
             services.AddScoped<CertificateCourseService>();
+            services.AddScoped<CertificateProgrammaticService>();
             services.AddScoped<CertificateService>();
             //End Certificate           
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using InfinitySO.Models.ModelsCertificate;
+using InfinitySO.Models.ViewModels;
 using InfinitySO.Services.ServicesAdministration;
 using InfinitySO.Services.ServicesCertificate;
 using Microsoft.AspNetCore.Mvc;
@@ -21,14 +22,14 @@ namespace InfinitySO.Controllers.ControllersCertificate
         public async Task<IActionResult> Index()
         {
             var certificateCourses = await _certificateCourseService.FindAllAsync();
-            var viewModel = new CertificateCourse { CertificateCourses = certificateCourses, InitialDate = DateTime.Now, FinalDate = DateTime.Now };
+            var viewModel = new CertificateFormViewModel { CertificateCourses = certificateCourses};
             return View(viewModel);
         }
 
         public async Task<IActionResult> Register()
         {
             var companies = await _companyService.FindAllAsync();
-            var viewModel = new CertificateCourse { Companies = companies, InitialDate = DateTime.Now, FinalDate = DateTime.Now };
+            var viewModel = new CertificateFormViewModel { Companies = companies};
             return View(viewModel);
         }
 
@@ -39,7 +40,7 @@ namespace InfinitySO.Controllers.ControllersCertificate
             if (!ModelState.IsValid)
             {
                 var companies = await _companyService.FindAllAsync();
-                var viewModel = new CertificateCourse { Companies = companies, InitialDate = DateTime.Now, FinalDate = DateTime.Now };
+                var viewModel = new CertificateFormViewModel { Companies = companies/*, InitialDate = DateTime.Now, FinalDate = DateTime.Now*/ };
                 return View(viewModel);
             }
             await _certificateCourseService.InsertAsync(certificateCourse);
