@@ -4,7 +4,7 @@
 }
 
 <div class="row">
-    <div class="col-md-10 mr-auto ml-auto">
+    <div class="col-md-12 mr-auto ml-auto">
         <div class="card ">
             <div class="card-header card-header-rose card-header-text">
                 <div class="card-text">
@@ -19,7 +19,7 @@
                 <div id="div1">
                     <div class="wrapperCert">
                         <div class="certificate">
-                            <h1>Certificado</h1>
+                            <h1><b>CERTIFICADO</b></h1>
                             <p>
                                 Certificamos a participação de @Html.DisplayFor(model => model.Certificate.MainBoard.Name) @Html.DisplayFor(model => model.Certificate.MainBoard.LastName)
                                 no Curso de @Html.DisplayFor(model => model.CertificateCourse.NameCourse), realizado pelo @Html.DisplayFor(model => model.CertificateCourse.Company.CorporateName)
@@ -43,21 +43,26 @@
                 <div id="div2">
                     <div class="wrapperCert">
                         <div class="certificate">
-                            <h4>Conteúdo programático do curso de @Html.DisplayFor(model => model.CertificateCourse.NameCourse)</h4>
-                            @{int i = 1;}
-                            <div>
+                            <h4><b>CONTEÚDO PROGRAMÁTICO DO CURSO DE @Html.DisplayFor(model => model.CertificateCourse.NameCourse)</b></h4>
+                            <div style="display:table;">
+                                @{int i = 1;}
                                 @foreach (var item in Model.CertificateProgrammatics)
                                 {
-                                    @if (i < 13)
+                                    if (Model.CertificateProgrammatics.Count >= 30)
                                     {
-                                        <p>@i @item.ProgrammaticContent</p>
+                                        <p style="font-size:9pt; padding-left: 2em; float: left; width: 30%;"><b>@i</b>. @item.ProgrammaticContent</p>
                                     }
-                                    else
+                                    else if (Model.CertificateProgrammatics.Count >= 11)
                                     {
-                                        <p style="text-align:right">@i @item.ProgrammaticContent</p>
+                                        <p style="font-size:12pt; padding-left: 2em; float: left; width: 45%;"><b>@i</b>. @item.ProgrammaticContent</p>
+                                    }
+                                    else if (Model.CertificateProgrammatics.Count <= 10)
+                                    {
+                                        <p style="font-size:13pt; padding-left: 2em; float: left; width: 80%;"><b>@i</b>. @item.ProgrammaticContent</p>
                                     }
                                     i++;
                                 }
+                                <div style="clear: both;"></div>
                             </div>
                             <h3><b>Total de @Html.DisplayFor(model => model.CertificateCourse.Hour)Horas.</b></h3>
                         </div>
