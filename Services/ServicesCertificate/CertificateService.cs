@@ -1,6 +1,7 @@
 ﻿using InfinitySO.Data;
 using InfinitySO.Models.ModelsAdministration;
 using InfinitySO.Models.ModelsCertificate;
+using InfinitySO.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,10 +29,10 @@ namespace InfinitySO.Services.ServicesCertificate
             return await _context.Certificate.Include(x => x.CertificateCourse).Include(x => x.CertificateCourse.Company).Include(x => x.MainBoard).OrderBy(x => x.MainBoard.Name).ThenBy(x => x.MainBoard.LastName).Where(x => x.CertificateCourseId == id).ToListAsync();
         }
 
-        public async Task InsertAsync(Certificate obj, MainBoard mainBoard)
+        public async Task InsertAsync(CertificateFormViewModel obj, MainBoard mainBoard)
         {
-            _context.Add(obj);
-            _context.Entry(obj).Property("MainBoardId").CurrentValue = mainBoard.Id;
+            _context.Add(obj.Certificate);
+            _context.Entry(obj.Certificate).Property("MainBoardId").CurrentValue = mainBoard.Id;
             await _context.SaveChangesAsync();
         }
     }

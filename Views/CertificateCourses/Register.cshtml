@@ -55,7 +55,7 @@
                     <div class="col-sm-7">
                         <div class="form-group">
                             <label asp-for="CertificateCourse.Value"></label>
-                            <input asp-for="CertificateCourse.Value" class="form-control" />
+                            <input onKeyDown="Mascara(this,Valor);" onKeyPress="Mascara(this,Valor);" onKeyUp="Mascara(this,Valor);" asp-for="CertificateCourse.Value" class="form-control" />
                             <span asp-validation-for="CertificateCourse.Value" class="text-danger"></span>
                         </div>
                     </div>
@@ -87,10 +87,10 @@
                                 <tr>
                                     <th>
                                         <label asp-for="CertificateProgrammatic.ProgrammaticContent" class="form-check-label"></label>
-                                        <input id="DateDueId" asp-for="CertificateProgrammatic.ProgrammaticContent" class="form-control" />
+                                        <input id="ProgrammaticContentId" asp-for="CertificateProgrammatic.ProgrammaticContent" class="form-control" />
                                     </th>
-                                    <th>                                       
-                                        <button style="float:right;" class="btn btn-link btn-info btn-just-icon" type="button" id="ButtonAddBillet" onclick="AddBillet()" disabled="disabled"><i class="material-icons">add_box</i></button>
+                                    <th>
+                                        <button style="float:right;" class="btn btn-link btn-info btn-just-icon" type="button" id="ButtonAddProgrammatic" onclick="AddProgrammatic()"><i class="material-icons">add_box</i></button>
                                     </th>
                                 </tr>
                             </thead>
@@ -100,11 +100,10 @@
                                     <th></th>
                                 </tr>
                             </tfoot>
-                            <tbody id="BilletValuesId"></tbody>
-                            <tbody id="BilletValuesTotalId"></tbody>
+                            <tbody id="ProgrammaticContentsId"></tbody>
                         </table>
                     </div>
-                    <textarea style="display:none;" id="BilletValues"></textarea>
+                    <textarea style="display:none;" asp-for="stringContentProgrammatic" id="ContentProgrammatics"></textarea>
                     <div class="form-group">
                         <hr />
                         <input type="submit" value="Create" class="btn btn-info" />
@@ -116,3 +115,54 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+
+        var Programmatics = new Object();
+        Programmatics.ContentProgrammatic = new Array();
+
+        var ButtonAddProgrammatic = document.getElementById("ButtonAddProgrammatic");
+        var IdContentProgrammatics = document.getElementById("ProgrammaticContentId");
+        var stringContentProgrammatic = document.getElementById("stringContentProgrammatic");
+        var ContentProgrammatics = document.getElementById("ContentProgrammatics");
+        var IdProgrammaticContents = document.getElementById("ProgrammaticContentsId"); //Div responsavel por adicionar tbody
+
+        function AddProgrammatic() {
+            Programmatics.ContentProgrammatic.push({
+                "IdContentProgrammatics": IdContentProgrammatics.value
+            });
+
+            ContentProgrammatics.innerHTML = JSON.stringify(Programmatics.ContentProgrammatic);
+
+            var Programmatic = "<tr>" +
+                "<td>" + IdContentProgrammatics.value + "</td>" +
+                "</tr>";
+            IdProgrammaticContents.innerHTML += Programmatic;
+            IdContentProgrammatics.value = "";
+        }
+    </script>
+    <script type="text/javascript">
+        /*Função Pai de Mascaras*/
+        function Mascara(o, f) {
+            v_obj = o
+            v_fun = f
+            setTimeout("execmascara()", 1)
+        }
+
+        /*Função que Executa os objetos*/
+        function execmascara() {
+            v_obj.value = v_fun(v_obj.value)
+        }
+
+        /*Função que padroniza valor monétario*/
+        function Valor(v) {
+            v = v.replace(/\D/g, "") //Remove tudo o que não é dígito
+            v = v.replace(/^([0-9]{3}\.?){3}-[0-9]{2}$/, "$1.$2");
+            //v=v.replace(/(\d{3})(\d)/g,"$1,$2")
+            v = v.replace(/(\d)(\d{2})$/, "$1.$2") //Coloca ponto antes dos 2 últimos digitos
+            return v
+        }
+
+    </script>
+}

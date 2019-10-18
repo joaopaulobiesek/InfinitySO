@@ -76,11 +76,11 @@ namespace InfinitySO.Controllers.ControllersCertificate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(Certificate certificate, string searchCPF)
+        public async Task<IActionResult> Register(CertificateFormViewModel certificateFormViewModel, string searchCPF)
         {
             var certificateCourses = await _certificateCourseService.FindAllAsync();
-            var certificateCoursesId = await _certificateCourseService.FindByIdAsync(certificate.CertificateCourseId);
-            var certificates = await _certificateService.FindAllIdAsync(certificate.CertificateCourseId);
+            var certificateCoursesId = await _certificateCourseService.FindByIdAsync(certificateFormViewModel.Certificate.CertificateCourseId);
+            var certificates = await _certificateService.FindAllIdAsync(certificateFormViewModel.Certificate.CertificateCourseId);
             var viewModel = new CertificateFormViewModel { CertificateCourses = certificateCourses };
             if (!ModelState.IsValid)
             {
@@ -96,8 +96,8 @@ namespace InfinitySO.Controllers.ControllersCertificate
                 {
                     if (certificates.Count < certificateCoursesId.Amount)
                     {
-                        await _certificateService.InsertAsync(certificate, mainBoards);
-                        return RedirectToAction("Index", new { id = certificate.CertificateCourseId });
+                        await _certificateService.InsertAsync(certificateFormViewModel, mainBoards);
+                        return RedirectToAction("Index", new { id = certificateFormViewModel.Certificate.CertificateCourseId });
                     }
                     else
                     {

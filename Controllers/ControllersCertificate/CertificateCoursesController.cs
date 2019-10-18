@@ -35,7 +35,7 @@ namespace InfinitySO.Controllers.ControllersCertificate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(CertificateCourse certificateCourse)
+        public async Task<IActionResult> Register(CertificateFormViewModel certificateFormViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -43,7 +43,7 @@ namespace InfinitySO.Controllers.ControllersCertificate
                 var viewModel = new CertificateFormViewModel { Companies = companies/*, InitialDate = DateTime.Now, FinalDate = DateTime.Now*/ };
                 return View(viewModel);
             }
-            await _certificateCourseService.InsertAsync(certificateCourse);
+            await _certificateCourseService.InsertAsync(certificateFormViewModel);
             return RedirectToAction(nameof(Index));
         }
     }
