@@ -482,6 +482,45 @@
                         break;
                     }
                 }
+                @foreach (var item in UserClaims)
+                {
+                    if (item.Type == "FullAcess" || item.Type == "SubCategory" || item.Type == "PatrimonyKey" || item.Type == "PatrimonyKeyDescription" ||
+                        item.Type == "Patrimony")
+                    {
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#pagesSupply">
+                                <i class="material-icons">image</i>
+                                <p>
+                                    Suprimento
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="pagesSupply">
+                                <ul class="nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">
+                                            <span class="sidebar-mini"> C </span>
+                                            <span class="sidebar-normal"> Cadastrar Produto </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="Patrimonies" asp-action="Index">
+                                            <span class="sidebar-mini"> P </span>
+                                            <span class="sidebar-normal"> Cadastrar Patrimônio </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" asp-area="" asp-controller="HistoricalPatrimony" asp-action="Index">
+                                            <span class="sidebar-mini"> H </span>
+                                            <span class="sidebar-normal"> Historico do Patrimônio </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        break;
+                    }
+                }
 
                 @foreach (var item in UserClaims)
                 {
