@@ -168,7 +168,7 @@ namespace InfinitySO.Data
             Period per63 = new Period { Semester = sem4, Course = cur10, CodPeriod = "CSTADS3" };
             Period per64 = new Period { Semester = sem5, Course = cur10, CodPeriod = "CSTADS4" };
             Period per65 = new Period { Semester = sem6, Course = cur10, CodPeriod = "CSTADS5" };
-            Period per66 = new Period { Semester = sem7, Course = cur10, CodPeriod = "CSTADS6" }; 
+            Period per66 = new Period { Semester = sem7, Course = cur10, CodPeriod = "CSTADS6" };
             Period per67 = new Period { Semester = sem2, Course = cur11, CodPeriod = "CSTEIP1" };
             Period per68 = new Period { Semester = sem3, Course = cur11, CodPeriod = "CSTEIP2" };
             Period per69 = new Period { Semester = sem4, Course = cur11, CodPeriod = "CSTEIP3" };
@@ -452,10 +452,10 @@ namespace InfinitySO.Data
             SystemController sys12 = new SystemController { Name = "Jornada", NameController = "EmployeeJourney", NameClaim = "Journey", ValueClaim = 5, IsCheck = false };
             SystemController sys13 = new SystemController { Name = "Escala", NameController = "EmployeeScale", NameClaim = "Scale", ValueClaim = 5, IsCheck = false };
             SystemController sys14 = new SystemController { Name = "Ponto eletrônico", NameController = "EmployeeTimePoint", NameClaim = "TimePoint", ValueClaim = 5, IsCheck = false };
-            SystemController sys15 = new SystemController { Name = "SubCategoria", NameController = "PatrimonySubCategory", NameClaim = "SubCategory", ValueClaim = 5, IsCheck = false };
-            SystemController sys16 = new SystemController { Name = "Serial Patrimônio", NameController = "PatrimonyPatrimonyKey", NameClaim = "PatrimonyKey", ValueClaim = 5, IsCheck = false };
-            SystemController sys17 = new SystemController { Name = "Descrição Serial Patrimônio", NameController = "PatrimonyPatrimonyKeyDescription", NameClaim = "PatrimonyKeyDescription", ValueClaim = 5, IsCheck = false };
-            SystemController sys18 = new SystemController { Name = "Patrimônio", NameController = "PatrimonyPatrimony", NameClaim = "Patrimony", ValueClaim = 5, IsCheck = false };
+            SystemController sys15 = new SystemController { Name = "Histórico do Patrimônio", NameController = "PatrimonyHistoricPatrimony", NameClaim = "HistoricPatrimony", ValueClaim = 5, IsCheck = false };
+            SystemController sys16 = new SystemController { Name = "Patrimônio", NameController = "PatrimonyPatrimony", NameClaim = "Patrimony", ValueClaim = 5, IsCheck = false };
+            SystemController sys17 = new SystemController { Name = "Produto", NameController = "PatrimonyProduct", NameClaim = "Product", ValueClaim = 5, IsCheck = false };
+            /*falta 18*/
             SystemController sys19 = new SystemController { Name = "Valor Boleto", NameController = "StudentBilletValue", NameClaim = "BilletValue", ValueClaim = 5, IsCheck = false };
             SystemController sys20 = new SystemController { Name = "Curso", NameController = "StudentCourse", NameClaim = "Course", ValueClaim = 5, IsCheck = false };
             SystemController sys21 = new SystemController { Name = "Período", NameController = "StudentPeriod", NameClaim = "Period", ValueClaim = 5, IsCheck = false };
@@ -463,6 +463,13 @@ namespace InfinitySO.Data
             SystemController sys23 = new SystemController { Name = "Financeiro Estudantil", NameController = "StudentStudentFinancial", NameClaim = "StudentFinancial", ValueClaim = 5, IsCheck = false };
             SystemController sys24 = new SystemController { Name = "Estudante", NameController = "StudentStudent", NameClaim = "Student", ValueClaim = 5, IsCheck = false };
             SystemController sys25 = new SystemController { Name = "Usuário Log-in", NameController = "UserDataLoginUserDataLogin", NameClaim = "UserDataLogin", ValueClaim = 5, IsCheck = false };
+            /*Novo*/
+            SystemController sys26 = new SystemController { Name = "Suprimento", NameController = "AdministrationSupply", NameClaim = "Supply", ValueClaim = 5, IsCheck = false };
+            SystemController sys27 = new SystemController { Name = "Adicionar Suprimento", NameController = "AdministrationSupplyAdd", NameClaim = "SupplyAdd", ValueClaim = 5, IsCheck = false };
+            SystemController sys28 = new SystemController { Name = "Remover Suprimento", NameController = "AdministrationSupplyWithdrawal", NameClaim = "SupplyWithdrawal", ValueClaim = 5, IsCheck = false };
+            SystemController sys29 = new SystemController { Name = "Certificado", NameController = "CertificateCertificate", NameClaim = "Certificate", ValueClaim = 5, IsCheck = false };
+            SystemController sys30 = new SystemController { Name = "Curso Certificado", NameController = "CertificateCertificateCourse", NameClaim = "CertificateCourse", ValueClaim = 5, IsCheck = false };
+            SystemController sys31 = new SystemController { Name = "Certificado Programatico", NameController = "CertificateCertificateProgrammatic", NameClaim = "CertificateProgrammatic", ValueClaim = 5, IsCheck = false };
 
             SystemSubController sub4 = new SystemSubController { SystemController = sys4, Name = "Criar", NameSubController = "AdministrationAddressCreate", NameClaim = "AddressCreate", ValueClaim = 5, IsCheck = false };
             SystemSubController sub5 = new SystemSubController { SystemController = sys4, Name = "Editar", NameSubController = "AdministrationAddressEdit", NameClaim = "AddressEdit", ValueClaim = 5, IsCheck = false };
@@ -497,18 +504,16 @@ namespace InfinitySO.Data
             SystemSubController sub34 = new SystemSubController { SystemController = sys14, Name = "Criar", NameSubController = "EmployeeTimePointCreate", NameClaim = "TimePointCreate", ValueClaim = 5, IsCheck = false };
             SystemSubController sub35 = new SystemSubController { SystemController = sys14, Name = "Editar", NameSubController = "EmployeeTimePointEdit", NameClaim = "TimePointEdit", ValueClaim = 5, IsCheck = false };
             SystemSubController sub36 = new SystemSubController { SystemController = sys14, Name = "Deletar", NameSubController = "EmployeeTimePointDelete", NameClaim = "TimePointDelete", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub37 = new SystemSubController { SystemController = sys15, Name = "Criar", NameSubController = "PatrimonySubCategoryCreate", NameClaim = "SubCategoryCreate", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub38 = new SystemSubController { SystemController = sys15, Name = "Editar", NameSubController = "PatrimonySubCategoryEdit", NameClaim = "SubCategoryEdit", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub39 = new SystemSubController { SystemController = sys15, Name = "Deletar", NameSubController = "PatrimonySubCategoryDelete", NameClaim = "SubCategoryDelete", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub40 = new SystemSubController { SystemController = sys16, Name = "Criar", NameSubController = "PatrimonyPatrimonyKeyCreate", NameClaim = "PatrimonyKeyCreate", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub41 = new SystemSubController { SystemController = sys16, Name = "Editar", NameSubController = "PatrimonyPatrimonyKeyEdit", NameClaim = "PatrimonyKeyEdit", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub42 = new SystemSubController { SystemController = sys16, Name = "Deletar", NameSubController = "PatrimonyPatrimonyKeyDelete", NameClaim = "PatrimonyKeyDelete", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub43 = new SystemSubController { SystemController = sys17, Name = "Criar", NameSubController = "PatrimonyPatrimonyKeyDescriptionCreate", NameClaim = "PatrimonyKeyDescriptionCreate", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub44 = new SystemSubController { SystemController = sys17, Name = "Editar", NameSubController = "PatrimonyPatrimonyKeyDescriptionEdit", NameClaim = "PatrimonyKeyDescriptionEdit", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub45 = new SystemSubController { SystemController = sys17, Name = "Deletar", NameSubController = "PatrimonyPatrimonyKeyDescriptionDelete", NameClaim = "PatrimonyKeyDescriptionDelete", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub46 = new SystemSubController { SystemController = sys18, Name = "Criar", NameSubController = "PatrimonyPatrimonyCreate", NameClaim = "PatrimonyCreate", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub47 = new SystemSubController { SystemController = sys18, Name = "Editar", NameSubController = "PatrimonyPatrimonyEdit", NameClaim = "PatrimonyEdit", ValueClaim = 5, IsCheck = false };
-            SystemSubController sub48 = new SystemSubController { SystemController = sys18, Name = "Deletar", NameSubController = "PatrimonyPatrimonyDelete", NameClaim = "PatrimonyDelete", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub37 = new SystemSubController { SystemController = sys15, Name = "Criar", NameSubController = "PatrimonyHistoricPatrimonyCreate", NameClaim = "HistoricPatrimonyCreate", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub38 = new SystemSubController { SystemController = sys15, Name = "Editar", NameSubController = "PatrimonyHistoricPatrimonyEdit", NameClaim = "HistoricPatrimonyEdit", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub39 = new SystemSubController { SystemController = sys15, Name = "Deletar", NameSubController = "PatrimonyHistoricPatrimonyDelete", NameClaim = "HistoricPatrimonyDelete", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub40 = new SystemSubController { SystemController = sys16, Name = "Criar", NameSubController = "PatrimonyPatrimonyCreate", NameClaim = "PatrimonyCreate", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub41 = new SystemSubController { SystemController = sys16, Name = "Editar", NameSubController = "PatrimonyPatrimonyEdit", NameClaim = "PatrimonyEdit", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub42 = new SystemSubController { SystemController = sys16, Name = "Deletar", NameSubController = "PatrimonyPatrimonyDelete", NameClaim = "PatrimonyDelete", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub43 = new SystemSubController { SystemController = sys17, Name = "Criar", NameSubController = "PatrimonyProductCreate", NameClaim = "ProductCreate", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub44 = new SystemSubController { SystemController = sys17, Name = "Editar", NameSubController = "PatrimonyProductEdit", NameClaim = "ProductEdit", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub45 = new SystemSubController { SystemController = sys17, Name = "Deletar", NameSubController = "PatrimonyProductDelete", NameClaim = "ProductDelete", ValueClaim = 5, IsCheck = false };
+            /*falta 18  46 47 48*/
             SystemSubController sub49 = new SystemSubController { SystemController = sys19, Name = "Criar", NameSubController = "StudentBilletValueCreate", NameClaim = "BilletValueCreate", ValueClaim = 5, IsCheck = false };
             SystemSubController sub50 = new SystemSubController { SystemController = sys19, Name = "Editar", NameSubController = "StudentBilletValueEdit", NameClaim = "BilletValueEdit", ValueClaim = 5, IsCheck = false };
             SystemSubController sub51 = new SystemSubController { SystemController = sys19, Name = "Deletar", NameSubController = "StudentBilletValueDelete", NameClaim = "BilletValueDelete", ValueClaim = 5, IsCheck = false };
@@ -530,12 +535,33 @@ namespace InfinitySO.Data
             SystemSubController sub67 = new SystemSubController { SystemController = sys25, Name = "Criar", NameSubController = "UserDataLoginUserDataLoginCreate", NameClaim = "UserDataLoginCreate", ValueClaim = 5, IsCheck = false };
             SystemSubController sub68 = new SystemSubController { SystemController = sys25, Name = "Editar", NameSubController = "UserDataLoginUserDataLoginEdit", NameClaim = "UserDataLoginEdit", ValueClaim = 5, IsCheck = false };
             SystemSubController sub69 = new SystemSubController { SystemController = sys25, Name = "Deletar", NameSubController = "UserDataLoginUserDataLoginDelete", NameClaim = "UserDataLoginDelete", ValueClaim = 5, IsCheck = false };
+            /*Novo*/
+            SystemSubController sub70 = new SystemSubController { SystemController = sys26, Name = "Criar", NameSubController = "AdministrationSupplyCreate", NameClaim = "SupplyCreate", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub71 = new SystemSubController { SystemController = sys26, Name = "Editar", NameSubController = "AdministrationSupplyEdit", NameClaim = "SupplyEdit", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub72 = new SystemSubController { SystemController = sys26, Name = "Deletar", NameSubController = "AdministrationSupplyDelete", NameClaim = "SupplyDelete", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub73 = new SystemSubController { SystemController = sys27, Name = "Criar", NameSubController = "AdministrationSupplyAddCreate", NameClaim = "SupplyAddCreate", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub74 = new SystemSubController { SystemController = sys27, Name = "Editar", NameSubController = "AdministrationSupplyAddEdit", NameClaim = "SupplyAddEdit", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub75 = new SystemSubController { SystemController = sys27, Name = "Deletar", NameSubController = "AdministrationSupplyAddDelete", NameClaim = "SupplyAddDelete", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub76 = new SystemSubController { SystemController = sys28, Name = "Criar", NameSubController = "AdministrationSupplyWithdrawalCreate", NameClaim = "SupplyWithdrawalCreate", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub77 = new SystemSubController { SystemController = sys28, Name = "Editar", NameSubController = "AdministrationSupplyWithdrawalEdit", NameClaim = "SupplyWithdrawalEdit", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub78 = new SystemSubController { SystemController = sys28, Name = "Deletar", NameSubController = "AdministrationSupplyWithdrawalDelete", NameClaim = "SupplyWithdrawalDelete", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub79 = new SystemSubController { SystemController = sys29, Name = "Criar", NameSubController = "CertificateCertificateCreate", NameClaim = "CertificateCreate", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub80 = new SystemSubController { SystemController = sys29, Name = "Editar", NameSubController = "CertificateCertificateEdit", NameClaim = "CertificateEdit", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub81 = new SystemSubController { SystemController = sys29, Name = "Deletar", NameSubController = "CertificateCertificateDelete", NameClaim = "CertificateDelete", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub82 = new SystemSubController { SystemController = sys30, Name = "Criar", NameSubController = "CertificateCertificateCourseCreate", NameClaim = "CertificateCourseCreate", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub83 = new SystemSubController { SystemController = sys30, Name = "Editar", NameSubController = "CertificateCertificateCourseEdit", NameClaim = "CertificateCourseEdit", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub84 = new SystemSubController { SystemController = sys30, Name = "Deletar", NameSubController = "CertificateCertificateCourseDelete", NameClaim = "CertificateCourseDelete", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub85 = new SystemSubController { SystemController = sys31, Name = "Criar", NameSubController = "CertificateCertificateProgrammaticCreate", NameClaim = "CertificateProgrammaticCreate", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub86 = new SystemSubController { SystemController = sys31, Name = "Editar", NameSubController = "CertificateCertificateProgrammaticEdit", NameClaim = "CertificateProgrammaticEdit", ValueClaim = 5, IsCheck = false };
+            SystemSubController sub87 = new SystemSubController { SystemController = sys31, Name = "Deletar", NameSubController = "CertificateCertificateProgrammaticDelete", NameClaim = "CertificateProgrammaticDelete", ValueClaim = 5, IsCheck = false };
 
-            await _context.SystemController.AddRangeAsync(sys4, sys5, sys6, sys7, sys8, sys9, sys10, sys11, sys12, sys13, sys14, sys15, sys16, sys17, sys19, sys20, sys21, sys22, sys23, sys24, sys25);
+
+            await _context.SystemController.AddRangeAsync(sys4, sys5, sys6, sys7, sys8, sys9, sys10, sys11, sys12, sys13, sys14, sys15, sys16, sys17, /*sys18,*/ sys19, sys20, sys21, sys22, sys23, sys24, sys25, sys26, sys27, sys28, sys29, sys30, sys31);
 
             await _context.SystemSubController.AddRangeAsync(sub4, sub5, sub6, sub7, sub8, sub9, sub10, sub11, sub12, sub13, sub14, sub15, sub16, sub17, sub18, sub19, sub20, sub21, sub22, sub23, sub24, sub25, sub26,
-                                                       sub27, sub28, sub29, sub30, sub31, sub32, sub33, sub34, sub35, sub36, sub37, sub38, sub39, sub40, sub41, sub42, sub43, sub44, sub45, sub46, sub47, sub48,
-                                                       sub49, sub50, sub51, sub52, sub53, sub54, sub55, sub56, sub57, sub58, sub59, sub60, sub61, sub62, sub63, sub64, sub65, sub66, sub67, sub68, sub69);
+                                                       sub27, sub28, sub29, sub30, sub31, sub32, sub33, sub34, sub35, sub36, sub37, sub38, sub39, sub40, sub41, sub42, sub43, sub44, sub45, /*sub46, sub47, sub48,*/
+                                                       sub49, sub50, sub51, sub52, sub53, sub54, sub55, sub56, sub57, sub58, sub59, sub60, sub61, sub62, sub63, sub64, sub65, sub66, sub67, sub68, sub69,
+                                                       sub70, sub71, sub72, sub73, sub74, sub75, sub76, sub77, sub78, sub79, sub80, sub81, sub82, sub83, sub84, sub85, sub86, sub87);
 
             await _context.Department.AddRangeAsync(d1, d2, d3);
 

@@ -1,13 +1,13 @@
-USE InfinitySO23
+USE InfinitySO
 GO
 
-SET IDENTITY_INSERT Department ON
+SET IDENTITY_INSERT CertificateProgrammatic ON
 
-INSERT INTO Department (Id, SectorId, Name )
-SELECT Id,1,Name 
-FROM InfinitySO.dbo.Department;
+INSERT INTO CertificateProgrammatic (Id, CertificateCourseId, ProgrammaticContent)
+SELECT Id,1,ProgrammaticContent
+FROM InfinitySolutions.dbo.CertificateProgrammatic; /*Copia desse banco para o banco do USE*/
 
-SET IDENTITY_INSERT Department OFF
+SET IDENTITY_INSERT CertificateProgrammatic OFF
 GO
 
 

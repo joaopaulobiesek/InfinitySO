@@ -133,7 +133,46 @@ namespace InfinitySO
                 options.AddPolicy("AdministrationSectorEdit", policy => policy.RequireClaim("SectorEdit", "1", "2", "3", "4", "5"));
                 options.AddPolicy("AdministrationSectorDelete", policy => policy.RequireClaim("SectorDelete", "1", "2", "3", "4", "5"));
                 //End ControllersAdministrationSector
+                options.AddPolicy("AdministrationSupply", policy => policy.RequireClaim("Supply", "1", "2", "3", "4", "5"));
+                //Start ControllersAdministrationSupply
+                options.AddPolicy("AdministrationSupplyCreate", policy => policy.RequireClaim("SupplyCreate", "1", "2", "3", "4", "5"));
+                options.AddPolicy("AdministrationSupplyEdit", policy => policy.RequireClaim("SupplyEdit", "1", "2", "3", "4", "5"));
+                options.AddPolicy("AdministrationSupplyDelete", policy => policy.RequireClaim("SupplyDelete", "1", "2", "3", "4", "5"));
+                //End ControllersAdministrationSupply
+                options.AddPolicy("AdministrationSupplyAdd", policy => policy.RequireClaim("SupplyAdd", "1", "2", "3", "4", "5"));
+                //Start ControllersAdministrationSupply
+                options.AddPolicy("AdministrationSupplyAddCreate", policy => policy.RequireClaim("SupplyAddCreate", "1", "2", "3", "4", "5"));
+                options.AddPolicy("AdministrationSupplyAddEdit", policy => policy.RequireClaim("SupplyAddEdit", "1", "2", "3", "4", "5"));
+                options.AddPolicy("AdministrationSupplyAddDelete", policy => policy.RequireClaim("SupplyAddDelete", "1", "2", "3", "4", "5"));
+                //End ControllersAdministrationSupply
+                options.AddPolicy("AdministrationSupplyWithdrawal", policy => policy.RequireClaim("SupplyWithdrawal", "1", "2", "3", "4", "5"));
+                //Start ControllersAdministrationSupply
+                options.AddPolicy("AdministrationSupplyWithdrawalCreate", policy => policy.RequireClaim("SupplyWithdrawalCreate", "1", "2", "3", "4", "5"));
+                options.AddPolicy("AdministrationSupplyWithdrawalEdit", policy => policy.RequireClaim("SupplyWithdrawalEdit", "1", "2", "3", "4", "5"));
+                options.AddPolicy("AdministrationSupplyWithdrawalDelete", policy => policy.RequireClaim("SupplyWithdrawalDelete", "1", "2", "3", "4", "5"));
+                //End ControllersAdministrationSupply
                 //End ControllersAdministration
+
+                //Start ControllersCertificate
+                options.AddPolicy("CertificateCertificate", policy => policy.RequireClaim("Certificate", "1", "2", "3", "4", "5"));
+                //Start ControllersCertificateCertificate
+                options.AddPolicy("CertificateCertificateCreate", policy => policy.RequireClaim("CertificateCreate", "1", "2", "3", "4", "5"));
+                options.AddPolicy("CertificateCertificateEdit", policy => policy.RequireClaim("CertificateEdit", "1", "2", "3", "4", "5"));
+                options.AddPolicy("CertificateCertificateDelete", policy => policy.RequireClaim("CertificateDelete", "1", "2", "3", "4", "5"));
+                //End ControllersCertificateCertificate
+                options.AddPolicy("CertificateCertificateCourse", policy => policy.RequireClaim("CertificateCourse", "1", "2", "3", "4", "5"));
+                //Start ControllersCertificateCourse
+                options.AddPolicy("CertificateCertificateCourseCreate", policy => policy.RequireClaim("CertificateCourseCreate", "1", "2", "3", "4", "5"));
+                options.AddPolicy("CertificateCertificateCourseEdit", policy => policy.RequireClaim("CertificateCourseEdit", "1", "2", "3", "4", "5"));
+                options.AddPolicy("CertificateCertificateCourseDelete", policy => policy.RequireClaim("CertificateCourseDelete", "1", "2", "3", "4", "5"));
+                //End ControllersCertificateCourse
+                options.AddPolicy("CertificateCertificateProgrammatic", policy => policy.RequireClaim("CertificateProgrammatic", "1", "2", "3", "4", "5"));
+                //Start ControllersCertificateProgrammatic
+                options.AddPolicy("CertificateCertificateProgrammaticCreate", policy => policy.RequireClaim("CertificateProgrammaticCreate", "1", "2", "3", "4", "5"));
+                options.AddPolicy("CertificateCertificateProgrammaticEdit", policy => policy.RequireClaim("CertificateProgrammaticEdit", "1", "2", "3", "4", "5"));
+                options.AddPolicy("CertificateCertificateProgrammaticDelete", policy => policy.RequireClaim("CertificateProgrammaticDelete", "1", "2", "3", "4", "5"));
+                //End ControllersCertificateProgrammatic
+                //End ControllersCertificate
 
                 //Start ControllersEmployee
                 options.AddPolicy("EmployeeEmployee", policy => policy.RequireClaim("Employee", "1", "2", "3", "4", "5"));
@@ -163,30 +202,24 @@ namespace InfinitySO
                 //End ControllersEmployee
 
                 //Start ControllersPatrimony
-                options.AddPolicy("PatrimonySubCategory", policy => policy.RequireClaim("SubCategory", "1", "2", "3", "4", "5"));
-                //Start ControllersPatrimonySubCategory
-                options.AddPolicy("PatrimonySubCategoryCreate", policy => policy.RequireClaim("SubCategoryCreate", "1", "2", "3", "4", "5"));
-                options.AddPolicy("PatrimonySubCategoryEdit", policy => policy.RequireClaim("SubCategoryEdit", "1", "2", "3", "4", "5"));
-                options.AddPolicy("PatrimonySubCategoryDelete", policy => policy.RequireClaim("SubCategoryDelete", "1", "2", "3", "4", "5"));
-                //End ControllersPatrimonySubCategory
-                options.AddPolicy("PatrimonyPatrimonyKey", policy => policy.RequireClaim("PatrimonyKey", "1", "2", "3", "4", "5"));
-                //Start ControllersPatrimonyPatrimonyKey
-                options.AddPolicy("PatrimonyPatrimonyKeyCreate", policy => policy.RequireClaim("PatrimonyKeyCreate", "1", "2", "3", "4", "5"));
-                options.AddPolicy("PatrimonyPatrimonyKeyEdit", policy => policy.RequireClaim("PatrimonyKeyEdit", "1", "2", "3", "4", "5"));
-                options.AddPolicy("PatrimonyPatrimonyKeyDelete", policy => policy.RequireClaim("PatrimonyKeyDelete", "1", "2", "3", "4", "5"));
-                //End ControllersPatrimonyPatrimonyKey
-                options.AddPolicy("PatrimonyPatrimonyKeyDescription", policy => policy.RequireClaim("PatrimonyKeyDescription", "1", "2", "3", "4", "5"));
-                //Start ControllersPatrimonyPatrimonyKeyDescription
-                options.AddPolicy("PatrimonyPatrimonyKeyDescriptionCreate", policy => policy.RequireClaim("PatrimonyKeyDescriptionCreate", "1", "2", "3", "4", "5"));
-                options.AddPolicy("PatrimonyPatrimonyKeyDescriptionEdit", policy => policy.RequireClaim("PatrimonyKeyDescriptionEdit", "1", "2", "3", "4", "5"));
-                options.AddPolicy("PatrimonyPatrimonyKeyDescriptionDelete", policy => policy.RequireClaim("PatrimonyKeyDescriptionDelete", "1", "2", "3", "4", "5"));
-                //End ControllersPatrimonyPatrimonyKeyDescription
+                options.AddPolicy("PatrimonyHistoricPatrimony", policy => policy.RequireClaim("HistoricPatrimony", "1", "2", "3", "4", "5"));
+                //Start ControllersPatrimonyHistoricPatrimony
+                options.AddPolicy("PatrimonyHistoricPatrimonyCreate", policy => policy.RequireClaim("HistoricPatrimonyCreate", "1", "2", "3", "4", "5"));
+                options.AddPolicy("PatrimonyHistoricPatrimonyEdit", policy => policy.RequireClaim("HistoricPatrimonyEdit", "1", "2", "3", "4", "5"));
+                options.AddPolicy("PatrimonyHistoricPatrimonyDelete", policy => policy.RequireClaim("HistoricPatrimonyDelete", "1", "2", "3", "4", "5"));
+                //End ControllersPatrimonyHistoricPatrimony
                 options.AddPolicy("PatrimonyPatrimony", policy => policy.RequireClaim("Patrimony", "1", "2", "3", "4", "5"));
                 //Start ControllersPatrimonyPatrimony
                 options.AddPolicy("PatrimonyPatrimonyCreate", policy => policy.RequireClaim("PatrimonyCreate", "1", "2", "3", "4", "5"));
                 options.AddPolicy("PatrimonyPatrimonyEdit", policy => policy.RequireClaim("PatrimonyEdit", "1", "2", "3", "4", "5"));
                 options.AddPolicy("PatrimonyPatrimonyDelete", policy => policy.RequireClaim("PatrimonyDelete", "1", "2", "3", "4", "5"));
                 //End ControllersPatrimonyPatrimony
+                options.AddPolicy("PatrimonyProduct", policy => policy.RequireClaim("PatrimonyProduct", "1", "2", "3", "4", "5"));
+                //Start ControllersPatrimonyProduct
+                options.AddPolicy("PatrimonyProductCreate", policy => policy.RequireClaim("PatrimonyProductCreate", "1", "2", "3", "4", "5"));
+                options.AddPolicy("PatrimonyProductEdit", policy => policy.RequireClaim("PatrimonyProductEdit", "1", "2", "3", "4", "5"));
+                options.AddPolicy("PatrimonyProductDelete", policy => policy.RequireClaim("PatrimonyProductDelete", "1", "2", "3", "4", "5"));
+                //End ControllersPatrimonyProduct            
                 //End ControllersPatrimony
 
                 //Start ControllersStudent
