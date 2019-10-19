@@ -16,17 +16,17 @@ namespace InfinitySO.Models.ModelsEmployee
         [StringLength(5)]
         public string Duration { get; set; }
         [StringLength(5)]
-        public String Input1 { get; set; }
+        public string Input1 { get; set; }
         [StringLength(5)]
-        public String Input2 { get; set; }
+        public string Input2 { get; set; }
         [StringLength(5)]
-        public String Input3 { get; set; }
+        public string Input3 { get; set; }
         [StringLength(5)]
-        public String Input4 { get; set; }
+        public string Input4 { get; set; }
         [StringLength(5)]
-        public String Input5 { get; set; }
+        public string Input5 { get; set; }
         [StringLength(5)]
-        public String Input6 { get; set; }
+        public string Input6 { get; set; }
         [StringLength(5)]
         public string Output1 { get; set; }
         [StringLength(5)]

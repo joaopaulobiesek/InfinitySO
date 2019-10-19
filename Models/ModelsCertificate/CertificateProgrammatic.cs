@@ -12,16 +12,18 @@ namespace InfinitySO.Models.ModelsCertificate
 
         [ForeignKey("CertificateCourse")]
         public int CertificateCourseId { get; set; }
+        public int Cod { get; set; }
         public string ProgrammaticContent { get; set; }
 
         public CertificateProgrammatic()
         {
         }
 
-        public CertificateProgrammatic(int id, CertificateCourse certificateCourse, string programmaticContent)
+        public CertificateProgrammatic(int id, CertificateCourse certificateCourse, int cod, string programmaticContent)
         {
             Id = id;
             CertificateCourse = certificateCourse;
+            Cod = cod;
             ProgrammaticContent = programmaticContent;
         }
     }

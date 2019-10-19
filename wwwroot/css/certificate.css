@@ -21,7 +21,7 @@
     .wrapperCert .certificate {
         width: 1000px;
         height: 600px;
-        border: 1px solid rgba(0, 0, 0, .3);
+        border: none;/*1px solid rgba(0, 0, 0, .3);*/
         background-image: url(../../lib/img/border.png);
         background-size: 1000px 600px;
         font-family: 'Arvo', serif;

@@ -131,6 +131,19 @@ namespace InfinitySO.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Scale",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 60, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scale", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Semester",
                 columns: table => new
                 {
@@ -270,68 +283,6 @@ namespace InfinitySO.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Scale",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 60, nullable: false),
-                    SundayJourneyId = table.Column<int>(nullable: true),
-                    MondayJourneyId = table.Column<int>(nullable: true),
-                    TuesdayJourneyId = table.Column<int>(nullable: true),
-                    WednesdayJourneyId = table.Column<int>(nullable: true),
-                    ThursdayJourneyId = table.Column<int>(nullable: true),
-                    FridayJourneyId = table.Column<int>(nullable: true),
-                    SaturdayJourneyId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Scale", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Scale_Journey_FridayJourneyId",
-                        column: x => x.FridayJourneyId,
-                        principalTable: "Journey",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Scale_Journey_MondayJourneyId",
-                        column: x => x.MondayJourneyId,
-                        principalTable: "Journey",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Scale_Journey_SaturdayJourneyId",
-                        column: x => x.SaturdayJourneyId,
-                        principalTable: "Journey",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Scale_Journey_SundayJourneyId",
-                        column: x => x.SundayJourneyId,
-                        principalTable: "Journey",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Scale_Journey_ThursdayJourneyId",
-                        column: x => x.ThursdayJourneyId,
-                        principalTable: "Journey",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Scale_Journey_TuesdayJourneyId",
-                        column: x => x.TuesdayJourneyId,
-                        principalTable: "Journey",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Scale_Journey_WednesdayJourneyId",
-                        column: x => x.WednesdayJourneyId,
-                        principalTable: "Journey",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Address",
                 columns: table => new
                 {
@@ -413,6 +364,33 @@ namespace InfinitySO.Data.Migrations
                         name: "FK_UserDataLogin_MainBoard_MainBoardId",
                         column: x => x.MainBoardId,
                         principalTable: "MainBoard",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ScaleFormatting",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    JourneyId = table.Column<int>(nullable: false),
+                    ScaleId = table.Column<int>(nullable: false),
+                    Week = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ScaleFormatting", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ScaleFormatting_Journey_JourneyId",
+                        column: x => x.JourneyId,
+                        principalTable: "Journey",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ScaleFormatting_Scale_ScaleId",
+                        column: x => x.ScaleId,
+                        principalTable: "Scale",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -503,6 +481,7 @@ namespace InfinitySO.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CertificateCourseId = table.Column<int>(nullable: false),
+                    Cod = table.Column<int>(nullable: false),
                     ProgrammaticContent = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -1041,39 +1020,14 @@ namespace InfinitySO.Data.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Scale_FridayJourneyId",
-                table: "Scale",
-                column: "FridayJourneyId");
+                name: "IX_ScaleFormatting_JourneyId",
+                table: "ScaleFormatting",
+                column: "JourneyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Scale_MondayJourneyId",
-                table: "Scale",
-                column: "MondayJourneyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Scale_SaturdayJourneyId",
-                table: "Scale",
-                column: "SaturdayJourneyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Scale_SundayJourneyId",
-                table: "Scale",
-                column: "SundayJourneyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Scale_ThursdayJourneyId",
-                table: "Scale",
-                column: "ThursdayJourneyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Scale_TuesdayJourneyId",
-                table: "Scale",
-                column: "TuesdayJourneyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Scale_WednesdayJourneyId",
-                table: "Scale",
-                column: "WednesdayJourneyId");
+                name: "IX_ScaleFormatting_ScaleId",
+                table: "ScaleFormatting",
+                column: "ScaleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sector_DepartmentId",
@@ -1170,6 +1124,9 @@ namespace InfinitySO.Data.Migrations
                 name: "HistoricPatrimony");
 
             migrationBuilder.DropTable(
+                name: "ScaleFormatting");
+
+            migrationBuilder.DropTable(
                 name: "SupplyAdd");
 
             migrationBuilder.DropTable(
@@ -1198,6 +1155,9 @@ namespace InfinitySO.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Patrimony");
+
+            migrationBuilder.DropTable(
+                name: "Journey");
 
             migrationBuilder.DropTable(
                 name: "Supply");
@@ -1231,9 +1191,6 @@ namespace InfinitySO.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Company");
-
-            migrationBuilder.DropTable(
-                name: "Journey");
 
             migrationBuilder.DropTable(
                 name: "Department");

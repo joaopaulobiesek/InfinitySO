@@ -21,7 +21,7 @@
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-md-6 col-sm-3">
+                    @*<div class="col-lg-5 col-md-6 col-sm-3">
                         <select asp-for="SundayJourney" asp-items="@(new SelectList(Model.Journeys, "Id", "Name"))" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Sunday">
                             <option selected value="">Sunday</option>
                         </select>
@@ -62,7 +62,7 @@
                             <option selected value="">Saturday</option>
                         </select>
                         <span asp-validation-for="SaturdayJourney" class="text-danger"></span>
-                    </div><br />
+                    </div><br />*@
                     <div class="form-group">
                         <hr />
                         <input type="submit" value="Create" class="btn btn-info" />

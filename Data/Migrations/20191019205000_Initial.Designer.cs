@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InfinitySO.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191017195533_Initial")]
+    [Migration("20191019205000_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -452,6 +451,9 @@ namespace InfinitySO.Data.Migrations
                     b.Property<int>("CertificateCourseId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Cod")
+                        .HasColumnType("int");
+
                     b.Property<string>("ProgrammaticContent")
                         .HasColumnType("nvarchar(max)");
 
@@ -572,49 +574,39 @@ namespace InfinitySO.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FridayJourneyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MondayJourneyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.Property<int?>("SaturdayJourneyId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Scale");
+                });
+
+            modelBuilder.Entity("InfinitySO.Models.ModelsEmployee.ScaleFormatting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("JourneyId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SundayJourneyId")
+                    b.Property<int>("ScaleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ThursdayJourneyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TuesdayJourneyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WednesdayJourneyId")
+                    b.Property<int>("Week")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FridayJourneyId");
+                    b.HasIndex("JourneyId");
 
-                    b.HasIndex("MondayJourneyId");
+                    b.HasIndex("ScaleId");
 
-                    b.HasIndex("SaturdayJourneyId");
-
-                    b.HasIndex("SundayJourneyId");
-
-                    b.HasIndex("ThursdayJourneyId");
-
-                    b.HasIndex("TuesdayJourneyId");
-
-                    b.HasIndex("WednesdayJourneyId");
-
-                    b.ToTable("Scale");
+                    b.ToTable("ScaleFormatting");
                 });
 
             modelBuilder.Entity("InfinitySO.Models.ModelsEmployee.TimePoint", b =>
@@ -1366,35 +1358,19 @@ namespace InfinitySO.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("InfinitySO.Models.ModelsEmployee.Scale", b =>
+            modelBuilder.Entity("InfinitySO.Models.ModelsEmployee.ScaleFormatting", b =>
                 {
-                    b.HasOne("InfinitySO.Models.ModelsEmployee.Journey", "FridayJourney")
+                    b.HasOne("InfinitySO.Models.ModelsEmployee.Journey", "Journey")
                         .WithMany()
-                        .HasForeignKey("FridayJourneyId");
+                        .HasForeignKey("JourneyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("InfinitySO.Models.ModelsEmployee.Journey", "MondayJourney")
+                    b.HasOne("InfinitySO.Models.ModelsEmployee.Scale", "Scale")
                         .WithMany()
-                        .HasForeignKey("MondayJourneyId");
-
-                    b.HasOne("InfinitySO.Models.ModelsEmployee.Journey", "SaturdayJourney")
-                        .WithMany()
-                        .HasForeignKey("SaturdayJourneyId");
-
-                    b.HasOne("InfinitySO.Models.ModelsEmployee.Journey", "SundayJourney")
-                        .WithMany()
-                        .HasForeignKey("SundayJourneyId");
-
-                    b.HasOne("InfinitySO.Models.ModelsEmployee.Journey", "ThursdayJourney")
-                        .WithMany()
-                        .HasForeignKey("ThursdayJourneyId");
-
-                    b.HasOne("InfinitySO.Models.ModelsEmployee.Journey", "TuesdayJourney")
-                        .WithMany()
-                        .HasForeignKey("TuesdayJourneyId");
-
-                    b.HasOne("InfinitySO.Models.ModelsEmployee.Journey", "WednesdayJourney")
-                        .WithMany()
-                        .HasForeignKey("WednesdayJourneyId");
+                        .HasForeignKey("ScaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("InfinitySO.Models.ModelsEmployee.TimePoint", b =>

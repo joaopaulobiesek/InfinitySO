@@ -114,6 +114,7 @@ namespace InfinitySO.Areas.Identity.Pages.Account
             await _userManager.AddClaimAsync(app, new Claim("Employee", "5"));
             await _userManager.AddClaimAsync(app, new Claim("Journey", "5"));
             await _userManager.AddClaimAsync(app, new Claim("Scale", "5"));
+            await _userManager.AddClaimAsync(app, new Claim("ScaleFormatting", "5"));
             await _userManager.AddClaimAsync(app, new Claim("TimePoint", "5"));
             await _userManager.AddClaimAsync(app, new Claim("HistoricPatrimony", "5"));
             await _userManager.AddClaimAsync(app, new Claim("Patrimony", "5"));
@@ -173,6 +174,9 @@ namespace InfinitySO.Areas.Identity.Pages.Account
             await _userManager.AddClaimAsync(app, new Claim("ScaleCreate", "5"));
             await _userManager.AddClaimAsync(app, new Claim("ScaleEdit", "5"));
             await _userManager.AddClaimAsync(app, new Claim("ScaleDelete", "5"));
+            await _userManager.AddClaimAsync(app, new Claim("ScaleFormattingCreate", "5"));
+            await _userManager.AddClaimAsync(app, new Claim("ScaleFormattingEdit", "5"));
+            await _userManager.AddClaimAsync(app, new Claim("ScaleFormattingDelete", "5"));
             await _userManager.AddClaimAsync(app, new Claim("TimePointCreate", "5"));
             await _userManager.AddClaimAsync(app, new Claim("TimePointEdit", "5"));
             await _userManager.AddClaimAsync(app, new Claim("TimePointDelete", "5"));

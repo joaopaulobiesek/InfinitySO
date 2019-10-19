@@ -14,27 +14,6 @@ namespace InfinitySO.Models.ModelsEmployee
         [Required]
         [StringLength(60)]
         public string Name { get; set; }
-        public Journey SundayJourney { get; set; }
-        public Journey MondayJourney { get; set; }
-        public Journey TuesdayJourney { get; set; }
-        public Journey WednesdayJourney { get; set; }
-        public Journey ThursdayJourney { get; set; }
-        public Journey FridayJourney { get; set; }
-        public Journey SaturdayJourney { get; set; }
-        //[ForeignKey("Journey")]
-        //public int SundayJourneyId { get; set; }
-        //[ForeignKey("Journey")]
-        //public int MondayJourneyId { get; set; }
-        //[ForeignKey("Journey")]
-        //public int TuesdayJourneyId { get; set; }
-        //[ForeignKey("Journey")]
-        //public int WednesdayJourneyId { get; set; }
-        //[ForeignKey("Journey")]
-        //public int ThursdayJourneyId { get; set; }
-        //[ForeignKey("Journey")]
-        //public int FridayJourneyId { get; set; }
-        //[ForeignKey("Journey")]
-        //public int SaturdayJourneyId { get; set; }
 
         [NotMapped]
         public ICollection<Employee> Employees { get; set; } = new List<Employee>();
@@ -45,17 +24,10 @@ namespace InfinitySO.Models.ModelsEmployee
         {
         }
 
-        public Scale(int id, string name, Journey sundayJourney, Journey mondayJourney, Journey tuesdayJourney, Journey wednesdayJourney, Journey thursdayJourney, Journey fridayJourney, Journey saturdayJourney)
+        public Scale(int id, string name)
         {
             Id = id;
             Name = name;
-            SundayJourney = sundayJourney;
-            MondayJourney = mondayJourney;
-            TuesdayJourney = tuesdayJourney;
-            WednesdayJourney = wednesdayJourney;
-            ThursdayJourney = thursdayJourney;
-            FridayJourney = fridayJourney;
-            SaturdayJourney = saturdayJourney;
         }
 
         public string TotalTime(DateTime initial, DateTime final)

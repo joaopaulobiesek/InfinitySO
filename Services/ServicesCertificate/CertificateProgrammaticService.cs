@@ -18,7 +18,7 @@ namespace InfinitySO.Services.ServicesCertificate
         }
         public async Task<List<CertificateProgrammatic>> FindAllIdAsync(int id)
         {
-            return await _context.CertificateProgrammatic.Include(x => x.CertificateCourse).OrderBy(x => x.ProgrammaticContent).Where(x => x.CertificateCourseId == id).ToListAsync();
+                return await _context.CertificateProgrammatic.Include(x => x.CertificateCourse).Where(x => x.CertificateCourseId == id).OrderBy(x => x.Cod).ThenBy(x => x.ProgrammaticContent).ToListAsync();
         }
     }
 }

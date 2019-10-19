@@ -193,6 +193,12 @@ namespace InfinitySO
                 options.AddPolicy("EmployeeScaleEdit", policy => policy.RequireClaim("ScaleEdit", "1", "2", "3", "4", "5"));
                 options.AddPolicy("EmployeeScaleDelete", policy => policy.RequireClaim("ScaleDelete", "1", "2", "3", "4", "5"));
                 //End ControllersEmployeeScale
+                options.AddPolicy("EmployeeScaleFormatting", policy => policy.RequireClaim("ScaleFormatting", "1", "2", "3", "4", "5"));
+                //Start ControllersEmployeeScaleFormatting
+                options.AddPolicy("EmployeeScaleFormattingCreate", policy => policy.RequireClaim("ScaleFormattingCreate", "1", "2", "3", "4", "5"));
+                options.AddPolicy("EmployeeScaleFormattingEdit", policy => policy.RequireClaim("ScaleFormattingEdit", "1", "2", "3", "4", "5"));
+                options.AddPolicy("EmployeeScaleFormattingDelete", policy => policy.RequireClaim("ScaleFormattingDelete", "1", "2", "3", "4", "5"));
+                //End ControllersEmployeeScaleFormatting
                 options.AddPolicy("EmployeeTimePoint", policy => policy.RequireClaim("TimePoint", "1", "2", "3", "4", "5"));
                 //Start ControllersEmployeeTimePoint
                 options.AddPolicy("EmployeeTimePointCreate", policy => policy.RequireClaim("TimePointCreate", "1", "2", "3", "4", "5"));

@@ -45,6 +45,7 @@ namespace InfinitySO.Data
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Journey> Journey { get; set; }
         public DbSet<Scale> Scale { get; set; }
+        public DbSet<ScaleFormatting> ScaleFormatting { get; set; }
         public DbSet<TimePoint> TimePoint { get; set; }
         //End Employee
 
