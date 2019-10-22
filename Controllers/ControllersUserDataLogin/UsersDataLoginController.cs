@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using InfinitySO.Models.JsonModels;
 using InfinitySO.Models.ModelsUserDataLogin;
 using InfinitySO.Models.ViewModels;
 using InfinitySO.Services.ServicesAdministration;
@@ -29,8 +32,32 @@ namespace InfinitySO.Controllers.ControllersUserDataLogin
             _systemSubControllerService = systemSubControllerService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetName(string term)
+        {
+            if (term.Length > 3)
+            {
+                List<JsonAutoCompeteMainBoard> list = new List<JsonAutoCompeteMainBoard>();
+                var ListNames = await _mainBoardService.FindAllAsync();
+                foreach (var item in ListNames)
+                {
+                    var name = RemoveAccents(item.Name) + " " + RemoveAccents(item.LastName) + " - CPF: " + item.CPF.Trim().Replace(".", "").Replace("-", "");
+                    list.Add(new JsonAutoCompeteMainBoard() { Name = name });
+                }
+                var result = (from N in list where N.Name.Contains(RemoveAccents(term.ToUpper())) select new { Value = N.Name });
+                return Json(result);
+            }
+            else
+            {
+                return Json("");
+            }
+        }
+
         public IActionResult Index()
         {
+            /*var userDataLogins = await _userDataLoginService.FindAllAppAsync();
+            var viewModel = new ApplicationUser { ApplicationUsers = userDataLogins };
+            return View(viewModel);*/
             return View();
         }
 
@@ -45,18 +72,38 @@ namespace InfinitySO.Controllers.ControllersUserDataLogin
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UserDataLogin userDataLogin)
+        public async Task<IActionResult> Create(UserDataLogin userDataLogin, string searchCPF)
         {
+            var mainBoard = await _mainBoardService.FindAllAsync();
+            var systemController = await _systemControllerService.FindAllAsync();
+            var systemSubController = await _systemSubControllerService.FindAllAsync();
+            var viewModel = new UserDataLogin { MainBoards = mainBoard, SystemControllers = systemController, SystemSubControllers = systemSubController };
             if (!ModelState.IsValid)
             {
-                var mainBoard = await _mainBoardService.FindAllAsync();
-                var systemController = await _systemControllerService.FindAllAsync();
-                var systemSubController = await _systemSubControllerService.FindAllAsync();
-                var viewModel = new UserDataLogin { MainBoards = mainBoard, SystemControllers = systemController, SystemSubControllers = systemSubController };
                 return View(viewModel);
             }
-            await _userDataLoginService.InsertAsync(userDataLogin);
-            return RedirectToAction(nameof(Create));
+            try
+            {
+                string[] cpfs = searchCPF.Split("- CPF: ");
+                string cpf = cpfs[1].Trim().Replace(".", "").Replace("-", "");
+                cpf = Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
+                var mainBoards = await _mainBoardService.FindByCPFAsync(cpf);
+                if (mainBoards != null)
+                {
+
+                    await _userDataLoginService.InsertAsync(userDataLogin, mainBoards);
+                    return RedirectToAction(nameof(Create));
+                }
+                else
+                {
+                    ViewData["Error"] = "Erro ao tentar carregar informações, tente novamente mais tarde!";
+                    return View(viewModel);
+                }
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public IActionResult Error(string message)
@@ -67,6 +114,21 @@ namespace InfinitySO.Controllers.ControllersUserDataLogin
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             };
             return View(viewModel);
+        }
+
+        private string RemoveAccents(string texto)
+        {
+            string s = texto.Normalize(NormalizationForm.FormD);
+            StringBuilder sb = new StringBuilder();
+            for (int k = 0; k < s.Length; k++)
+            {
+                UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(s[k]);
+                if (uc != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(s[k]);
+                }
+            }
+            return sb.ToString();
         }
     }
 }

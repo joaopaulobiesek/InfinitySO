@@ -229,7 +229,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="UsersDataLogin" asp-action="Create">
+                                        <a class="nav-link" asp-area="" asp-controller="UsersDataLogin" asp-action="Index">
                                             <span class="sidebar-mini"> E </span>
                                             <span class="sidebar-normal"> UserDataLogin </span>
                                         </a>
@@ -241,8 +241,10 @@
                 }
                 @foreach (var item in UserClaims)
                 {
-                    if (item.Type == "FullAcess" || item.Type == "UserDataLogin" || item.Type == "Department" || item.Type == "Sector" ||
-                        item.Type == "Employee" || item.Type == "Company")
+                    if (item.Type == "FullAcess" && Convert.ToInt32(item.Value) > 0 || item.Type == "UserDataLogin" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "Department" && Convert.ToInt32(item.Value) > 0 || item.Type == "Sector" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "Employee" && Convert.ToInt32(item.Value) > 0 || item.Type == "Company" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "Supply" && Convert.ToInt32(item.Value) > 0)
                     {
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" href="#pagesAdministration">
@@ -254,127 +256,151 @@
                             </a>
                             <div class="collapse" id="pagesAdministration">
                                 <ul class="nav">
-                                    <li class="nav-item ">
-                                        <a class="nav-link" data-toggle="collapse" href="#pagesAdministrationDepart">
-                                            <i class="material-icons">image</i>
-                                            <p>
-                                                Departamento
-                                                <b class="caret"></b>
-                                            </p>
-                                        </a>
-                                        <div class="collapse" id="pagesAdministrationDepart">
-                                            <ul class="nav">
-                                                <li class="nav-item ">
-                                                    <a class="nav-link" asp-area="" asp-controller="Departments" asp-action="Index">
-                                                        <span class="sidebar-mini"> D </span>
-                                                        <span class="sidebar-normal"> Departamento </span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item ">
-                                                    <a class="nav-link" asp-area="" asp-controller="Sectors" asp-action="Index">
-                                                        <span class="sidebar-mini"> S </span>
-                                                        <span class="sidebar-normal"> Setor </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="UsersDataLogin" asp-action="Create">
-                                            <span class="sidebar-mini"> A </span>
-                                            <span class="sidebar-normal"> Cadastrar Acesso </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="Companies" asp-action="Index">
-                                            <span class="sidebar-mini"> E </span>
-                                            <span class="sidebar-normal"> Cadastrar Empresa </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="CertificateCourses" asp-action="Index">
-                                            <span class="sidebar-mini"> C </span>
-                                            <span class="sidebar-normal"> Emissão de Certificados </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">
-                                            <span class="sidebar-mini"> E </span>
-                                            <span class="sidebar-normal"> Espaço do Local </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="Employees" asp-action="Index">
-                                            <span class="sidebar-mini"> F </span>
-                                            <span class="sidebar-normal"> Funcionário </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="Places" asp-action="Index">
-                                            <span class="sidebar-mini"> L </span>
-                                            <span class="sidebar-normal"> Local </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="MainBoards" asp-action="Register">
-                                            <span class="sidebar-mini"> P </span>
-                                            <span class="sidebar-normal"> Pessoa Fisica </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="Supplies" asp-action="Index">
-                                            <span class="sidebar-mini"> S </span>
-                                            <span class="sidebar-normal"> Suprimento </span>
-                                        </a>
-                                    </li>
+                                    @foreach (var item2 in UserClaims)
+                                    {
+                                        if (item2.Type == "UserDataLogin" && Convert.ToInt32(item2.Value) > 0)
+                                        {
+                                            <li class="nav-item ">
+                                                <a class="nav-link" asp-area="" asp-controller="UsersDataLogin" asp-action="Index">
+                                                    <span class="sidebar-mini"> A </span>
+                                                    <span class="sidebar-normal"> Cadastrar Acesso </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    @foreach (var item2 in UserClaims)
+                                    {
+                                        if (item2.Type == "Company" && Convert.ToInt32(item2.Value) > 0)
+                                        {
+                                            <li class="nav-item ">
+                                                <a class="nav-link" asp-area="" asp-controller="Companies" asp-action="Index">
+                                                    <span class="sidebar-mini"> E </span>
+                                                    <span class="sidebar-normal"> Cadastrar Empresa </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    @foreach (var item2 in UserClaims)
+                                    {
+                                        if (item2.Type == "Certificate" && Convert.ToInt32(item2.Value) > 0)
+                                        {
+                                            <li class="nav-item ">
+                                                <a class="nav-link" asp-area="" asp-controller="CertificateCourses" asp-action="Index">
+                                                    <span class="sidebar-mini"> C </span>
+                                                    <span class="sidebar-normal"> Emissão de Certificados </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    @foreach (var item2 in UserClaims)
+                                    {
+                                        if (item2.Type == "Category" && Convert.ToInt32(item2.Value) > 0)
+                                        {
+                                            <li class="nav-item ">
+                                                <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">
+                                                    <span class="sidebar-mini"> E </span>
+                                                    <span class="sidebar-normal"> Espaço do Local </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    @foreach (var item2 in UserClaims)
+                                    {
+                                        if (item2.Type == "Employee" && Convert.ToInt32(item2.Value) > 0)
+                                        {
+                                            <li class="nav-item ">
+                                                <a class="nav-link" asp-area="" asp-controller="Employees" asp-action="Index">
+                                                    <span class="sidebar-mini"> F </span>
+                                                    <span class="sidebar-normal"> Funcionário </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    @foreach (var item2 in UserClaims)
+                                    {
+                                        if (item2.Type == "Place" && Convert.ToInt32(item2.Value) > 0)
+                                        {
+                                            <li class="nav-item ">
+                                                <a class="nav-link" asp-area="" asp-controller="Places" asp-action="Index">
+                                                    <span class="sidebar-mini"> L </span>
+                                                    <span class="sidebar-normal"> Local </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    @foreach (var item2 in UserClaims)
+                                    {
+                                        if (item2.Type == "MainBoard" && Convert.ToInt32(item2.Value) > 0)
+                                        {
+                                            <li class="nav-item ">
+                                                <a class="nav-link" asp-area="" asp-controller="MainBoards" asp-action="Register">
+                                                    <span class="sidebar-mini"> P </span>
+                                                    <span class="sidebar-normal"> Pessoa Fisica </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    @foreach (var item2 in UserClaims)
+                                    {
+                                        if (item2.Type == "Supply" && Convert.ToInt32(item2.Value) > 0)
+                                        {
+                                            <li class="nav-item ">
+                                                <a class="nav-link" asp-area="" asp-controller="Supplies" asp-action="Index">
+                                                    <span class="sidebar-mini"> S </span>
+                                                    <span class="sidebar-normal"> Suprimento </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
                             </div>
                         </li>
                         break;
                     }
                 }
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#pagesClass">
-                        <i class="material-icons">image</i>
-                        <p>
-                            Turmas
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesClass">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" asp-area="" asp-controller="Students" asp-action="Index">
-                                    <span class="sidebar-mini"> A </span>
-                                    <span class="sidebar-normal"> Cadastrar Aluno </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#pagesCall">
-                        <i class="material-icons">image</i>
-                        <p>
-                            Chamados
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesCall">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" asp-area="" asp-controller="" asp-action="">
-                                    <span class="sidebar-mini"> E </span>
-                                    <span class="sidebar-normal"> Exemplo </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @*<li class="nav-item ">
+                        <a class="nav-link" data-toggle="collapse" href="#pagesClass">
+                            <i class="material-icons">image</i>
+                            <p>
+                                Turmas
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="pagesClass">
+                            <ul class="nav">
+                                <li class="nav-item ">
+                                    <a class="nav-link" asp-area="" asp-controller="Students" asp-action="Index">
+                                        <span class="sidebar-mini"> A </span>
+                                        <span class="sidebar-normal"> Cadastrar Aluno </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" data-toggle="collapse" href="#pagesCall">
+                            <i class="material-icons">image</i>
+                            <p>
+                                Chamados
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="pagesCall">
+                            <ul class="nav">
+                                <li class="nav-item ">
+                                    <a class="nav-link" asp-area="" asp-controller="" asp-action="">
+                                        <span class="sidebar-mini"> E </span>
+                                        <span class="sidebar-normal"> Exemplo </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>*@
                 @foreach (var item in UserClaims)
                 {
-                    if (item.Type == "FullAcess" || item.Type == "Student" || item.Type == "StudentCreate" || item.Type == "StudentEdit" ||
-                        item.Type == "StudentDelete")
+                    if (item.Type == "FullAcess" && Convert.ToInt32(item.Value) > 0 || item.Type == "Student" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "StudentCreate" && Convert.ToInt32(item.Value) > 0 || item.Type == "StudentEdit" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "StudentDelete" && Convert.ToInt32(item.Value) > 0)
                     {
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" href="#pagesStudent">
@@ -412,8 +438,9 @@
                 }
                 @foreach (var item in UserClaims)
                 {
-                    if (item.Type == "FullAcess" || item.Type == "StudentFinancial" || item.Type == "StudentFinancialCreate" || item.Type == "StudentFinancialEdit" ||
-                        item.Type == "StudentFinancialDelete")
+                    if (item.Type == "FullAcess" && Convert.ToInt32(item.Value) > 0 || item.Type == "StudentFinancial" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "StudentFinancialCreate" && Convert.ToInt32(item.Value) > 0 || item.Type == "StudentFinancialEdit" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "StudentFinancialDelete" && Convert.ToInt32(item.Value) > 0)
                     {
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" href="#pagesFinancial">
@@ -445,8 +472,8 @@
                 }
                 @foreach (var item in UserClaims)
                 {
-                    if (item.Type == "FullAcess" || item.Type == "SubCategory" || item.Type == "PatrimonyKey" || item.Type == "PatrimonyKeyDescription" ||
-                        item.Type == "Patrimony")
+                    if (item.Type == "FullAcess" && Convert.ToInt32(item.Value) > 0 || item.Type == "HistoricPatrimony" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "Patrimony" && Convert.ToInt32(item.Value) > 0 || item.Type == "PatrimonyProduct" && Convert.ToInt32(item.Value) > 0)
                     {
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" href="#pagesPatrimony">
@@ -484,48 +511,9 @@
                 }
                 @foreach (var item in UserClaims)
                 {
-                    if (item.Type == "FullAcess" || item.Type == "SubCategory" || item.Type == "PatrimonyKey" || item.Type == "PatrimonyKeyDescription" ||
-                        item.Type == "Patrimony")
-                    {
-                        <li class="nav-item ">
-                            <a class="nav-link" data-toggle="collapse" href="#pagesSupply">
-                                <i class="material-icons">image</i>
-                                <p>
-                                    Suprimento
-                                    <b class="caret"></b>
-                                </p>
-                            </a>
-                            <div class="collapse" id="pagesSupply">
-                                <ul class="nav">
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">
-                                            <span class="sidebar-mini"> C </span>
-                                            <span class="sidebar-normal"> Cadastrar Produto </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="Patrimonies" asp-action="Index">
-                                            <span class="sidebar-mini"> P </span>
-                                            <span class="sidebar-normal"> Cadastrar Patrimônio </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" asp-area="" asp-controller="HistoricalPatrimony" asp-action="Index">
-                                            <span class="sidebar-mini"> H </span>
-                                            <span class="sidebar-normal"> Historico do Patrimônio </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        break;
-                    }
-                }
-
-                @foreach (var item in UserClaims)
-                {
-                    if (item.Type == "FullAcess" || item.Type == "TimePoint" || item.Type == "TimePointCreate" || item.Type == "TimePointEdit" ||
-                        item.Type == "TimePointDelete")
+                    if (item.Type == "FullAcess" && Convert.ToInt32(item.Value) > 0 || item.Type == "TimePoint" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "TimePointCreate" && Convert.ToInt32(item.Value) > 0 || item.Type == "TimePointEdit" && Convert.ToInt32(item.Value) > 0
+                        || item.Type == "TimePointDelete" && Convert.ToInt32(item.Value) > 0)
                     {
                         <li class="nav-item ">
                             <a class="nav-link" data-toggle="collapse" href="#pagesPoint">

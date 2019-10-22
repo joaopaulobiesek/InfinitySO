@@ -14,16 +14,13 @@
                 <!--Start-->
                 <form asp-action="Create">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select asp-for="MainBoardId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Name">
-                            <option selected value="">Usuário</option>
-                            @foreach (var item in Model.MainBoards)
-                            {
-                                <option value="@item.Id">@item.Name @item.LastName - E-mail: @item.Email</option>
-                            }
-                        </select>
-                        <span asp-validation-for="MainBoardId" class="text-danger"></span>
-                    </div><br />
+                    <div class="text-danger">@ViewData["Error"]</div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label>Aluno:</label>
+                            <input id="searchCPF" name="searchCPF" type="text" class="form-control">
+                        </div>
+                    </div>
                     <div class="col-sm-7">
                         <div class="form-group">
                             <label asp-for="PasswordUser"></label>
@@ -101,3 +98,11 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+    $("#searchCPF").autocomplete({
+        source: '@Url.Action("GetName","UsersDataLogin")'
+    });
+    </script>
+}
