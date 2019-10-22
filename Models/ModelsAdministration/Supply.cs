@@ -1,21 +1,34 @@
 ﻿using InfinitySO.Models.Enums;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace InfinitySO.Models.ModelsAdministration
 {
     public class Supply
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Display(Name = "Unidade de Medida")]
         public MeasureType MeasureType { get; set; }
+        [Display(Name = "Categoria")]
         public ProductCategory ProductCategory { get; set; }
+        [Display(Name = "Nome do suprimento")]
         public string Name { get; set; }
+        [Display(Name = "Descrição")]
         public string Description { get; set; }
+        [Display(Name = "Valor da Medida")]
         public double ValueMeasure { get; set; }
+        [Display(Name = "Quantidade minima para baixa de estoque")]
         public double MinimumOrderQuantity { get; set; }
+        [Display(Name = "Ativa Produto")]
         public bool ActiveSupply { get; set; }
         public ICollection<SupplyAdd> AddSupplies { get; set; } = new List<SupplyAdd>();
         public ICollection<SupplyWithdrawal> SupplyWithdrawals { get; set; } = new List<SupplyWithdrawal>();
+        [NotMapped]
+        public ICollection<Supply> Supplies { get; set; } = new List<Supply>();
 
         public Supply()
         {

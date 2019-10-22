@@ -24,34 +24,47 @@
                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                                <th>@Html.DisplayNameFor(model => model.ValueMeasure)</th>
+                                <th>@Html.DisplayNameFor(model => model.MinimumOrderQuantity)</th>
+                                <th>@Html.DisplayNameFor(model => model.ActiveSupply)</th>
                                 <th class="disabled-sorting text-right">Actions</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                                <th>@Html.DisplayNameFor(model => model.ValueMeasure)</th>
+                                <th>@Html.DisplayNameFor(model => model.MinimumOrderQuantity)</th>
+                                <th>@Html.DisplayNameFor(model => model.ActiveSupply)</th>
                                 <th class="disabled-sorting text-right">Actions</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="text-right">
-                                    <a asp-action="Edit" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
-                                    <a asp-action="Details"  class="btn btn-link btn-warning btn-just-icon details"><i class="material-icons">dvr</i></a>
-                                    <a asp-action="Delete"  class="btn btn-link btn-danger btn-just-icon remove" style="pointer-events: none;"><i class="material-icons">close</i></a>
-                                </td>
-                            </tr>
+                            @foreach (var item in Model.Supplies)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ValueMeasure)
+                                        @Html.DisplayFor(modelItem => item.MeasureType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MinimumOrderQuantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ActiveSupply)
+                                    </td>
+                                    <td class="text-right">
+                                        <a asp-controller="SupplyAdds" asp-action="Index" asp-route-id="@item.Id" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">add_circle</i></a>
+                                        <a asp-controller="SupplyWithdrawals" asp-action="Index" asp-route-id="@item.Id" class="btn btn-link btn-danger btn-just-icon edit"><i class="material-icons">remove_circle</i></a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
