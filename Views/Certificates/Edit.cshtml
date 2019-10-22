@@ -1,0 +1,61 @@
+﻿@model CertificateFormViewModel
+@{
+    ViewData["Title"] = "Create Certificate";
+}
+<div class="row">
+    <div class="col-md-10 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Edit">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="text-danger">@ViewData["Error"]</div>
+                    <input type="hidden" asp-for="Certificate.MainBoardId" />
+                    <input type="hidden" asp-for="Certificate.Id" />
+                    <input type="hidden" asp-for="Certificate.CertificateCourseId" />
+                    <h6> @Html.DisplayNameFor(model => model.CertificateCourse.NameCourse)</h6>
+                    <p class="text-secondary">
+                        @Html.DisplayFor(model => model.CertificateCourse.Company.FantasyName) - @Html.DisplayFor(model => model.CertificateCourse.NameSignature)
+                        - CPF: @Html.DisplayFor(model => model.CertificateCourse.NameCPF) - @Html.DisplayFor(model => model.CertificateCourse.NameCourse)
+                        - De: @Html.DisplayFor(model => model.CertificateCourse.InitialDate) a @Html.DisplayFor(model => model.CertificateCourse.FinalDate)
+                        - @Html.DisplayFor(model => model.CertificateCourse.Hour) h.
+                    </p>
+                    <h6> @Html.DisplayNameFor(model => model.Certificate.MainBoard.Name)</h6>
+                    <p class="text-secondary">@Html.DisplayFor(model => model.Certificate.MainBoard.Name) @Html.DisplayFor(model => model.Certificate.MainBoard.LastName)</p>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input asp-for="Certificate.Pay" class="form-check-input">
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                            Pago
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input asp-for="Certificate.Approved" class="form-check-input">
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                            Aprovado
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <hr />
+                        <input type="submit" value="Save" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

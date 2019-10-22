@@ -2,6 +2,7 @@
 using InfinitySO.Models.JsonModels;
 using InfinitySO.Models.ModelsCertificate;
 using InfinitySO.Models.ViewModels;
+using InfinitySO.Services.Exception;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -50,10 +51,39 @@ namespace InfinitySO.Services.ServicesCertificate
             List<JsonCertificateProgrammatic> jsonProgrammatics = JsonConvert.DeserializeObject<List<JsonCertificateProgrammatic>>(obj.stringContentProgrammatic);
             for (int i = 0; i < jsonProgrammatics.Count; i++)
             {
-                CertificateProgrammatic cp1 = new CertificateProgrammatic { CertificateCourse = cc1, ProgrammaticContent = jsonProgrammatics[i].IdContentProgrammatics };
+                CertificateProgrammatic cp1 = new CertificateProgrammatic { CertificateCourse = cc1, Cod = Convert.ToInt32(jsonProgrammatics[i].IdProgrammaticCod), ProgrammaticContent = jsonProgrammatics[i].IdContentProgrammatics };
                 _context.CertificateProgrammatic.AddRange(cp1);
             }
             await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(CertificateFormViewModel obj)
+        {
+            bool hasAny = await _context.CertificateCourse.AnyAsync(x => x.Id == obj.CertificateCourse.Id);
+            if (!hasAny)
+            {
+                throw new NotFoundException("Id not found");
+            }
+            try
+            {
+                foreach (var item in obj.CertificateProgrammatics)
+                {
+                    CertificateProgrammatic cp1 = new CertificateProgrammatic
+                    {
+                        Id = item.Id,
+                        CertificateCourseId = item.CertificateCourseId,
+                        Cod = item.Cod,
+                        ProgrammaticContent = item.ProgrammaticContent
+                    };
+                    _context.Update(cp1);
+                }
+                _context.Update(obj.CertificateCourse);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace InfinitySO.Models.ViewModels
         public CertificateCourse CertificateCourse { get; set; }
         public CertificateProgrammatic CertificateProgrammatic { get; set; }
         public ICollection<Certificate> Certificates { get; set; }
-        public ICollection<CertificateProgrammatic> CertificateProgrammatics { get; set; }
+        public List<CertificateProgrammatic> CertificateProgrammatics { get; set; }
         public ICollection<CertificateCourse> CertificateCourses { get; set; }
         public ICollection<Company> Companies { get; set; }
         public string stringContentProgrammatic { get; set; }

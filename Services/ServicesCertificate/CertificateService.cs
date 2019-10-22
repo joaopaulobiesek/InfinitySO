@@ -2,6 +2,7 @@
 using InfinitySO.Models.ModelsAdministration;
 using InfinitySO.Models.ModelsCertificate;
 using InfinitySO.Models.ViewModels;
+using InfinitySO.Services.Exception;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,24 @@ namespace InfinitySO.Services.ServicesCertificate
             _context.Add(obj.Certificate);
             _context.Entry(obj.Certificate).Property("MainBoardId").CurrentValue = mainBoard.Id;
             await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(CertificateFormViewModel obj)
+        {
+            bool hasAny = await _context.Certificate.AnyAsync(x => x.Id == obj.Certificate.Id);
+            if (!hasAny)
+            {
+                throw new NotFoundException("Id not found");
+            }
+            try
+            {                
+                _context.Update(obj.Certificate);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }

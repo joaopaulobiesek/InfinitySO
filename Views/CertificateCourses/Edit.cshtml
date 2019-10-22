@@ -3,7 +3,7 @@
     ViewData["Title"] = "Create Certificate";
 }
 <div class="row">
-    <div class="col-md-6 mr-auto ml-auto">
+    <div class="col-md-10 mr-auto ml-auto">
         <div class="card ">
             <div class="card-header card-header-rose card-header-text">
                 <div class="card-text">
@@ -12,18 +12,16 @@
             </div>
             <div class="card-body ">
                 <!--Start-->
-                <form asp-action="Register">
+                <form asp-action="Edit">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="col-lg-5 col-md-6 col-sm-3">
-                        <select id="StudentListId" asp-for="CertificateCourse.CompanyId" class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Company">
-                            <option disabled selected>Selecione Empresa</option>
-                            @foreach (var item in Model.Companies)
-                            {
-                                <option value="@item.Id">@item.CorporateName - @item.FantasyName -CNPJ: @item.CNPJ</option>
-                            }
-                        </select>
-                        <span asp-validation-for="CertificateCourse.CompanyId" class="text-danger"></span>
-                    </div><br />
+                    <input type="hidden" asp-for="CertificateCourse.Id" />
+                    <input type="hidden" asp-for="CertificateCourse.CompanyId" />
+                    <h6> @Html.DisplayNameFor(model => model.CertificateCourse.Company)</h6>
+                    <p class="text-secondary">
+                        @Html.DisplayFor(model => model.CertificateCourse.Company.CorporateName) 
+                        - @Html.DisplayFor(model => model.CertificateCourse.Company.FantasyName) 
+                        - CNPJ: @Html.DisplayFor(model => model.CertificateCourse.Company.CNPJ)
+                    </p>
                     <div class="col-sm-7">
                         <div class="form-group">
                             <label asp-for="CertificateCourse.NameCourse"></label>
@@ -85,32 +83,36 @@
                         <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label asp-for="CertificateProgrammatic.Cod" class="form-check-label"></label>
-                                        <input id="ProgrammaticCodId" asp-for="CertificateProgrammatic.Cod" class="form-control" readonly="readonly" value="1" />
-                                    </th>
-                                    <th>
-                                        <label asp-for="CertificateProgrammatic.ProgrammaticContent" class="form-check-label"></label>
-                                        <input id="ProgrammaticContentId" asp-for="CertificateProgrammatic.ProgrammaticContent" class="form-control" />
-                                    </th>
-                                    <th>
-                                        <button style="float:right;" class="btn btn-link btn-info btn-just-icon" type="button" id="ButtonAddProgrammatic" onclick="AddProgrammatic()"><i class="material-icons">add_box</i></button>
-                                    </th>
+                                    <th>@Html.DisplayNameFor(model => model.CertificateProgrammatic.Cod)</th>
+                                    <th>@Html.DisplayNameFor(model => model.CertificateProgrammatic.ProgrammaticContent)</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th>@Html.DisplayNameFor(model => model.CertificateProgrammatic.Cod)</th>
                                     <th>@Html.DisplayNameFor(model => model.CertificateProgrammatic.ProgrammaticContent)</th>
-                                    <th></th>
                                 </tr>
                             </tfoot>
-                            <tbody id="ProgrammaticContentsId"></tbody>
+                            @for (int i = 0; i < Model.CertificateProgrammatics.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <label asp-for="@Model.CertificateProgrammatics[i].Cod" class="form-check-label"></label>
+                                        <input asp-for="@Model.CertificateProgrammatics[i].Cod" class="form-control" readonly="readonly" />
+                                        <input type="hidden" asp-for="@Model.CertificateProgrammatics[i].Id" />
+                                        <input type="hidden" asp-for="@Model.CertificateProgrammatics[i].CertificateCourseId" />
+                                    </td>
+                                    <td>
+                                        <label asp-for="@Model.CertificateProgrammatics[i].ProgrammaticContent" class="form-check-label"></label>
+                                        <input asp-for="@Model.CertificateProgrammatics[i].ProgrammaticContent" class="form-control" />
+                                    </td>
+                                </tr>
+                            }
                         </table>
                     </div>
-                    <textarea style="display:none;" asp-for="stringContentProgrammatic" id="ContentProgrammatics"></textarea>
                     <div class="form-group">
                         <hr />
-                        <input type="submit" value="Create" class="btn btn-info" />
+                        <input type="submit" value="Save" class="btn btn-info" />
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
                     </div>
                 </form>
@@ -121,35 +123,6 @@
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-    <script>
-
-        var Programmatics = new Object();
-        Programmatics.ContentProgrammatic = new Array();
-        
-        var ButtonAddProgrammatic = document.getElementById("ButtonAddProgrammatic");
-        var IdContentProgrammatics = document.getElementById("ProgrammaticContentId");
-        var IdProgrammaticCod = document.getElementById("ProgrammaticCodId");
-        var stringContentProgrammatic = document.getElementById("stringContentProgrammatic");
-        var ContentProgrammatics = document.getElementById("ContentProgrammatics");
-        var IdProgrammaticContents = document.getElementById("ProgrammaticContentsId"); //Div responsavel por adicionar tbody
-
-        function AddProgrammatic() {
-            Programmatics.ContentProgrammatic.push({
-                "IdContentProgrammatics": IdContentProgrammatics.value,
-                "IdProgrammaticCod": IdProgrammaticCod.value
-            });
-
-            ContentProgrammatics.innerHTML = JSON.stringify(Programmatics.ContentProgrammatic);
-
-            var Programmatic = "<tr>" +
-                "<td>" + IdProgrammaticCod.value + "</td>" +
-                "<td>" + IdContentProgrammatics.value + "</td>" +
-                "</tr>";
-            IdProgrammaticContents.innerHTML += Programmatic;
-            IdContentProgrammatics.value = "";
-            IdProgrammaticCod.value = parseFloat(IdProgrammaticCod.value) + parseFloat(1);
-        }
-    </script>
     <script type="text/javascript">
         /*Função Pai de Mascaras*/
         function Mascara(o, f) {

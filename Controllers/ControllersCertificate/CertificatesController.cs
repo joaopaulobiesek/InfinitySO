@@ -10,10 +10,12 @@ using InfinitySO.Models.ModelsCertificate;
 using InfinitySO.Models.ViewModels;
 using InfinitySO.Services.ServicesAdministration;
 using InfinitySO.Services.ServicesCertificate;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InfinitySO.Controllers.ControllersCertificate
 {
+    [Authorize(Policy = "CertificateCertificate")]
     public class CertificatesController : Controller
     {
         private readonly CertificateCourseService _certificateCourseService;
@@ -67,6 +69,7 @@ namespace InfinitySO.Controllers.ControllersCertificate
             return View(viewModel);
         }
 
+        [Authorize(Policy = "CertificateCertificateCreate")]
         public async Task<IActionResult> Register()
         {
             var certificateCourses = await _certificateCourseService.FindAllAsync();
@@ -76,6 +79,7 @@ namespace InfinitySO.Controllers.ControllersCertificate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "CertificateCertificateCreate")]
         public async Task<IActionResult> Register(CertificateFormViewModel certificateFormViewModel, string searchCPF)
         {
             var certificateCourses = await _certificateCourseService.FindAllAsync();
@@ -128,6 +132,53 @@ namespace InfinitySO.Controllers.ControllersCertificate
             var certificateProgrammatics = await _certificateProgrammaticService.FindAllIdAsync(certificates.CertificateCourseId);
             var viewModel = new CertificateFormViewModel { CertificateCourse = certificateCourses, Certificate = certificates, CertificateProgrammatics = certificateProgrammatics };
             return View(viewModel);
+        }
+
+        [Authorize(Policy = "CertificateCertificateEdit")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+
+            var obj = await _certificateService.FindByIdAsync(id.Value);
+            var obj2 = await _certificateCourseService.FindByIdAsync(obj.CertificateCourseId);
+            if (obj == null || obj2 == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
+
+            var viewModel = new CertificateFormViewModel { Certificate = obj, CertificateCourse = obj2 };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Policy = "CertificateCertificateEdit")]
+        public async Task<IActionResult> Edit(int? id, CertificateFormViewModel certificateFormViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var obj = await _certificateService.FindByIdAsync(id.Value);
+                var obj2 = await _certificateCourseService.FindByIdAsync(obj.CertificateCourseId);
+                var viewModel = new CertificateFormViewModel { Certificate = obj, CertificateCourse = obj2 };
+                return View(viewModel);
+            }
+            if (id != certificateFormViewModel.Certificate.Id)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
+            }
+            try
+            {
+                await _certificateService.UpdateAsync(certificateFormViewModel);
+                return RedirectToAction("Index", new { id = certificateFormViewModel.Certificate.CertificateCourseId });
+
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public IActionResult Error(string message)
