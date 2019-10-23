@@ -1,0 +1,99 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Create New Login";
+}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <div class="card ">
+            <div class="card-header card-header-rose card-header-text">
+                <div class="card-text">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!--Start-->
+                <form asp-action="Create">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="text-danger">@ViewData["Error"]</div>
+                    <h6> @Html.DisplayNameFor(model => model.MainBoard.Name)</h6>
+                    <p class="text-secondary">@Html.DisplayFor(model => model.MainBoard.Name) @Html.DisplayFor(model => model.MainBoard.LastName)</p>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label >teste</label>
+                            <input value="teste" class="form-control" />
+                            <span  class="text-danger"></span>
+                        </div>
+                    </div><br /><hr /><br />
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" checked="checked" type="checkbox" value="Home" disabled="disabled"> Início
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="FullAcess" disabled="disabled"> FullAcess
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="Admin" disabled="disabled"> Admin
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div><br /><hr /><br />
+                    <!---------------------------------------------------------------------------------------------------------------------->
+                    @*@for (int i = 0; i < Model.SystemControllers.Count; i++)
+                    {
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                @Html.CheckBoxFor(m => Model.SystemControllers[i].IsCheck, new { @class = "form-check-input" })
+                                @Model.SystemControllers[i].Name
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                            @Html.HiddenFor(m => Model.SystemControllers[i].Id)
+                            @Html.HiddenFor(m => Model.SystemControllers[i].NameClaim)
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label label-checkbox"></label>
+                            <div class="col-sm-10 checkbox-radios">
+                                @for (int j = 0; j < Model.SystemSubControllers.Count; j++)
+                                {
+
+                                    @if (Model.SystemSubControllers[j].SystemControllerId == Model.SystemControllers[i].Id)
+                                    {
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                @Html.CheckBoxFor(m => Model.SystemSubControllers[j].IsCheck, new { @class = "form-check-input" })
+                                                @Model.SystemSubControllers[j].Name
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                            @Html.HiddenFor(m => Model.SystemSubControllers[j].Id)
+                                            @Html.HiddenFor(m => Model.SystemSubControllers[j].NameClaim)
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div><br /><hr /><br />
+                    }*@
+                    <!---------------------------------------------------------------------------------------------------------------------->
+                    <div class="form-group">
+                        <br /><hr />
+                        <input type="submit" value="Save" class="btn btn-info" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary" data-dismiss="modal">Back to List</a>
+                    </div>
+                </form>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

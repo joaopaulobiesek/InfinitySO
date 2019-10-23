@@ -53,12 +53,11 @@ namespace InfinitySO.Controllers.ControllersUserDataLogin
             }
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            /*var userDataLogins = await _userDataLoginService.FindAllAppAsync();
+            var userDataLogins = await _userDataLoginService.FindAllAppAsync();
             var viewModel = new ApplicationUser { ApplicationUsers = userDataLogins };
-            return View(viewModel);*/
-            return View();
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create()
@@ -90,9 +89,17 @@ namespace InfinitySO.Controllers.ControllersUserDataLogin
                 var mainBoards = await _mainBoardService.FindByCPFAsync(cpf);
                 if (mainBoards != null)
                 {
-
-                    await _userDataLoginService.InsertAsync(userDataLogin, mainBoards);
-                    return RedirectToAction(nameof(Create));
+                    var users = await _userDataLoginService.FindByIdAsync(mainBoards.Id);
+                    if (users == null)
+                    {
+                        await _userDataLoginService.InsertAsync(userDataLogin, mainBoards);
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        ViewData["Error"] = "Este Usuário já possui login!";
+                        return View(viewModel);
+                    }
                 }
                 else
                 {
@@ -104,6 +111,21 @@ namespace InfinitySO.Controllers.ControllersUserDataLogin
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        { // https://www.youtube.com/watch?v=5XA4Z-SOif8
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+            var obj = await _userDataLoginService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
+            ApplicationUser app = obj;
+            return View(app);
         }
 
         public IActionResult Error(string message)

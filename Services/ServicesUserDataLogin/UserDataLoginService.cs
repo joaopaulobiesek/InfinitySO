@@ -23,9 +23,19 @@ namespace InfinitySO.Services.ServicesUserDataLogin
             _mainBoardService = mainBoardService;
         }
 
+        public async Task<ApplicationUser> FindByIdAsync(int id)
+        {
+            return await _context.ApplicationUser.FirstOrDefaultAsync(obj => obj.MainBoardId == id);
+        }
+
         public async Task<List<UserDataLogin>> FindAllAsync()
         {
             return await _context.UserDataLogin.Include(obj => obj.MainBoard).ToListAsync();
+        }
+
+        public async Task<List<ApplicationUser>> FindAllAppAsync()
+        {
+            return await _context.ApplicationUser.Include(obj => obj.MainBoard).ToListAsync();
         }
 
         public async Task InsertAsync(UserDataLogin obj, MainBoard mainBoard)

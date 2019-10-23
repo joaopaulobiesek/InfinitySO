@@ -71,6 +71,7 @@ namespace InfinitySO.Data
         //End Student
 
         //Start UserDataLogin
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<UserDataLogin> UserDataLogin { get; set; }
         //End UserDataLogin
     }
