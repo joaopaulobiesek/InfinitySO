@@ -1,4 +1,4 @@
-﻿@model ApplicationUser
+﻿@model UserClaimsFormViewModel
 @{
     ViewData["Title"] = "Create New Login";
 }
@@ -12,76 +12,79 @@
             </div>
             <div class="card-body ">
                 <!--Start-->
-                <form asp-action="Create">
+                <form asp-action="Edit">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="text-danger">@ViewData["Error"]</div>
-                    <h6> @Html.DisplayNameFor(model => model.MainBoard.Name)</h6>
-                    <p class="text-secondary">@Html.DisplayFor(model => model.MainBoard.Name) @Html.DisplayFor(model => model.MainBoard.LastName)</p>
-                    <div class="col-sm-7">
-                        <div class="form-group">
-                            <label >teste</label>
-                            <input value="teste" class="form-control" />
-                            <span  class="text-danger"></span>
-                        </div>
-                    </div><br /><hr /><br />
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" checked="checked" type="checkbox" value="Home" disabled="disabled"> Início
-                            <span class="form-check-sign">
-                                <span class="check"></span>
-                            </span>
-                        </label>
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="FullAcess" disabled="disabled"> FullAcess
-                            <span class="form-check-sign">
-                                <span class="check"></span>
-                            </span>
-                        </label>
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="Admin" disabled="disabled"> Admin
-                            <span class="form-check-sign">
-                                <span class="check"></span>
-                            </span>
-                        </label>
-                    </div><br /><hr /><br />
-                    <!---------------------------------------------------------------------------------------------------------------------->
-                    @*@for (int i = 0; i < Model.SystemControllers.Count; i++)
+                    <input type="hidden" asp-for="UserId" />
+                    @for (int i = 0; i < Model.Cliams.Count; i++)
                     {
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                @Html.CheckBoxFor(m => Model.SystemControllers[i].IsCheck, new { @class = "form-check-input" })
-                                @Model.SystemControllers[i].Name
-                                <span class="form-check-sign">
-                                    <span class="check"></span>
-                                </span>
-                            </label>
-                            @Html.HiddenFor(m => Model.SystemControllers[i].Id)
-                            @Html.HiddenFor(m => Model.SystemControllers[i].NameClaim)
-                        </div>
-                        <div class="row">
-                            <label class="col-sm-2 col-form-label label-checkbox"></label>
-                            <div class="col-sm-10 checkbox-radios">
-                                @for (int j = 0; j < Model.SystemSubControllers.Count; j++)
-                                {
-
-                                    @if (Model.SystemSubControllers[j].SystemControllerId == Model.SystemControllers[i].Id)
-                                    {
-                                        <div class="form-check form-check-inline">
+                        if (Model.Cliams[i].ClaimType == "TimePoint")
+                        {
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="hidden" asp-for="@Model.Cliams[i].ClaimType">
+                                    <input class="form-check-input" asp-for="@Model.Cliams[i].IsSelected"> @Model.Cliams[i].ClaimName
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label label-checkbox"></label>
+                                <div class="col-sm-10 checkbox-radios">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
                                             <label class="form-check-label">
-                                                @Html.CheckBoxFor(m => Model.SystemSubControllers[j].IsCheck, new { @class = "form-check-input" })
-                                                @Model.SystemSubControllers[j].Name
-                                                <span class="form-check-sign">
+                                                <input class="form-check-input" type="radio" value="1" asp-for="@Model.Cliams[i].ClaimValue"> Criar
+                                                <span class="circle">
                                                     <span class="check"></span>
                                                 </span>
                                             </label>
-                                            @Html.HiddenFor(m => Model.SystemSubControllers[j].Id)
-                                            @Html.HiddenFor(m => Model.SystemSubControllers[j].NameClaim)
-                                        </div>
-                                    }
-                                }
+                                        </label>
+                                    </div>
+                                </div>
+                            </div><br /><hr /><br />
+                        }
+                        else
+                        {
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="hidden" asp-for="@Model.Cliams[i].ClaimType">
+                                    <input class="form-check-input" asp-for="@Model.Cliams[i].IsSelected"> @Model.Cliams[i].ClaimName
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
                             </div>
-                        </div><br /><hr /><br />
-                    }*@
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label label-checkbox"></label>
+                                <div class="col-sm-10 checkbox-radios">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio"  value="1" asp-for="@Model.Cliams[i].ClaimValue"> Criar
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio"  value="2" asp-for="@Model.Cliams[i].ClaimValue"> Criar e Editar
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio"  value="3" asp-for="@Model.Cliams[i].ClaimValue"> Criar Editar e Deletar
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div><br /><hr /><br />
+                        }
+                    }
                     <!---------------------------------------------------------------------------------------------------------------------->
                     <div class="form-group">
                         <br /><hr />

@@ -1,10 +1,12 @@
 ﻿using InfinitySO.Data;
 using InfinitySO.Models.ModelsAdministration;
 using InfinitySO.Models.ModelsUserDataLogin;
+using InfinitySO.Models.ViewModels;
 using InfinitySO.Services.ServicesAdministration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -62,7 +64,8 @@ namespace InfinitySO.Services.ServicesUserDataLogin
                     if (item2.IsCheck)
                     {
                         await _userManager.AddClaimAsync(app, new Claim(item2.NameClaim, "2"));
-                    }else
+                    }
+                    else
                     {
                         await _userManager.AddClaimAsync(app, new Claim(item2.NameClaim, "0"));
                     }
@@ -71,6 +74,14 @@ namespace InfinitySO.Services.ServicesUserDataLogin
                 _context.Add(l1);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task UpdateAsync(UserClaimsFormViewModel obj)
+        {
+            var user = await _userManager.FindByIdAsync(obj.UserId);
+            var claims = await _userManager.GetClaimsAsync(user);
+            var result = await _userManager.RemoveClaimsAsync(user, claims);
+            result = await _userManager.AddClaimsAsync(user, obj.Cliams.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, "1")));
         }
     }
 }

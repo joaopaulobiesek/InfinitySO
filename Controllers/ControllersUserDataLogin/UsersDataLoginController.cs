@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using InfinitySO.Models.Claims;
 using InfinitySO.Models.JsonModels;
 using InfinitySO.Models.ModelsUserDataLogin;
 using InfinitySO.Models.ViewModels;
@@ -12,6 +14,7 @@ using InfinitySO.Services.ServicesAdministration;
 using InfinitySO.Services.ServicesSystem;
 using InfinitySO.Services.ServicesUserDataLogin;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InfinitySO.Controllers.ControllersUserDataLogin
@@ -20,13 +23,15 @@ namespace InfinitySO.Controllers.ControllersUserDataLogin
     public class UsersDataLoginController : Controller
     {
         private readonly UserDataLoginService _userDataLoginService;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly MainBoardService _mainBoardService;
         private readonly SystemControllerService _systemControllerService;
         private readonly SystemSubControllerService _systemSubControllerService;
 
-        public UsersDataLoginController(UserDataLoginService userDataLoginService, MainBoardService mainBoardService, SystemControllerService systemControllerService, SystemSubControllerService systemSubControllerService)
+        public UsersDataLoginController(UserDataLoginService userDataLoginService, UserManager<ApplicationUser> userManager, MainBoardService mainBoardService, SystemControllerService systemControllerService, SystemSubControllerService systemSubControllerService)
         {
             _userDataLoginService = userDataLoginService;
+            _userManager = userManager;
             _mainBoardService = mainBoardService;
             _systemControllerService = systemControllerService;
             _systemSubControllerService = systemSubControllerService;
@@ -113,19 +118,113 @@ namespace InfinitySO.Controllers.ControllersUserDataLogin
             }
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
         { // https://www.youtube.com/watch?v=5XA4Z-SOif8
-            if (id == null)
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
-            var obj = await _userDataLoginService.FindByIdAsync(id.Value);
-            if (obj == null)
+            var existingUserClaims = await _userManager.GetClaimsAsync(user);
+            var viewModel = new UserClaimsFormViewModel { UserId = id };
+
+            foreach (Claim claim in MainClaim.MainClaims)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+                if (claim.Type != "Home" && claim.Type != "Admin" && claim.Type != "FullAcess")
+                {
+                    string NameClaim = "";
+                    switch (claim.Type)
+                    {
+                        case "MainBoard": NameClaim = "Cadastro Principal"; break;
+                        case "MainBoardEdit": NameClaim = "Editar"; break;
+                        case "MainBoardDelete": NameClaim = "Deletar"; break;
+                        case "Category": NameClaim = "Espaço do Local"; break;
+                        case "CategoryEdit": NameClaim = "Editar"; break;
+                        case "CategoryDelete": NameClaim = "Deletar"; break;
+                        case "Place": NameClaim = "Cadastro Local"; break;
+                        case "PlaceEdit": NameClaim = "Editar"; break;
+                        case "PlaceDelete": NameClaim = "Deletar"; break;
+                        case "Company": NameClaim = "Empresa"; break;
+                        case "CompanyEdit": NameClaim = "Editar"; break;
+                        case "CompanyDelete": NameClaim = "Deletar"; break;
+                        case "Supply": NameClaim = "Suprimento"; break;
+                        case "SupplyEdit": NameClaim = "Editar"; break;
+                        case "SupplyDelete": NameClaim = "Deletar"; break;
+                        case "Certificate": NameClaim = "Certificado"; break;
+                        case "CertificateEdit": NameClaim = "Editar"; break;
+                        case "CertificateDelete": NameClaim = "Deletar"; break;
+                        case "Employee": NameClaim = "Funcionario"; break;
+                        case "EmployeeEdit": NameClaim = "Editar"; break;
+                        case "EmployeeDelete": NameClaim = "Deletar"; break;
+                        case "Journey": NameClaim = "Jornada"; break;
+                        case "JourneyEdit": NameClaim = "Editar"; break;
+                        case "JourneyDelete": NameClaim = "Deletar"; break;
+                        case "Scale": NameClaim = "Escala"; break;
+                        case "ScaleEdit": NameClaim = "Editar"; break;
+                        case "ScaleDelete": NameClaim = "Deletar"; break;
+                        case "TimePoint": NameClaim = "Ponto"; break;
+                        case "Patrimony": NameClaim = "Patrimonio"; break;
+                        case "PatrimonyEdit": NameClaim = "Editar"; break;
+                        case "PatrimonyDelete": NameClaim = "Deletar"; break;
+                        case "StudentFinancial": NameClaim = "Financeiro Estudantil"; break;
+                        case "StudentFinancialEdit": NameClaim = "Editar"; break;
+                        case "StudentFinancialDelete": NameClaim = "Deletar"; break;
+                        case "Student": NameClaim = "Estudante"; break;
+                        case "StudentEdit": NameClaim = "Editar"; break;
+                        case "StudentDelete": NameClaim = "Deletar"; break;
+                        case "UserDataLogin": NameClaim = "Cadastrar Acesso"; break;
+                        case "UserDataLoginEdit": NameClaim = "Editar"; break;
+                        case "UserDataLoginDelete": NameClaim = "Deletar"; break;
+                    }
+                    UserClaim userClaim = new UserClaim
+                    {
+                        ClaimType = claim.Type,
+                        ClaimName = NameClaim
+                    };
+                    if (existingUserClaims.Any(c => c.Type == claim.Type))
+                    {
+                        userClaim.IsSelected = true;
+                    }
+                    viewModel.Cliams.Add(userClaim);
+                }
             }
-            ApplicationUser app = obj;
-            return View(app);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UserClaimsFormViewModel userClaimsFormViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var users = await _userManager.FindByIdAsync(userClaimsFormViewModel.UserId);
+                var existingUserClaims = await _userManager.GetClaimsAsync(users);
+                var viewModel = new UserClaimsFormViewModel { UserId = userClaimsFormViewModel.UserId };
+                foreach (Claim claim in MainClaim.MainClaims)
+                {
+                    UserClaim userClaim = new UserClaim
+                    {
+                        ClaimType = claim.Type
+                    };
+                    if (existingUserClaims.Any(c => c.Type == claim.Type))
+                    {
+                        userClaim.IsSelected = true;
+                    }
+                    viewModel.Cliams.Add(userClaim);
+                }
+                return View(viewModel);
+            }
+            try
+            {
+                await _userDataLoginService.UpdateAsync(userClaimsFormViewModel);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public IActionResult Error(string message)

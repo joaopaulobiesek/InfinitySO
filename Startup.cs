@@ -41,7 +41,7 @@ namespace InfinitySO
         {
            
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=InfinitySolutions;User Id=sa;Password=123;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+                    options.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=InfinitySO;User Id=sa;Password=123;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
