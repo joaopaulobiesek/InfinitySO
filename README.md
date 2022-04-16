@@ -6,11 +6,11 @@ Usado um template HTML PRO adaptado para CSHTML: https://www.creative-tim.com/pr
 
 ERP para faculdade (UNOPAR) - para fins de teste de conhecimento.
 
-Modulos:
-Estudante
-Administrativo
-Financeiro
-Certificado
-Funcionario
-Patrimonio
-Sistema para importação de dados em excel.
+Modulos:<br/><br/>
+Estudante<br/>
+Administrativo<br/>
+Financeiro<br/>
+Certificado<br/>
+Funcionario<br/>
+Patrimonio<br/>
+Sistema para importação de dados em excel.<br/>
